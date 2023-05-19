@@ -222,7 +222,7 @@
   <button type="submit">SEARCH</button>
 </div>
 <div class="gowriter">
-  <a href="${contextPath}/board/record.do">WIRTER</a>
+  <a href="${contextPath}/record.do">WIRTER</a>
 </div>
 </div>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />

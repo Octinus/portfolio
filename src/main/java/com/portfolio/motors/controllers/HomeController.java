@@ -54,24 +54,36 @@ public class HomeController {
   }
 
   @GetMapping("/notice") // 공지사항 페이지
-  public ModelAndView notice(){
+  public ModelAndView noticeboard(){
 
     return new ModelAndView("/board/notice");
   }
 
+  @GetMapping("/notice.do") // 공지사항 페이지
+  public ModelAndView notice(){
+
+    return new ModelAndView("/board/noticeW");
+  }
+
   @GetMapping("/record") // 공지사항 페이지
-  public ModelAndView record(){
+  public ModelAndView recordboard(){
 
     return new ModelAndView("/board/record");
   }
 
-  @GetMapping("/my") // 공지사항 페이지
+  @GetMapping("/record.do") // 공지사항 페이지
+  public ModelAndView record(){
+
+    return new ModelAndView("/board/recordW");
+  }
+
+  @GetMapping("/my") // 나의 정보 페이지
   public ModelAndView my(){
 
     return new ModelAndView("/mypage/my");
   }
 
-  @GetMapping("/reservation") // 공지사항 페이지
+  @GetMapping("/reservation") // 예약 페이지
   public ModelAndView reservation(){
 
     return new ModelAndView("/mypage/reservation");

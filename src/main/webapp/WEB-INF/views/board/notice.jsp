@@ -194,7 +194,7 @@
       <button type="submit">SEARCH</button>
   </div>
   <div class="gowriter">
-    <a href="${contextPath}/board/notice.do">WIRTER</a>
+    <a href="${contextPath}/notice.do">WIRTER</a>
   </div>
 </div>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />

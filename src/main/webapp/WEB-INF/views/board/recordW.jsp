@@ -5,6 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <c:import url="/WEB-INF/views/inc/top.jsp" />
   
-  <div>자유게시판 작성 페이지</div>
+  <div>정비이력 작성 페이지</div>
 
   <c:import url="/WEB-INF/views/inc/bottom.jsp" />

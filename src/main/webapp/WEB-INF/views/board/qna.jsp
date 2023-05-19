@@ -213,7 +213,7 @@
     <button type="submit">SEARCH</button>
   </div>
   <div class="gowriter">
-    <a href="${contextPath}/board/qna.do">WIRTER</a>
+    <a href="${contextPath}/qna.do">WIRTER</a>
   </div>
   </div>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />
