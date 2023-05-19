@@ -8,7 +8,6 @@
 * {
   font-family: "Noto Sans KR", sans-serif;
   box-sizing: border-box;
-  background-color: #f7f7f7;
 }
 .content-container {
   /* background-color: #f5faad; */
@@ -20,12 +19,13 @@
   상단 영역
 */
 .header {
+  line-height: 3;
   background-color: #f7f7f7;
   text-align: center;
   font-size: 48px;
   font-weight: 900;
   color: #0039f5;
-  padding: 20px 0 20px 0;
+  padding-bottom: 20px;
 }
 .header i {
   color: #fdba00;
@@ -35,7 +35,6 @@
   네비 영역
 */
 .navi {
-  /* background-color: #cdf8ea; */
   background-color: #f7f7f7;
   border-bottom: 1.3px solid #c2c1c1;
   position: sticky;
@@ -54,7 +53,6 @@
   padding: 5px;
   display: block;
   text-decoration: none;
-  color: black;
   font-weight: 600;
   width: 90px; /*강제 너비를 줘서 글이 삐져나갈수 있게 한다.*/
   display: flex;
@@ -78,6 +76,7 @@
   메인 영역
 */
 .main {
+  padding-top: 30px;
   background-color: #f7f7f7;
   text-align: center;
   min-height: 400px;
@@ -87,7 +86,6 @@
   하단 영역
 */
 .footer {
-  /* background-color: #e9cdfa; */
   background-color: #f7f7f7;
   border-top: 1.3px solid #c2c1c1;
   display: flex; /* 이걸 넣어야 사이즈가 줄었을때 같이 줄어듬 안넣으면 기본상태에는 동일하나 줄었을때 
@@ -96,7 +94,7 @@
 .footer .content-container {
   display: flex;
   line-height: 140%;
-  justify-content: space-around; /* 하단 내용들의 가에 여백을 주고 분리하기 위해 사용 */
+  justify-content: space-between; /* 하단 내용들의 가에 여백을 주고 분리하기 위해 사용 */
 }
 .footer .content-container h4 {
   font-size: 20px;

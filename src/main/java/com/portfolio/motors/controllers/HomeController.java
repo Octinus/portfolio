@@ -64,4 +64,16 @@ public class HomeController {
 
     return new ModelAndView("/board/record");
   }
+
+  @GetMapping("/my") // 공지사항 페이지
+  public ModelAndView my(){
+
+    return new ModelAndView("/mypage/my");
+  }
+
+  @GetMapping("/reservation") // 공지사항 페이지
+  public ModelAndView reservation(){
+
+    return new ModelAndView("/mypage/reservation");
+  }
 }
