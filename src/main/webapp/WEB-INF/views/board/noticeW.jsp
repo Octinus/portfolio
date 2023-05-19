@@ -21,9 +21,28 @@
     .noticetable tr .content {
       border-radius: 0;
     }
+    .noticebottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 30px;
+    }
+    .noticebottom a {
+      text-decoration: none;
+      display: block;
+      font-size: 13px;
+      color: black;
+      width: 140px;
+      height: 35px;
+      padding-top: 10px;
+      background-color: #d5d5d5;
+    }
+    .noticebottom button {
+      width: 140px;
+    }
   </style>
   <p class="noticetop">공지사항 작성 페이지</p>
 
+  <form method="post" action="${contextPath}/notice_ok.do" enctype="multipart/form-data">
   <table class="noticetable">
     <tr>
       <th>SUBJECT</th>
@@ -31,14 +50,27 @@
     </tr>
     <tr>
       <td colspan="2">
-        <form>
-          <textarea name="content" id="content"></textarea>
-          <a href="${contextPath}/notice">LIST</a>
-          <button type="submit">OK</button>
-        </form>
+        <textarea name="content" id="content"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <th>첨부파일</th>
+      <td>
+        <input type="file" name="file" id="file" />
+      </td>
+    </tr>
+    <tr>
+      <th>게시글비밀번호</th>
+      <td>
+        <input type="password" name="notipw" id="notipw" />
       </td>
     </tr>
   </table>
+  <div class="noticebottom">
+    <a href="${contextPath}/notice">LIST</a>
+    <button type="submit">OK</button>
+  </div>
+</form>
   <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ko.js"></script>
     <script>
