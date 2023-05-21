@@ -77,6 +77,12 @@ public class HomeController {
     return new ModelAndView("/board/recordW");
   }
 
+  @GetMapping("/email") // 공지사항 페이지
+  public ModelAndView email(){
+
+    return new ModelAndView("/board/email");
+  }
+
   @GetMapping("/my") // 나의 정보 페이지
   public ModelAndView my(){
 

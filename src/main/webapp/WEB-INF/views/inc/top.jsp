@@ -20,7 +20,7 @@
       </li>
       <li>
         <a href="#">MYPAGE</a>
-        <a href="${contextPath}/my">마이페이지</a>
+        <a href="${contextPath}/my">나의정보</a>
         <a href="${contextPath}/reservation">예약하기</a>
       </li>
       <li>

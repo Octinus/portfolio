@@ -5,6 +5,91 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <c:import url="/WEB-INF/views/inc/top.jsp" />
   
-  <div>정비이력 작성 페이지</div>
+  <style>
+    .recordtop {
+      padding-bottom: 40px;
+    }
+    .recordtable {
+      border: 1px solid black;
+      width: 1200px;
+    }
+    .recordtable tr {
+      text-align: left;
+      text-indent: 10px;
+      line-height: 3;
+      font-size: 13px;
+    }
+    .recordtable tr .content {
+      border-radius: 0;
+    }
+    .recordbottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 30px;
+    }
+    .recordbottom a {
+      text-decoration: none;
+      display: block;
+      font-size: 13px;
+      color: black;
+      width: 140px;
+      height: 35px;
+      padding-top: 10px;
+      background-color: #d5d5d5;
+    }
+    .recordbottom button {
+      width: 140px;
+    }
+  </style>
+  <p class="recordtop">정비이력 작성 페이지</p>
+
+  <form method="post" action="${contextPath}/record_ok.do" enctype="multipart/form-data">
+  <table class="recordtable">
+    <tr>
+      <th>SUBJECT</th>
+      <td><input type="text" name="subject" id="subject" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <textarea name="content" id="content"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <th>첨부파일</th>
+      <td>
+        <input type="file" name="file" id="file" />
+      </td>
+    </tr>
+    <tr>
+      <th>게시글비밀번호</th>
+      <td>
+        <input type="password" name="recordpw" id="recordpw" />
+      </td>
+    </tr>
+  </table>
+  <div class="recordbottom">
+    <a href="${contextPath}/record">LIST</a>
+    <button type="submit">OK</button>
+  </div>
+</form>
+  <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ko.js"></script>
+    <script>
+      ClassicEditor.create( document.querySelector( '#content' ), {
+
+        toolbar: [
+                  'heading',
+                  '|',
+                  'bold',
+                  'italic',
+                  'bulletedList',
+                  'numberedList',
+                  '|',
+                  'undo',
+                  'redo',
+                  ],
+        language: "ko"
+  } );
+    </script>
 
   <c:import url="/WEB-INF/views/inc/bottom.jsp" />

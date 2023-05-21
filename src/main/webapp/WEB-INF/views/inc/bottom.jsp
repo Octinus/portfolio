@@ -43,7 +43,7 @@
       <h4>C/S CENTER</h4>
       <p>MON - FRI 09:00 - 18:00</p>
       <p><span>SAT</span>, <span>SUN</span> OFF</p>
-      <a href="mailto:oct.23rd.c@gmail.com"><i class="fa-solid fa-envelope"></i> 메일 문의</a>
+      <a href="${contextPath}/email"><i class="fa-solid fa-envelope"></i> 메일 문의</a>
       <a href="tel:01011111111"><i class="fa-solid fa-phone"></i> 전화 문의</a>
     </div>
     <div class="guide">

@@ -6,28 +6,29 @@
   <c:import url="/WEB-INF/views/inc/top.jsp" />
   
   <style>
-    .qnatop {
+    .emailtop {
       padding-bottom: 40px;
     }
-    .qnatable {
+    .emailtable {
       border: 1px solid black;
       width: 1200px;
     }
-    .qnatable tr {
+    .emailtable tr {
       text-align: left;
-      text-indent: 10px;
       line-height: 3;
       font-size: 13px;
     }
-    .qnatable tr .content {
-      border-radius: 0;
+    .emailtable tr:first-child,
+    .emailtable tr:last-child {
+      text-indent: 10px;
     }
-    .qnabottom {
+
+    .emailbottom {
       display: flex;
       justify-content: space-between;
       padding-top: 30px;
     }
-    .qnabottom a {
+    .emailbottom a {
       text-decoration: none;
       display: block;
       font-size: 13px;
@@ -37,21 +38,21 @@
       padding-top: 10px;
       background-color: #d5d5d5;
     }
-    .qnabottom button {
+    .emailbottom button {
       width: 140px;
     }
   </style>
-  <p class="qnatop">자유게시판 작성 페이지</p>
+  <p class="emailtop">메일 문의 페이지</p>
 
-  <form method="post" action="${contextPath}/qna_ok.do" enctype="multipart/form-data">
-  <table class="qnatable">
+  <form method="post" action="${contextPath}/record_ok.do" enctype="multipart/form-data">
+  <table class="emailtable">
     <tr>
       <th>SUBJECT</th>
       <td><input type="text" name="subject" id="subject" /></td>
     </tr>
     <tr>
       <td colspan="2">
-        <textarea name="content" id="content"></textarea>
+        <textarea name="content" id="content">아이디(회원이 아니시라면 이름): <br />연락처: <br />문의내용:</textarea>
       </td>
     </tr>
     <tr>
@@ -60,15 +61,10 @@
         <input type="file" name="file" id="file" />
       </td>
     </tr>
-    <tr>
-      <th>게시글비밀번호</th>
-      <td>
-        <input type="password" name="qnapw" id="qnapw" />
-      </td>
-    </tr>
+    
   </table>
-  <div class="qnabottom">
-    <a href="${contextPath}/qna">LIST</a>
+  <div class="emailbottom">
+    <a href="${contextPath}/">HOME</a>
     <button type="submit">OK</button>
   </div>
 </form>
