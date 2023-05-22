@@ -6,7 +6,7 @@
 <c:import url="/WEB-INF/views/inc/top.jsp" />
 <style>
   .main h1 {
-    margin-bottom: 30px;
+    margin-bottom: 100px;
     padding-top: 20px;
     font-size: 30px;
     font-weight: 600;
@@ -18,7 +18,7 @@
     border: 1px solid #a3a3a3;    
   }
   .main table {
-    margin-bottom: 30px;
+    margin-bottom: 80px;
     border-top: 2px solid #8a8989;
   }
   .main th {
@@ -49,9 +49,27 @@
     margin: 5px 0 5px 20px;
     border: 1px solid #a3a3a3;
   }
+  .main td button {
+    border: 1px solid #a3a3a3;
+    margin-left: 5px;
+  }
 
-  .main div > button {
+  .joinbtn {
+    margin-bottom: 100px;
+  }
+  .main .joinbtn button {
+    width: 150px;
+    height: 30px;
     margin-bottom: 30px;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    transition: all 0.5s;
+  }
+  .main .joinbtn button:hover {
+    background-color: #f7f7f7;
+    color: black;
+    border: 1px solid black;
   }
 
   /* 에러 메세지에 대한 글자 색상 */
@@ -126,17 +144,7 @@
   </tr>
   <tr>
     <th><label for="email">E-mail</label></th>
-    <td><input type="email" name="email" id="email" />
-        @
-        <input type="email" name="email" id="email" />
-        <select name="email">
-          <option value="">직접입력</option>
-          <option value="google.com">google.com</option>
-          <option value="naver.com">naver.com</option>
-          <option value="kakao.com">kakao.com</option>
-          <option value="nate.com">nate.com</option>
-        </select>
-    </td>
+    <td><input type="email" name="email" id="email" /></td>
   </tr>
   <tr>
     <th><label for="birthdate">생년월일</label></th>
@@ -162,7 +170,7 @@
   </tr>
   </label>
   </table>
-  <div>    		
+  <div class="joinbtn">    		
     <button type="submit">JOIN</button>
     <button type="reset">RESET</button>
   </div>

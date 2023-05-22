@@ -6,15 +6,15 @@
           <c:import url="/WEB-INF/views/inc/top.jsp" />
           <style>
             .main .content-container {
-              justify-content: space-between;
               display: flex;
+              justify-content: space-between;
             }
 
             /* 메인화면 왼쪽 관리 요령 */
             .autoplay-container {
-              width: 33%;
+              width: 500px;
               position: relative;
-              margin: 50px 0 50px 0;
+              margin: 50px auto 100px auto;
             }
 
             .autoplay,
@@ -100,7 +100,6 @@
             /* slick dots css */
             .slick-dots {
               position: absolute;
-              bottom: -25px;
               display: block;
               width: 100%;
               padding: 0;
@@ -166,9 +165,7 @@
 
             /* 메인화면 중앙 로그인/회원가입 */
             .login {
-              margin-top: 15%;
-              width: 33%;
-              padding-left: 200px;
+              width: 300px;
             }
 
             .login a {
@@ -178,11 +175,12 @@
               width: 150px;
               height: 30px;
               padding-top: 5px;
+              margin: auto;
             }
 
             .login a:first-child {
               background-color: #0039f5;
-              color: #b8b8b8;
+              color: white;
               margin-bottom: 40px;
               transition: all 0.5s;
             }
@@ -205,7 +203,16 @@
             }
 
             .booking {
-              width: 33%;
+              margin-right: 50px;
+            }
+            .booking h1 {
+              margin-bottom: 50px;
+              font-size: 20px;
+            }
+            .booking table {
+              margin: auto;
+              width: 400px;
+              line-height: 3;
             }
           </style>
 
@@ -234,7 +241,57 @@
           </div>
 
           <div class="booking">
-            <h1>예약 현황</h1>
+            <h1>오늘의 예약 현황</h1>
+            <table>
+              <tr>
+                <th colspan="3">2023년 X월 XX일 X요일</th>
+              </tr>
+              <tr>
+                <th>시간</th>
+                <th>차종</th>
+                <th>이름</th>
+              </tr>
+              <tr>
+                <td>09:00 ~ 10:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <td>10:00 ~ 11:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <td>11:00 ~ 12:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <td>13:00 ~ 14:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <td>14:00 ~ 15:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <td>15:00 ~ 16:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <td>16:00 ~ 17:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+              <tr>
+                <th>17:00 ~ 18:00</td>
+                <td>OK자동차</td>
+                <td>11가1111 가X다 고객님</td>
+              </tr>
+            </table>
           </div>
 
           <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>

@@ -5,31 +5,121 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           <c:import url="/WEB-INF/views/inc/top.jsp" />
           <style>
-            .main div {
-              padding-top: 30px;
+            .main .logintop {
+              margin: 20px auto 80px auto;
+              font-size: 25px;
+              width: 100px;
+              border-bottom: 1px solid black;
             }
-            .main label {
+
+            .loginmain {
+              line-height: 2;
+              width: 300px;
+              margin: 0 auto 200px auto;
+              padding-bottom: 150px;
+              border-bottom: 1px solid black;
+            }
+            .loginmain table {
+              margin: auto;
+            }
+            .loginmain tr {
+              width: 190px;
+            }
+            .loginmain th {
+              text-align: left;
+              font-size: 13px;
+            }
+            .loginmain tr input {
+              border: 1px solid black;
+              width: 190px;
+            }
+            .loginmain table tr:nth-child(4) {
+              height: 50px;
+            }
+            .loginmain table tr:nth-child(5) {
+              height: 50px;
+            }
+            .loginmain table tr:nth-child(6),
+            .loginmain table tr:nth-child(7) {
+              text-align: left;
+              font-size: 10px;
+            }
+            .loginmain table tr:nth-child(6) a,
+            .loginmain table tr:nth-child(7) a {
+              text-decoration: none;
+              color: black;
+            }
+            .loginmain table tr:nth-child(7) {
+              height: 50px;
+            }
+            .login table tr:last-child {
+              height: 50px;
+            }
+            .loginbtn {
+              width: 190px;
+              height: 30px;
+              background-color: black;
+              color: white;
+              border: 1px solid black;
+              transition: all 0.5s;
+            }
+            .loginbtn:hover {
+              background-color: #f7f7f7;
+              color: black;
+              border: 1px solid black;
+            }
+            .joina {
+              display: block;
+              height: 30px;
+              color: black;
+              text-decoration: none;
               background-color: #d5d5d5;
+              transition: all 0.5s;
+            }
+            .joina:hover {
+              background-color: #f7f7f7;
+              color: black;
+              border: 1px solid black;
             }
           </style>
 
-          <div>
-
+          <div class="logintop">
+            <h1>LOG IN</h1>
           </div>
 
-          <div>
-            <label for="userid">ID
-              <br />
-              <input type="text" id="userid" name="userid" />
-            </label>
-            <br />
-            <label for="userpw">PASSWORD
-              <br />
-              <input type="password" id="userpw" name="userpw" />
-            </label>
+          <div class="loginmain">
+            <table>
+                <form method="post" action="${contextPath}/login_ok.do">
+                  <tr>
+                    <th><label for="userid">ID</label></th>
+                  </tr>
+                  <tr>
+                    <td><input type="text" id="userid" name="userid" /></td>
+                  </tr>
+                  <tr>
+                    <th><label for="userpw">PASSWORD</label></th>
+                  </tr>
+                  <tr>
+                    <td><input type="password" id="userpw" name="userpw" /></td>
+                  </tr>
+                  <tr>
+                  <td><button type="submit" class="loginbtn">Log In</button></td>
+                </tr>
+                </form>
+                <tr>
+                <td><a href="#">- SEARCH ID</a></td>
+              </tr>
+              <tr>
+                <td><a href="#">- SEARCH PASSWORD</a></td>
+              </tr>
+              <tr>
+                <td><a href="${contextPath}/join" class="joina">Join Member</a></td>
+              </tr>
+            </table>
           </div>
 
-          <div>
+
+          <div class="loginbottom">
 
           </div>
 

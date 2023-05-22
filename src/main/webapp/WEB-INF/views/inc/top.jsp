@@ -14,12 +14,12 @@
     <a href="/"><i class="fa-solid fa-house-chimney-window"></i>HOME</a>
     <ul>
       <li>
-        <a href="#">최씨네</a>
+        <a href="">최씨네</a>
         <a href="${contextPath}/introcenter">센터소개</a>
         <a href="${contextPath}/introtech">정비사소개</a>
       </li>
       <li>
-        <a href="#">MYPAGE</a>
+        <a href="">MYPAGE</a>
         <a href="${contextPath}/my">나의정보</a>
         <a href="${contextPath}/reservation">예약하기</a>
       </li>
