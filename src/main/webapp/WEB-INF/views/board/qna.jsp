@@ -62,6 +62,27 @@
     .main .qnabottom .qnasearch {
       text-indent: 20px;
     }
+    .qnasearch select {
+      background-color: white;
+    }
+    .qnasearch input {
+      border: 1px solid #8b8b8b;
+      background-color: white;
+    }
+    .qnasearch button {
+      border: 1px solid black;
+      width: 100px;
+      font-size: 12px;
+      color: white;
+      background-color: black;
+      line-height: 1.6;
+    }
+    .qnasearch button:hover {
+      background-color: #f7f7f7;
+      color: black;
+      border: 1px solid black;
+      transition: all 0.5s;
+    }
     .main .qnabottom .gowriter a {
       display: block;
       text-decoration: none;

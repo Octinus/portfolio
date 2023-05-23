@@ -55,7 +55,7 @@
     }
     
     .main .nobottom {
-      padding-bottom: 20px;
+      margin: 40px 0 80px 0;
       display: flex;
       justify-content: space-between;
     }
@@ -73,6 +73,27 @@
       width: 150px;
     }
     .main .nobottom .gowriter a:hover {
+      background-color: #f7f7f7;
+      color: black;
+      border: 1px solid black;
+      transition: all 0.5s;
+    }
+    .noticesearch select {
+      background-color: white;
+    }
+    .noticesearch input {
+      border: 1px solid #8b8b8b;
+      background-color: white;
+    }
+    .noticesearch button{
+      border: 1px solid black;
+      width: 100px;
+      font-size: 12px;
+      color: white;
+      background-color: black;
+      line-height: 1.6;
+    }
+    .noticesearch button:hover {
       background-color: #f7f7f7;
       color: black;
       border: 1px solid black;

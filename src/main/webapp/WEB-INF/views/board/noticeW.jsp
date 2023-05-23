@@ -5,11 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <c:import url="/WEB-INF/views/inc/top.jsp" />
   <style>
-    .noticetop {
-      padding-bottom: 40px;
+    .noticeWtop {
+      margin-bottom: 50px;
     }
     .noticetable {
-      border: 1px solid black;
+      border: 1px solid #8b8b8b;
       width: 1200px;
     }
     .noticetable tr {
@@ -18,15 +18,20 @@
       line-height: 3;
       font-size: 13px;
     }
-    .noticetable tr .content {
-      border-radius: 0;
+    .noticetable input {
+      border: 1px solid #8b8b8b;
+      background-color: white;
     }
-    .noticebottom {
+    .ck.ck-editor__editable_inline>:last-child {
+      height: 600px;
+      background-color: white;
+    }
+    .noticeWbottom {
       display: flex;
       justify-content: space-between;
       padding-top: 30px;
     }
-    .noticebottom a {
+    .noticeWbottom a {
       text-decoration: none;
       display: block;
       font-size: 13px;
@@ -36,11 +41,11 @@
       padding-top: 10px;
       background-color: #d5d5d5;
     }
-    .noticebottom button {
+    .noticeWbottom button {
       width: 140px;
     }
   </style>
-  <p class="noticetop">공지사항 작성 페이지</p>
+  <p class="noticeWtop">공지사항 작성 페이지</p>
 
   <form method="post" action="${contextPath}/notice_ok.do" enctype="multipart/form-data">
   <table class="noticetable">
@@ -66,7 +71,7 @@
       </td>
     </tr>
   </table>
-  <div class="noticebottom">
+  <div class="noticeWbottom">
     <a href="${contextPath}/notice">LIST</a>
     <button type="submit">OK</button>
   </div>

@@ -19,8 +19,9 @@
       line-height: 3;
       font-size: 13px;
     }
-    .recordtable tr .content {
-      border-radius: 0;
+    .ck.ck-editor__editable_inline>:last-child {
+      height: 600px;
+      background-color: white;
     }
     .recordbottom {
       display: flex;
