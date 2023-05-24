@@ -59,46 +59,131 @@
   }
   html.append("</table>");
 %>
+<style>
+  .resertop {
+    margin-bottom: 70px;
+  }
+  .calendar {
+    width: 500px;
+    margin-bottom: 100px;
+  }
+  .calendar, .time {
+    display: inline-flex;
+  }
+  .calendar table {
+    margin: auto;
+    line-height: 3;
+    border: 1px solid #8b8b8b;
+    text-align: center;
+  }
+  .calendar th {
+    width: 400px;
+    font-size: 25px;
+  }
+  .month {
+    border-bottom: 1px solid #8b8b8b;
+  }
+  .calendar .day td {
+    font-size: 25px;
+  }
+  .calendar .day td:first-child {
+    color: red;
+  }
+  .calendar .day td:last-child {
+    color: blue;
+  }
+  .date td button {
+    border: none;
+    width: 40px;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
+  .date td button:hover {
+    background-color: #8febfc;
+  }
+  .date td span {
+    font-size: 20px;
+    font-weight: 300;
+  }
+  .time {
+    line-height: 3;
+  }
+  .time td {
+    font-size: 18px;
+  }
 
+  .reserbottom {
+    margin-bottom: 100px;
+  }
+</style>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
 
-  <h1>예약 페이지</h1>
-  <br />
-  <br />
-  
-    <%
-    out.println(html.toString());
-    %>
-    <br />
-    <br />
-  <div class="calendar">
-    <table>
-      <tr>
-        <th colspan="7"><h3>${yy}년 ${mm}월</h3></th>
-      </tr>
-      <tr>
-        <c:forEach var="i" items="${dayName}">
-          <td>${i}</td>
-        </c:forEach>
-      </tr>
-      
-        <c:forEach var="j" items="${cal}">
-          <tr>
-          <c:forEach var="k" items="${j}">
-            <c:choose>
-              <c:when test="${k == 0}">
-                <td>.</td>
-              </c:when>
-              <c:otherwise>
-                <td>${k}</td>
-              </c:otherwise>
-            </c:choose>
+  <div class="resertop">
+    <h1>예약 페이지</h1>
+  </div>
+    <!-- <%    out.println(html.toString());    %> -->
+  <div class="resermain">
+    <div class="calendar">
+      <table>
+        <tr class="month">
+          <th colspan="7"><h3>${yy}년 ${mm}월</h3></th>
+        </tr>
+        <tr class="day">
+          <c:forEach var="i" items="${dayName}">
+            <td>${i}</td>
           </c:forEach>
         </tr>
-        </c:forEach>
-      
-    </table>
-    
+          <c:forEach var="j" items="${cal}">
+            <tr class="date">
+            <c:forEach var="k" items="${j}">
+              <c:choose>
+                <c:when test="${k == 0}">
+                  <td></td>
+                </c:when>
+                <c:otherwise>
+                  <c:choose>
+                    <c:when test="${k % 7 == 0 || k % 7 == 6}">
+                      <td><span>${k}</span></td>
+                    </c:when>
+                    <c:otherwise>
+                      <td><button type="button">${k}</button></td>
+                    </c:otherwise>
+                  </c:choose>
+                </c:otherwise>
+              </c:choose>
+            </c:forEach>
+          </tr>
+          </c:forEach>
+      </table>
+    </div>
+
+    <div class="time">
+      <table>
+        <tr><td>09:00 ~ 10:00</td></tr>
+        <tr><td>10:00 ~ 11:00</td></tr>
+        <tr><td>11:00 ~ 12:00</td></tr>
+        <tr><td>13:00 ~ 14:00</td></tr>
+        <tr><td>14:00 ~ 15:00</td></tr>
+        <tr><td>15:00 ~ 16:00</td></tr>
+        <tr><td>16:00 ~ 17:00</td></tr>
+        <tr><td>17:00 ~ 18:00</td></tr>
+      </table>
+    </div>
   </div>
 
+  <div class="reserbottom">
+    <form>
+      <label for="reserdate">예약일자</label>
+      <input type="text" name="reserdate" id="reserdate" />
+      <label for="resertiem">예약시간</label>
+      <input type="text" name="resertiem" id="resertiem" />
+      <button type="submit">예약</button>
+    </form>
+  </div>
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script>
+    
+  </script>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />
