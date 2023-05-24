@@ -113,91 +113,85 @@
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
-      <td>C.MOTORS</td>
-      <td>2023-03-01</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>2023 봄맞이 할인 이벤트</td>
+      <td><a href="" >2023봄맞이 할인 이벤트</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>

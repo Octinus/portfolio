@@ -55,7 +55,7 @@
     }
 
     .main .qnabottom {
-      padding-bottom: 20px;
+      margin: 40px 0 80px 0;
       display: flex;
       justify-content: space-between;
     }
@@ -115,21 +115,21 @@
     <tr>
       <td>공지</td>
       <td></td>
-      <td>최근공지1</td>
+      <td><a href="">최근공지1</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>공지</td>
       <td></td>
-      <td>최근공지2</td>
+      <td><a href="">최근공지2</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>공지</td>
       <td></td>
-      <td>최근공지3</td>
+      <td><a href="">최근공지3</a></td>
       <td>C.MOTORS</td>
       <td>2023-03-01</td>
     </tr>

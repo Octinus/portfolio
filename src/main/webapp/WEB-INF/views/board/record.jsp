@@ -48,12 +48,33 @@
   }
 
   .main .recordbottom {
-    padding-bottom: 20px;
+    margin: 40px 0 80px 0;
     display: flex;
     justify-content: space-between;
   }
   .main .recordbottom .recordresearch {
     text-indent: 20px;
+  }
+  .recordresearch select {
+    background-color: white;
+  }
+  .recordresearch input {
+    border: 1px solid #8b8b8b;
+    background-color: white;
+  }
+  .recordresearch button {
+    border: 1px solid black;
+    width: 100px;
+    font-size: 12px;
+    color: white;
+    background-color: black;
+    line-height: 1.6;
+  }
+  .recordresearch button:hover {
+    background-color: #f7f7f7;
+    color: black;
+    border: 1px solid black;
+    transition: all 0.5s;
   }
   .main .recordbottom .gowriter a {
     display: block;
