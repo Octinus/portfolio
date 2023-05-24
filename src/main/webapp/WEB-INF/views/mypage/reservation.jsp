@@ -65,8 +65,8 @@
   <h1>예약 페이지</h1>
   <br />
   <br />
-  <h3>${yy}년 ${mm}월</h3>
-  <%
+  
+    <%
     out.println(html.toString());
     %>
     <br />
@@ -74,15 +74,19 @@
   <div class="calendar">
     <table>
       <tr>
+        <th colspan="7"><h3>${yy}년 ${mm}월</h3></th>
+      </tr>
+      <tr>
         <c:forEach var="i" items="${dayName}">
           <td>${i}</td>
         </c:forEach>
       </tr>
-      <tr>
-        <c:forEach var="j" begin="0" end="${cal.length}" step="1" varStatus="status">
-          <c:forEach var="k" begin="0" end="${cal[status.index].length}" step="1" >
+      
+        <c:forEach var="j" items="${cal}">
+          <tr>
+          <c:forEach var="k" items="${j}">
             <c:choose>
-              <c:when test="${cal[status.index] == 0}">
+              <c:when test="${k == 0}">
                 <td>.</td>
               </c:when>
               <c:otherwise>
@@ -90,8 +94,9 @@
               </c:otherwise>
             </c:choose>
           </c:forEach>
+        </tr>
         </c:forEach>
-      </tr>
+      
     </table>
     
   </div>
