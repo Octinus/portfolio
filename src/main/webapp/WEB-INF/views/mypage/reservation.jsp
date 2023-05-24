@@ -147,7 +147,7 @@
                       <td><span>${k}</span></td>
                     </c:when>
                     <c:otherwise>
-                      <td><button type="button">${k}</button></td>
+                      <td><button class="datebtn" type="button" value="${k}">${k}</button></td>
                     </c:otherwise>
                   </c:choose>
                 </c:otherwise>
@@ -160,14 +160,14 @@
 
     <div class="time">
       <table>
-        <tr><td>09:00 ~ 10:00</td></tr>
-        <tr><td>10:00 ~ 11:00</td></tr>
-        <tr><td>11:00 ~ 12:00</td></tr>
-        <tr><td>13:00 ~ 14:00</td></tr>
-        <tr><td>14:00 ~ 15:00</td></tr>
-        <tr><td>15:00 ~ 16:00</td></tr>
-        <tr><td>16:00 ~ 17:00</td></tr>
-        <tr><td>17:00 ~ 18:00</td></tr>
+        <tr><td><button class="timebtn" type="button" value="09:00">09:00 ~ 10:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="10:00">10:00 ~ 11:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="11:00">11:00 ~ 12:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="13:00">13:00 ~ 14:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="14:00">14:00 ~ 15:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="15:00">15:00 ~ 16:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="16:00">16:00 ~ 17:00</button></td></tr>
+        <tr><td><button class="timebtn" type="button" value="17:00">17:00 ~ 18:00</button></td></tr>
       </table>
     </div>
   </div>
@@ -175,15 +175,22 @@
   <div class="reserbottom">
     <form>
       <label for="reserdate">예약일자</label>
-      <input type="text" name="reserdate" id="reserdate" />
+      <input type="text" name="reserdate" id="reserdate" value="" readonly/>
       <label for="resertiem">예약시간</label>
-      <input type="text" name="resertiem" id="resertiem" />
+      <input type="text" name="resertiem" id="resertiem" value="" readonly/>
       <button type="submit">예약</button>
     </form>
   </div>
 
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script>
-    
+    $('.datebtn').on('click', (e) => {
+      const date = $(e.currentTarget).attr('value')
+      $('#reserdate').attr('value', '${yy}-${mm}-' + date)
+    });
+    $('.timebtn').on('click', (e) => {
+      const time = $(e.currentTarget).attr('value')
+      $('#resertiem').attr('value', time)
+    });
   </script>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />
