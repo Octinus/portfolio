@@ -40,24 +40,6 @@
       }
   }
   request.setAttribute("cal", cal);
-
-  System.out.printf("[%d]년 [%d]월\n", yy, mm);
-  html.append("<table>");
-  for (int i = 0; i < cal.length; i++) {
-    html.append("<tr>");
-      for (int j = 0; j < cal[i].length; j++) {
-          if (i == 0) {
-            html.append("<th>" + dayName[j] + "</th>");
-          } else if (cal[i][j] == 0) {
-              html.append("<td></td>");
-          } else {
-              html.append("<td>" + cal[i][j] + "</td>");
-          }
-      }
-      html.append("</tr>");
-      System.out.println();
-  }
-  html.append("</table>");
 %>
 <style>
   .resertop {
@@ -73,7 +55,7 @@
   .calendar table {
     margin: auto;
     line-height: 3;
-    border: 1px solid #8b8b8b;
+    border: 2px solid #8b8b8b;
     text-align: center;
   }
   .calendar th {
@@ -81,10 +63,12 @@
     font-size: 25px;
   }
   .month {
-    border-bottom: 1px solid #8b8b8b;
+    border-bottom: 1px dotted #8b8b8b;
+    background-color: #b5d1fa;
   }
   .calendar .day td {
     font-size: 25px;
+    padding: 10px;
   }
   .calendar .day td:first-child {
     color: red;
@@ -92,29 +76,56 @@
   .calendar .day td:last-child {
     color: blue;
   }
+  
   .date td button {
     border: none;
     width: 40px;
     font-size: 20px;
     font-weight: 300;
     text-align: center;
+    background-color: #ccf8ced3;
   }
   .date td button:hover {
-    background-color: #8febfc;
+    background-color: #b5d1fa;
   }
   .date td span {
     font-size: 20px;
     font-weight: 300;
+    background-color: #e9e9e9;
+    padding: 2px 9px 2px 9px;
   }
-  .time {
+  .time table {
     line-height: 3;
+    border: 2px solid #8b8b8b;
+    text-align: center;
   }
-  .time td {
-    font-size: 18px;
+  .time table th {
+    font-size: 25px;
+    width: 300px;
+    border-bottom: 1px dotted #8b8b8b;
+  }
+  .time table td:first-child {
+    padding-top: 10px;
+  }
+  .time td button{
+    font-size: 20px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #ccf8ced3;
+  }
+  .time td button:hover {
+    background-color: #b5d1fa;
   }
 
   .reserbottom {
     margin-bottom: 100px;
+  }
+  .reserbottom input {
+    border: 1px solid #8b8b8b;
+    width: 120px;
+  }
+  .reserbottom button {
+    border: 1px solid #8b8b8b;
   }
 </style>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
@@ -160,14 +171,35 @@
 
     <div class="time">
       <table>
-        <tr><td><button class="timebtn" type="button" value="09:00">09:00 ~ 10:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="10:00">10:00 ~ 11:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="11:00">11:00 ~ 12:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="13:00">13:00 ~ 14:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="14:00">14:00 ~ 15:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="15:00">15:00 ~ 16:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="16:00">16:00 ~ 17:00</button></td></tr>
-        <tr><td><button class="timebtn" type="button" value="17:00">17:00 ~ 18:00</button></td></tr>
+        <tr>
+          <th colspan="4">
+            <h3>예약 가능 시간</h3>
+          </th>
+        </tr>
+        <tr>
+          <td><button class="timebtn" type="button" value="09:00">09:00</button></td>
+          <td><button class="timebtn" type="button" value="09:30">09:30</button></td>
+          <td><button class="timebtn" type="button" value="10:00">10:00</button></td>
+          <td><button class="timebtn" type="button" value="10:30">10:30</button></td>
+        </tr>
+        <tr>
+          <td><button class="timebtn" type="button" value="11:00">11:00</button></td>
+          <td><button class="timebtn" type="button" value="11:30">11:30</button></td>
+          <td><button class="timebtn" type="button" value="13:00">13:00</button></td>
+          <td><button class="timebtn" type="button" value="13:30">13:30</button></td>
+        </tr>
+        <tr>
+          <td><button class="timebtn" type="button" value="14:00">14:00</button></td>
+          <td><button class="timebtn" type="button" value="14:30">14:30</button></td>
+          <td><button class="timebtn" type="button" value="15:00">15:00</button></td>
+          <td><button class="timebtn" type="button" value="15:30">15:30</button></td>
+        </tr>
+        <tr>
+          <td><button class="timebtn" type="button" value="16:00">16:00</button></td>
+          <td><button class="timebtn" type="button" value="16:30">16:30</button></td>
+          <td><button class="timebtn" type="button" value="17:00">17:00</button></td>
+          <td><button class="timebtn" type="button" value="17:30">17:30</button></td>
+        </tr>
       </table>
     </div>
   </div>
@@ -187,6 +219,7 @@
     $('.datebtn').on('click', (e) => {
       const date = $(e.currentTarget).attr('value')
       $('#reserdate').attr('value', '${yy}-${mm}-' + date)
+      $('#resertiem').attr('value', '')
     });
     $('.timebtn').on('click', (e) => {
       const time = $(e.currentTarget).attr('value')

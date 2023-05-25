@@ -5,25 +5,40 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           <c:import url="/WEB-INF/views/inc/top.jsp" />
           <style>
-            .main .content-container {
+            .main .content-container .homemain {
               display: flex;
               justify-content: space-between;
             }
-
-            /* 메인화면 왼쪽 관리 요령 */
-            .autoplay-container {
-              width: 500px;
-              position: relative;
-              margin: 50px auto 100px auto;
+            .ad-container {
+              width: 1000px;
+              height: 200px;
+              margin: 40px auto 100px auto;
+            }
+            .ad,
+            .ad .ad-item {
+              width: 1000px;
+              height: 200px;
+            }
+            .ad .ad-item img {
+              width: 1000px;
+              height: 200px;
+              object-fit: cover;
             }
 
-            .autoplay,
-            .autoplay .autoplay-item {
+            /* 메인화면 왼쪽 관리 요령 */
+            .tip-container {
+              width: 500px;
+              position: relative;
+              margin: 0 auto 100px auto;
+            }
+
+            .tip,
+            .tip .tip-item {
               width: 100%;
               height: 100%;
             }
 
-            .autoplay .autoplay-item img {
+            .tip .tip-item img {
               width: 100%;
               height: 100%;
               object-fit: cover;
@@ -165,7 +180,7 @@
 
             /* 메인화면 중앙 로그인/회원가입 */
             .login {
-              width: 300px;
+              width: 100px;
             }
 
             .login a {
@@ -178,29 +193,19 @@
               margin: auto;
             }
 
-            .login a:first-child {
+            .login a {
               background-color: #0039f5;
               color: white;
               margin-bottom: 40px;
               transition: all 0.5s;
             }
 
-            .login a:first-child:hover {
+            .login a:hover {
               background-color: #f7f7f7;
               color: black;
               border: 1px solid black;
             }
 
-            .login a:last-child {
-              background-color: #d5d5d5;
-              transition: all 0.5s;
-            }
-
-            .login a:last-child:hover {
-              background-color: #f7f7f7;
-              color: black;
-              border: 1px solid black;
-            }
 
             .booking {
               margin-right: 50px;
@@ -215,83 +220,113 @@
               line-height: 3;
             }
           </style>
-
-          <div class="autoplay-container">
-            <!-- 요령 slick 본체-->
-            <div class="autoplay">
-              <div class="autoplay-item">
-                <img src="${contextPath}/assets/img/2.jpg" />
+          <div class="ad-container">
+            <div class="ad">
+              <div class="ad-item">
+                <img src="${contextPath}/assets/img/ad1.jpg" />
               </div>
-              <div class="autoplay-item">
-                <img src="${contextPath}/assets/img/3.jpg" />
+              <div class="ad-item">
+                <img src="${contextPath}/assets/img/ad2.jpg" />
               </div>
-              <div class="autoplay-item">
-                <img src="${contextPath}/assets/img/4.jpg" />
+              <div class="ad-item">
+                <img src="${contextPath}/assets/img/ad3.jpg" />
               </div>
-              <div class="autoplay-item">
-                <img src="${contextPath}/assets/img/5.jpg" />
+              <div class="ad-item">
+                <img src="${contextPath}/assets/img/ad4.jpg" />
+              </div>
+              <div class="ad-item">
+                <img src="${contextPath}/assets/img/ad5.jpg" />
               </div>
             </div>
           </div>
 
-          <div class="login"> <!-- 메인 가운데 로그인/회원가입 -->
-            <a href="${contextPath}/login">Log In</a>
+          <div class="homemain">
+            <div class="tip-container">
+              <div class="login"> <!-- 메인 가운데 로그인/회원가입 -->
+                <a href="${contextPath}/login">Log In</a>
+              </div>
+              <!-- 요령 slick 본체-->
+              <div class="tip">
+                <div class="tip-item">
+                  <img src="${contextPath}/assets/img/2.jpg" />
+                </div>
+                <div class="tip-item">
+                  <img src="${contextPath}/assets/img/3.jpg" />
+                </div>
+                <div class="tip-item">
+                  <img src="${contextPath}/assets/img/4.jpg" />
+                </div>
+                <div class="tip-item">
+                  <img src="${contextPath}/assets/img/5.jpg" />
+                </div>
+              </div>
+            </div>
 
-            <a href="${contextPath}/join">Join Member</a>
-          </div>
+            
 
-          <div class="booking">
-            <h1>오늘의 예약 현황</h1>
-            <table>
-              <tr>
-                <th colspan="3">2023년 X월 XX일 X요일</th>
-              </tr>
-              <tr>
-                <th>시간</th>
-                <th>차종</th>
-                <th>이름</th>
-              </tr>
-              <tr>
-                <td>09:00 ~ 10:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <td>10:00 ~ 11:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <td>11:00 ~ 12:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <td>13:00 ~ 14:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <td>14:00 ~ 15:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <td>15:00 ~ 16:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <td>16:00 ~ 17:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-              <tr>
-                <th>17:00 ~ 18:00</td>
-                <td>OK자동차</td>
-                <td>11가1111 가X다 고객님</td>
-              </tr>
-            </table>
+            <div class="booking">
+              <h1>오늘의 예약 현황</h1>
+              <table>
+                <tr>
+                  <th colspan="3">2023년 X월 XX일 X요일</th>
+                </tr>
+                <tr>
+                  <th>시간</th>
+                  <th>차종</th>
+                  <th>이름</th>
+                </tr>
+                <tr>
+                  <td>09:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>09:30</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>10:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>10:30</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>11:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>13:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>14:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>15:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <td>16:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+                <tr>
+                  <th>17:00</td>
+                  <td>OK자동차</td>
+                  <td>11가1111 가X다 고객님</td>
+                </tr>
+              </table>
+            </div>
           </div>
 
           <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -299,11 +334,21 @@
 
           <script>
             $(document).ready(function () {
-              $('.autoplay').slick({
+              $('.ad').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 2000,
+                arrows: false,
+                dots: false
+              });
+            });
+            $(document).ready(function () {
+              $('.tip').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
                 dots: true,
                 arrows: true,
                 prevArrow: "<button type='button' class='slick-prev'><</button>",
