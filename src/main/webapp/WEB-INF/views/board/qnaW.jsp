@@ -42,7 +42,7 @@
       width: 140px;
     }
   </style>
-  <p class="qnatop">자유게시판 작성 페이지</p>
+  <p class="qnatop">Q&A</p>
 
   <form method="post" action="${contextPath}/qna_ok.do" enctype="multipart/form-data">
   <table class="qnatable">

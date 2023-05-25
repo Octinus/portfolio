@@ -6,8 +6,13 @@
   <c:import url="/WEB-INF/views/inc/top.jsp" />
   <style>
     .techtop {
-      font-size: 20px;
-      margin-bottom: 40px;
+    margin: 20px auto 80px auto;
+    font-size: 25px;
+    width: 100px;
+    border-bottom: 1px solid black;
+    }
+    .techtop h1 {
+      padding-bottom: 10px;
     }
 
     .techmain {
@@ -29,9 +34,11 @@
       border: 1px solid black;
     }
   </style>
+
   <div class="techtop">
     <h1>정비사</h1>
   </div>
+
   <div class="techmain">
     <table class="techtable">
       <tr>

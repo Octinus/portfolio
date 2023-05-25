@@ -45,7 +45,7 @@
       width: 140px;
     }
   </style>
-  <p class="noticeWtop">공지사항 작성 페이지</p>
+  <p class="noticeWtop">NOTICE</p>
 
   <form method="post" action="${contextPath}/notice_ok.do" enctype="multipart/form-data">
   <table class="noticetable">

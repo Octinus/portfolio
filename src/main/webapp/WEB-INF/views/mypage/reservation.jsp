@@ -11,6 +11,7 @@
 
   int yy = c.get(Calendar.YEAR);
   request.setAttribute("yy", yy);
+
   int mm = c.get(Calendar.MONTH) + 1;
   request.setAttribute("mm", mm);
 
@@ -43,8 +44,15 @@
 %>
 <style>
   .resertop {
-    margin-bottom: 70px;
+    margin: 20px auto 80px auto;
+    font-size: 25px;
+    width: 180px;
+    border-bottom: 1px solid black;
   }
+  .resertop h1 {
+    padding-bottom: 10px;
+  }
+
   .calendar {
     width: 500px;
     margin-bottom: 100px;
@@ -131,7 +139,7 @@
 <c:import url="/WEB-INF/views/inc/top.jsp" />
 
   <div class="resertop">
-    <h1>예약 페이지</h1>
+    <h1>RESERVATIOM</h1>
   </div>
     <!-- <%    out.println(html.toString());    %> -->
   <div class="resermain">

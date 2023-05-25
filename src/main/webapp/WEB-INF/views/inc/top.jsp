@@ -22,6 +22,7 @@
         <a href="">MYPAGE</a>
         <a href="${contextPath}/my">나의정보</a>
         <a href="${contextPath}/reservation">예약하기</a>
+        <a href="${contextPath}/reservation">로그아웃</a>
       </li>
       <li>
         <a href="${contextPath}/record">정비이력</a>

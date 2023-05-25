@@ -42,7 +42,7 @@
       width: 140px;
     }
   </style>
-  <p class="recordtop">정비이력 작성 페이지</p>
+  <p class="recordtop">모두를 위한 정비 이력</p>
 
   <form method="post" action="${contextPath}/record_ok.do" enctype="multipart/form-data">
   <table class="recordtable">
