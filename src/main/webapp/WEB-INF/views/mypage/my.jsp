@@ -129,11 +129,11 @@
       </tr>
       <tr>
         <th><label for="name">이름<span>*</span></label></th>
-        <td><input type="text" name="name" id="name" placeholder="이름"/></td>
+        <td><input type="text" name="name" id="name" placeholder="이름" readonly /></td>
       </tr>
       <tr>
         <th><label for="userid">아이디<span>*</span></label></th>
-        <td><input type="text" name="userid" id="userid" placeholder="아이디"/> (영문소문자/숫자, 4~16자)</td>
+        <td><input type="text" name="userid" id="userid" placeholder="아이디" readonly /> (영문소문자/숫자, 4~16자)</td>
       </tr>
       <tr>
         <th><label for="userpw">비밀번호<span>*</span></label></th>

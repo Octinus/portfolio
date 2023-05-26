@@ -194,7 +194,7 @@
   }
 
   .login a {
-    background-color: #0039f5;
+    background-color: #002396;
     color: white;
     margin-bottom: 40px;
     transition: all 0.5s;

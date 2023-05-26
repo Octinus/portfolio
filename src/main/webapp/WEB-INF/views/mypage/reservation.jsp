@@ -92,15 +92,16 @@
     font-weight: 300;
     text-align: center;
     background-color: #ccf8ced3;
+    margin: 10px;
   }
   .date td button:hover {
     background-color: #b5d1fa;
   }
-  .date td span {
+  .date td:nth-child(1) button,
+  .date td:nth-child(7) button {
     font-size: 20px;
     font-weight: 300;
     background-color: #e9e9e9;
-    padding: 2px 9px 2px 9px;
   }
   .time table {
     line-height: 3;
@@ -161,14 +162,7 @@
                   <td></td>
                 </c:when>
                 <c:otherwise>
-                  <c:choose>
-                    <c:when test="${k % 7 == 0 || k % 7 == 6}">
-                      <td><span>${k}</span></td>
-                    </c:when>
-                    <c:otherwise>
-                      <td><button class="datebtn" type="button" value="${k}">${k}</button></td>
-                    </c:otherwise>
-                  </c:choose>
+                    <td><button class="datebtn" type="button" value="${k}">${k}</button></td>
                 </c:otherwise>
               </c:choose>
             </c:forEach>
@@ -225,6 +219,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script>
     $('.datebtn').on('click', (e) => {
+      const idx = $(e.currentTarget).parent().index()
+      if(idx == 0 || idx == 6) {
+        $('#reserdate').attr('value', '')
+        return
+      }
       const date = $(e.currentTarget).attr('value')
       $('#reserdate').attr('value', '${yy}-${mm}-' + date)
       $('#resertiem').attr('value', '')

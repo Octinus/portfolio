@@ -24,7 +24,7 @@
   text-align: center;
   font-size: 48px;
   font-weight: 900;
-  color: #0039f5;
+  color: #002396;
   padding-bottom: 20px;
 }
 .header i {
@@ -56,7 +56,7 @@
   font-weight: 600;
   width: 90px; /*강제 너비를 줘서 글이 삐져나갈수 있게 한다.*/
   display: flex;
-  color: #0039f5;
+  color: #011b72;
   background-color: #f7f7f7;
 }
 .navi ul {
