@@ -23,7 +23,7 @@ public interface MembersMapper {
         public int insert(Members input);
 
         @Update("update members set name=#{name}, mem_type=#{mem_type}, mem_id=#{mem_id}, mem_pw=#{mem_pw}, tel=#{tel}, email=#{email}, " +
-                "birthdate=#{birthdate}, carno=#{carno}, carmo=#{carmo}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2} who_is=#{who_is}, is_out=#{is_out} " +
+                "birthdate=#{birthdate}, carno=#{carno}, carmo=#{carmo}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2}" +
                 "where id=#{id}")
         public int update(Members input);
 

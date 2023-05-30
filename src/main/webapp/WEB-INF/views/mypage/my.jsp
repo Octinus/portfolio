@@ -121,7 +121,11 @@
 </div>
 
 <div class="myinfo-container">
-  <form class="myinfo">
+  <form class="myinfo" method="post" action="${contextPath}/my_edit_ok">
+    <input type="hidden" name="id" id="id" value="${login_info.getId()}"/>
+    <input type="hidden" name="mem_type" id="mem_type" value="C" />
+    <input type="hidden" name="is_out" id="is_out" value="N" />
+
     <table>
       <tr>
         <th>나의정보</th>
@@ -129,25 +133,25 @@
       </tr>
       <tr>
         <th><label for="name">이름<span>*</span></label></th>
-        <td><input type="text" name="name" id="name" placeholder="이름" readonly /></td>
+        <td><input type="text" name="name" id="name" value="${login_info.getName()}" readonly /></td>
       </tr>
       <tr>
         <th><label for="userid">아이디<span>*</span></label></th>
-        <td><input type="text" name="userid" id="userid" placeholder="아이디" readonly /> (영문소문자/숫자, 4~16자)</td>
+        <td><input type="text" name="mem_id" id="mem_id" value="${login_info.getMem_id()}" readonly /></td>
       </tr>
       <tr>
         <th><label for="userpw">비밀번호<span>*</span></label></th>
-        <td><input type="password" name="userpw" id="userpw" placeholder="비밀번호"/> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
+        <td><input type="password" name="mem_pw" id="mem_pw" value="${login_info.getMem_pw()}"/></td>
       </tr>
       <tr>
         <th><label for="userpwre">비밀번호 확인<span>*</span></label></th>
-        <td><input type="password" name="userpwre" id="userpwre" placeholder="비밀번호 확인"/> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
+        <td><input type="password" name="mem_pwre" id="mem_pwre" placeholder="비밀번호 확인"/></td>
       </tr>
       <tr>
         <th><label for="tel">연락처<span>*</span></label></th>
         <td>
           <select name="tel">
-            <option value="">--선택하세요--</option>
+            <option value="${login_info.getTel().substring(0, 3)}">${login_info.getTel().substring(0, 3)}</option>
             <option value="010">010</option>
             <option value="011">011</option>
             <option value="016">016</option>
@@ -173,34 +177,34 @@
             <option value="064">064</option>
         </select>
         -
-          <input type="tel" name="tel" id="tel" />
+          <input type="tel" name="tel" id="tel" value="${login_info.getTel().substring(4, 8)}" />
           -
-          <input type="tel" name="tel" id="tel" /> (연락 가능한 번호를 적어주세요.)</td>
+          <input type="tel" name="tel" id="tel" value="${login_info.getTel().substring(9)}" /></td>
       </tr>
       <tr>
         <th><label for="email">E-mail<span>*</span></label></th>
-        <td><input type="email" name="email" id="email" /></td>
+        <td><input type="email" name="email" id="email" value="${login_info.getEmail()}"/></td>
       </tr>
       <tr>
         <th><label for="birthdate">생년월일<span>*</span></label></th>
-        <td><input type="date" name="birthdate" id="birthdate" placeholder="생년월일"/></td>
+        <td><input type="date" name="birthdate" id="birthdate" value="${login_info.getBirthdate()}"/></td>
       </tr>
       <tr>
         <th><label for="carnum">자동차번호<span>*</span></label></th>
-        <td><input type="text" name="carnum" id="carnum" placeholder="자동차번호"/></td>
+        <td><input type="text" name="carno" id="carno" value="${login_info.getCarno()}"/></td>
       </tr>
       <tr>
         <th><label for="carmodel">차종<span>*</span></label></th>
-        <td><input type="text" name="carmodel" id="carmodel" placeholder="차종"/></td>
+        <td><input type="text" name="carmo" id="carmo" value="${login_info.getCarmo()}"/></td>
       </tr>
       <tr>
         <th rowspan="3"><label for="postcode">주소<span>*</span></th>
         <td>
-        <input type="tel" name="postcode" id="postcode" placeholder="우편번호"/><button type="button" onclick="check_Postcode()">우편번호 ></button>
+        <input type="tel" name="postcode" id="postcode" value="${login_info.getPostcode()}"/><button type="button" onclick="check_Postcode()">우편번호 ></button>
         <br />
-        <input type="text" name="addr1" id="addr1" placeholder="기본주소"/>
+        <input type="text" name="addr1" id="addr1" value="${login_info.getAddr1()}"/>
         <br />
-        <input type="text" name="addr2" id="addr2" placeholder="상세주소"/>
+        <input type="text" name="addr2" id="addr2" value="${login_info.getAddr2()}"/>
       </td>
       </tr>
       </label>

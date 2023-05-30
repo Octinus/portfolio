@@ -18,15 +18,21 @@
         <a href="${contextPath}/introcenter">센터소개</a>
         <a href="${contextPath}/introtech">정비사소개</a>
       </li>
-      <li>
-        <a href="">MYPAGE</a>
-        <a href="${contextPath}/my">나의정보</a>
-        <a href="${contextPath}/reservation">예약하기</a>
-        <a href="${contextPath}/reservation">로그아웃</a>
-      </li>
-      <li>
-        <a href="${contextPath}/record">정비이력</a>
-      </li>
+
+      <c:if test="${login_info != null}">
+        <li>
+          <a href="">MYPAGE</a>
+          <a href="${contextPath}/my">나의정보</a>
+          <a href="${contextPath}/reservation">예약하기</a>
+          <a href="${contextPath}/logout">로그아웃</a>
+        </li>
+        <c:if test="${login_info.getMem_type().equals('T') || login_info.getMem_type().equals('A')}">
+          <li>
+            <a href="${contextPath}/record">정비이력</a>
+          </li>
+        </c:if>
+      </c:if>
+
       <li>
         <a href="${contextPath}/notice">공지사항</a>
       </li>

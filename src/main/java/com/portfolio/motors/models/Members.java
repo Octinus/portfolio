@@ -19,7 +19,7 @@ public class Members {
   private String birthdate;
   private String carno;
   private String carmo;
-  private int postcode;
+  private String postcode;
   private String addr1;
   private String addr2;
   private String level;
@@ -27,4 +27,20 @@ public class Members {
   private String edit_date;
   private String who_is;
   private String is_out;
+
+  private static int offset;
+  private static int listCount;
+  
+  public static int getOffset() {
+    return offset;
+  }
+  public static void setOffset(int offset) {
+    Members.offset = offset;
+  }
+  public static int getListCount() {
+    return listCount;
+  }
+  public static void setListCount(int listCount) {
+    Members.listCount = listCount;
+  }
 }

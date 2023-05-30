@@ -180,10 +180,11 @@
 
   /* 메인화면 중앙 로그인/회원가입 */
   .login {
-    width: 100px;
+    width: 400px;
+    display: inline-flex;
   }
 
-  .login a {
+  .login .golog {
     text-decoration: none;
     color: black;
     display: block;
@@ -193,14 +194,14 @@
     margin: auto;
   }
 
-  .login a {
+  .login .golog {
     background-color: #002396;
     color: white;
     margin-bottom: 40px;
     transition: all 0.5s;
   }
 
-  .login a:hover {
+  .login .golog:hover {
     background-color: #f7f7f7;
     color: black;
     border: 1px solid black;
@@ -242,8 +243,16 @@
 
 <div class="homemain">
   <div class="tip-container">
-    <div class="login"> <!-- 메인 가운데 로그인/회원가입 -->
-      <a href="${contextPath}/login">Log In</a>
+    <div class="login"> <!-- 메인 로그인 / 로그인시 환영인사 로그아웃 -->
+      <c:choose>
+        <c:when test="${login_info != null}">
+          <p><a href="${contextPath}/my">${login_info.getName()}</a>님 안녕하세요.</p>
+          <a href="${contextPath}/logout" class="golog">LOG OUT</a>
+        </c:when>
+        <c:otherwise>
+          <a href="${contextPath}/login" class="golog">Log In</a>
+        </c:otherwise>
+      </c:choose>
     </div>
     <!-- 요령 slick 본체-->
     <div class="tip">

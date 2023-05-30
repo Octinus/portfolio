@@ -153,8 +153,32 @@ public class RegexHelper {
 	 * @param message - 조건 불충분시 발생할 메세지
 	 * @throws StringFormatException
 	 */
-	public void isLength(String value, String message) throws StringFormatException {
-		if(value.length() > 12) {
+	public void isMaxLength(String value, String message) throws StringFormatException {
+		if(value.length() > 16) {
+			throw new StringFormatException(message);
+		}
+	}
+
+	/**
+	 * 입력값의 길이가 4자 이상인지 검사
+	 * @param value - 입력값
+	 * @param message - 조건 불충분시 발생할 메세지
+	 * @throws StringFormatException
+	 */
+	public void isMinLength(String value, String message) throws StringFormatException {
+		if(value.length() < 4) {
+			throw new StringFormatException(message);
+		}
+	}
+
+	/**
+	 * 입력값의 길이가 10자 이상인지 검사
+	 * @param value - 입력값
+	 * @param message - 조건 불충분시 발생할 메세지
+	 * @throws StringFormatException
+	 */
+	public void isMinPwLength(String value, String message) throws StringFormatException {
+		if(value.length() < 10) {
 			throw new StringFormatException(message);
 		}
 	}

@@ -92,18 +92,18 @@
 
 <div class="loginmain">
   <table>
-      <form method="post" action="${contextPath}/login_ok.do">
+      <form method="post" action="${contextPath}/login_ok">
         <tr>
-          <th><label for="userid">ID</label></th>
+          <th><label for="mem_id">ID</label></th>
         </tr>
         <tr>
-          <td><input type="text" id="userid" name="userid" /></td>
+          <td><input type="text" id="mem_id" name="mem_id" /></td>
         </tr>
         <tr>
-          <th><label for="userpw">PASSWORD</label></th>
+          <th><label for="mem_pw">PASSWORD</label></th>
         </tr>
         <tr>
-          <td><input type="password" id="userpw" name="userpw" /></td>
+          <td><input type="password" id="mem_pw" name="mem_pw" /></td>
         </tr>
         <tr>
         <td><button type="submit" class="loginbtn">Log In</button></td>
