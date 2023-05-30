@@ -61,8 +61,8 @@ public class HomeController {
 
     Members output = null;
 
-    input.setMemid(memid);
-    input.setMempw(mempw);
+    input.setMem_id(memid);
+    input.setMem_pw(mempw);
     try {
       output = membersService.selectItem(input);
     } catch (Exception e) {
@@ -70,7 +70,7 @@ public class HomeController {
     }      
 
     if(!memid.equals("")){
-      if(input.getMemid().equals(output.getMempw())){
+      if(input.getMem_id().equals(output.getMem_pw())){
         session.setAttribute("login_info", input);
       } else {
         return webHelper.redirect("/login", "비밀번호가 틀렸습니다.");
@@ -132,9 +132,9 @@ public class HomeController {
 
     Members input = new Members();
     input.setName(name);
-    input.setMemType(memType);
-    input.setMemid(memid);
-    input.setMempw(mempw);
+    input.setMem_type(memType);
+    input.setMem_id(memid);
+    input.setMem_pw(mempw);
     input.setTel(totTel);
     input.setBirthdate(birthdate);
     input.setEmail(email);
@@ -143,7 +143,8 @@ public class HomeController {
     input.setPostcode(postcode);
     input.setAddr1(addr1);
     input.setAddr2(addr2);
-    input.setIsOut(isOut);
+    input.setReg_date(regDate);
+    input.setIs_out(isOut);
 
     try {
       // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.

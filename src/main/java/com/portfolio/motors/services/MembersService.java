@@ -5,7 +5,7 @@ import java.util.List;
 import com.portfolio.motors.models.Members;
 
 public interface MembersService {
-  
+    
     /**
      * 멤버 정보를 새로 저장하고 저장된 정보를 조회하여 리턴한다.
      * 저장된 행의 수가 '0'이거나, SQL에 에러가 있는 경우는

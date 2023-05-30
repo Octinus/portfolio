@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Members {
   private int id;
-  private String memType;
-  private String memid;
-  private String mempw;
+  private String mem_type;
+  private String mem_id;
+  private String mem_pw;
   private String mempwre;
   private String name;
   private String tel;
@@ -23,8 +23,8 @@ public class Members {
   private String addr1;
   private String addr2;
   private String level;
-  private String regDate;
-  private String editDate;
-  private String whois;
-  private String isOut;
+  private String reg_date;
+  private String edit_date;
+  private String who_is;
+  private String is_out;
 }

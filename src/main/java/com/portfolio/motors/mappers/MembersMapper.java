@@ -17,13 +17,14 @@ import com.portfolio.motors.models.Members;
 @Mapper
 public interface MembersMapper {
 
-        @Insert("insert into members(name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, who_is, is_out) " +
-                "values(#{name}, #{mem_type}, #{mem_id}, #{mem_pw}, #{tel}, #{email}, #{birthdate}, #{carno}, #{carmo}, #{postcode}, #{addr1}, #{addr2}, #{who_is}, #{is_out})")
+        @Insert("insert into members(name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, reg_date, who_is, is_out) " +
+                "values(#{name}, #{mem_type}, #{mem_id}, #{mem_pw}, #{tel}, #{email}, #{birthdate}, #{carno}, #{carmo}, #{postcode}, #{addr1}, #{addr2}, #{reg_date}, #{who_is}, #{is_out})")
         @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
         public int insert(Members input);
 
         @Update("update members set name=#{name}, mem_type=#{mem_type}, mem_id=#{mem_id}, mem_pw=#{mem_pw}, tel=#{tel}, email=#{email}, " +
-                "birthdate=#{birthdate}, carno=#{carno}, carmo=#{carmo}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2} who_is=#{who_is}, is_out=#{is_out} where id=#{id}")
+                "birthdate=#{birthdate}, carno=#{carno}, carmo=#{carmo}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2} who_is=#{who_is}, is_out=#{is_out} " +
+                "where id=#{id}")
         public int update(Members input);
 
         @Delete("delete from members where id=#{id}")
@@ -34,7 +35,7 @@ public interface MembersMapper {
                 "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2 who_is, is_out from members " +
                 "<where>" + 
                 "<if test='id != null'>id like concat ('%', #{id}, '%')</if>" +
-                "<if test='custid != null'>or custid like concat ('%', #{mem_id}, '%')</if>" +
+                "<if test='mem_id != null'>or mem_id like concat ('%', #{mem_id}, '%')</if>" +
                 "</where>" +
                 "</script>")
         // 조회 결과와 MODEL 객체를 연결하기 위한 규칙 정의
