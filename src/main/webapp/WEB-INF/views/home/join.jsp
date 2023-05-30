@@ -114,6 +114,9 @@
     
 <div class="join-container">
   <form action="${contextPath}/join_ok" method="post" class="join">
+    <input type="hidden" name="mem_type" id="mem_type" value="C" />
+    <input type="hidden" name="reg_date" id="reg_date" value="$now()" />
+    <input type="hidden" name="is_out" id="is_out" value="N" />
     <table border="1">
     <tr>
       <th colspan="2"><span>*</span>필수입력사항</th>
@@ -123,16 +126,16 @@
       <td><input type="text" name="name" id="name" placeholder="이름"/></td>
     </tr>
     <tr>
-      <th><label for="userid">아이디<span>*</span></label></th>
-      <td><input type="text" name="userid" id="userid" placeholder="아이디"/> (영문소문자/숫자, 4~16자)</td>
+      <th><label for="mem_id">아이디<span>*</span></label></th>
+      <td><input type="text" name="mem_id" id="mem_id" placeholder="아이디"/> (영문소문자/숫자, 4~16자)</td>
     </tr>
     <tr>
-      <th><label for="userpw">비밀번호<span>*</span></label></th>
-      <td><input type="password" name="userpw" id="userpw" placeholder="비밀번호"/> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
+      <th><label for="mem_pw">비밀번호<span>*</span></label></th>
+      <td><input type="password" name="mem_pw" id="mem_pw" placeholder="비밀번호"/> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
     </tr>
     <tr>
-      <th><label for="userpwre">비밀번호 확인<span>*</span></label></th>
-      <td><input type="password" name="userpwre" id="userpwre" placeholder="비밀번호 확인"/> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
+      <th><label for="mem_pwre">비밀번호 확인<span>*</span></label></th>
+      <td><input type="password" name="mem_pwre" id="mem_pwre" placeholder="비밀번호 확인"/> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</td>
     </tr>
     <tr>
       <th><label for="tel">연락처<span>*</span></label></th>
@@ -177,12 +180,12 @@
       <td><input type="date" name="birthdate" id="birthdate" placeholder="생년월일"/></td>
     </tr>
     <tr>
-      <th><label for="carnum">자동차번호<span>*</span></label></th>
-      <td><input type="text" name="carnum" id="carnum" placeholder="자동차번호"/></td>
+      <th><label for="carno">자동차번호<span>*</span></label></th>
+      <td><input type="text" name="carno" id="carno" placeholder="자동차번호"/></td>
     </tr>
     <tr>
-      <th><label for="carmodel">차종<span>*</span></label></th>
-      <td><input type="text" name="carmodel" id="carmodel" placeholder="차종"/></td>
+      <th><label for="carmo">차종<span>*</span></label></th>
+      <td><input type="text" name="carmo" id="carmo" placeholder="차종"/></td>
     </tr>
     <tr>
       <th rowspan="3"><label for="postcode">주소<span>*</span></th>
