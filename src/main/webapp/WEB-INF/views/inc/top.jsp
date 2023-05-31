@@ -19,6 +19,15 @@
         <a href="${contextPath}/introtech">정비사소개</a>
       </li>
 
+      <c:if test="${login_info.getMem_type().equals('A')}">
+        <li>
+          <a href="">관리</a>
+          <a href="${contextPath}/admin/adCust">고객관리</a>
+          <a href="${contextPath}/admin/adTech">정비사관리</a>
+          <a href="${contextPath}/admin/adReservation">예약관리</a>
+        </li>
+      </c:if>
+
       <c:if test="${login_info != null}">
         <li>
           <a href="">MYPAGE</a>

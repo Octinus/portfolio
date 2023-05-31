@@ -17,8 +17,8 @@ import com.portfolio.motors.models.Members;
 @Mapper
 public interface MembersMapper {
 
-        @Insert("insert into members(name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, reg_date, who_is, is_out) " +
-                "values(#{name}, #{mem_type}, #{mem_id}, #{mem_pw}, #{tel}, #{email}, #{birthdate}, #{carno}, #{carmo}, #{postcode}, #{addr1}, #{addr2}, #{reg_date}, #{who_is}, #{is_out})")
+        @Insert("insert into members(name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, reg_date, is_out) " +
+                "values(#{name}, #{mem_type}, #{mem_id}, #{mem_pw}, #{tel}, #{email}, #{birthdate}, #{carno}, #{carmo}, #{postcode}, #{addr1}, #{addr2}, #{reg_date}, #{is_out})")
         @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
         public int insert(Members input);
 
@@ -32,11 +32,9 @@ public interface MembersMapper {
 
         // SELECT문(단일행 조회)을 수행하는 메서드 정의
         @Select("<script>" +
-                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2 who_is, is_out from members " +
-                "<where>" + 
-                "<if test='id != null'>id like concat ('%', #{id}, '%')</if>" +
-                "<if test='mem_id != null'>or mem_id like concat ('%', #{mem_id}, '%')</if>" +
-                "</where>" +
+                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, is_out from members " +
+                "WHERE mem_id=#{mem_id}" +
+                "ORDER BY id DESC LIMIT 0, 1" +
                 "</script>")
         // 조회 결과와 MODEL 객체를 연결하기 위한 규칙 정의
         // -> property : MODEL 객체를 연결하기 위한 규칙 정의
@@ -55,13 +53,12 @@ public interface MembersMapper {
                 @Result(property = "postcode", column = "postcode"),
                 @Result(property = "addr1", column = "addr1"),
                 @Result(property = "addr2", column = "addr2"),
-                @Result(property = "who_is", column = "who_is"),
                 @Result(property = "is_out", column = "is_out") })
         public Members selectItem(Members input);
 
         // SELECT문(다중행 조회)을 수행하는 메서드 정의
         @Select("<script>" +
-                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, who_is, is_out from members" +
+                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, is_out from members" +
                 "<where>" +
                 "<if test='name != null'>name like concat('%', #{name}, '%')</if>" +
                 "</where>" +

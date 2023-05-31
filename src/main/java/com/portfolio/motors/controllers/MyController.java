@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.portfolio.motors.exception.StringFormatException;
+import com.portfolio.motors.helpers.RegexHelper;
 import com.portfolio.motors.helpers.WebHelper;
 import com.portfolio.motors.models.Members;
 import com.portfolio.motors.services.MembersService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -19,6 +23,8 @@ public class MyController {
   private final MembersService membersService;
 
   private final WebHelper webHelper;
+
+  private final RegexHelper regexHelper;
   
   @GetMapping("/my") // 나의 정보 페이지
   public ModelAndView my(){
@@ -27,7 +33,8 @@ public class MyController {
   }
 
   @PostMapping("/my_edit_ok")
-  public ModelAndView myEditOk(@RequestParam(value="id") int id,
+  public ModelAndView myEditOk(HttpServletRequest request,
+                              @RequestParam(value="id") String id,
                               @RequestParam(value="name") String name,
                               @RequestParam(value="mem_type") String memType,
                               @RequestParam(value="mem_id") String memid,
@@ -43,25 +50,29 @@ public class MyController {
                               @RequestParam(value="addr2") String addr2,
                               @RequestParam(value="is_out") String isOut){
 
+    HttpSession session = request.getSession();
+
     String totTel = tel.replace(",", "-");
 
-    // try{
-    //   regexHelper.isValue(mempw, "비밀번호를 입력하세요.");
-    //   regexHelper.isMaxLength(mempw, "비밀번호는 16자를 넘을 수 없습니다.");
-    //   regexHelper.isMinPwLength(mempw, "비밀번호는 10자 이상이어야 합니다..");
-    //   regexHelper.isValue(totTel, "연락처를 입력하세요.");
-    //   regexHelper.isValue(email, "E-mail을 입력하세요.");
-    //   regexHelper.isEmail(email, "E-mail형식이 잘못되었습니다.");
-    //   regexHelper.isValue(birthdate, "생년월일을 입력하세요.");
-    //   regexHelper.isValue(carno, "자동차 번호를 입력하세요.");
-    //   regexHelper.isValue(carmo, "차종을 입력하세요.");
-    //   regexHelper.isValue(postcode, "우편번호를 입력하세요.");
-    //   regexHelper.isValue(addr1, "기본주소를 입력하세요.");
-    //   regexHelper.isValue(addr2, "상세주소를 입력하세요.");
-    // }
-    // catch(StringFormatException e){
-    //   return webHelper.badRequest(e);
-    // }
+    try{
+      regexHelper.isValue(mempw, "비밀번호를 입력하세요.");
+      regexHelper.isMaxLength(mempw, "비밀번호는 16자를 넘을 수 없습니다.");
+      regexHelper.isMinPwLength(mempw, "비밀번호는 10자 이상이어야 합니다..");
+      regexHelper.isValue(mempwre, "비밀번호를 입력하세요.");
+      regexHelper.isSame(mempw, mempwre, "비밀번호를 확인해주세요.");
+      regexHelper.isValue(totTel, "연락처를 입력하세요.");
+      regexHelper.isValue(email, "E-mail을 입력하세요.");
+      regexHelper.isEmail(email, "E-mail형식이 잘못되었습니다.");
+      regexHelper.isValue(birthdate, "생년월일을 입력하세요.");
+      regexHelper.isValue(carno, "자동차 번호를 입력하세요.");
+      regexHelper.isValue(carmo, "차종을 입력하세요.");
+      regexHelper.isValue(postcode, "우편번호를 입력하세요.");
+      regexHelper.isValue(addr1, "기본주소를 입력하세요.");
+      regexHelper.isValue(addr2, "상세주소를 입력하세요.");
+    }
+    catch(StringFormatException e){
+      return webHelper.badRequest(e);
+    }
 
     Members input = new Members();
     input.setId(id);
@@ -86,7 +97,7 @@ public class MyController {
       return webHelper.serverError(e);
     }
 
-
+    session.setAttribute("login_info", input);
     return webHelper.redirect("/my", "회원정보 수정이 완료되었습니다.");
   }
 

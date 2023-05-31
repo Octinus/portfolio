@@ -20,6 +20,19 @@ public class RegexHelper {
 			throw new StringFormatException(message);
 		}
 	}
+
+	/**
+	 * 입력받은 비밀번호 재확인 문자열이 기존의 비밀번호와 같은지 확인
+	 * @param st - 기존의 비밀번호
+	 * @param stre - 비밀번호 재확인 문자열
+	 * @param message - 조건 불충분시 표시할 메세지
+	 * @throws StringFormatException
+	 */
+	public void isSame(String st, String stre, String message) throws StringFormatException {
+		if(!st.equals(stre)) {
+			throw new StringFormatException(message);
+		}
+	}
 	
 	/**
 	 * 입력받은 숫자가 0인지 검사

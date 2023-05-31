@@ -88,6 +88,17 @@ public class JoinController {
     input.setReg_date(regDate);
     input.setIs_out(isOut);
 
+    Members output = null;
+    try {
+      output = membersService.selectItem(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    if (input.getMem_id().equals(output.getMem_id())) {
+      return webHelper.badRequest("이미 존재하는 아이디입니다.");
+    }
+
     try {
       // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
       membersService.insert(input);

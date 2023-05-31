@@ -136,84 +136,84 @@
     <tr>
       <td>1</td>
       <td>예약문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>부품문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>기타문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>예약문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>부품문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>기타문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>예약문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>부품문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>기타문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>예약문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>부품문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
     <tr>
       <td>1</td>
       <td>기타문의</td>
-      <td>이게궁금해요</td>
+      <td><a href="">이게궁금해요</a></td>
       <td>누군가</td>
       <td>2023-03-01</td>
     </tr>
