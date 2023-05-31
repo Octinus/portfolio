@@ -12,7 +12,7 @@
   int yy = c.get(Calendar.YEAR);
   request.setAttribute("yy", yy);
 
-  int mm = c.get(Calendar.MONTH) + 1;
+  String mm = String.format("%02d",c.get(Calendar.MONTH) + 1);
   request.setAttribute("mm", mm);
 
   int weekCnt = c.getActualMaximum(c.WEEK_OF_MONTH);
@@ -162,7 +162,7 @@
                   <td></td>
                 </c:when>
                 <c:otherwise>
-                    <td><button class="datebtn" type="button" value="${k}">${k}</button></td>
+                    <td><button class="datebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
                 </c:otherwise>
               </c:choose>
             </c:forEach>

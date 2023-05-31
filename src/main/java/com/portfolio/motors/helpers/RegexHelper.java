@@ -85,6 +85,18 @@ public class RegexHelper {
 			throw new StringFormatException(message);
 		}
 	}
+
+	/**
+	 * 입력값이 숫자로만 구성되었는지 검사
+	 * @param num - 입력값
+	 * @param message - 조건 불충분시 발생할 메세지
+	 * @throws StringFormatException
+	 */
+	public void onlyNum(String num, String message) throws StringFormatException {
+		if(Pattern.matches("^[0-9]*$", num)) {
+			throw new StringFormatException(message);
+		}
+	}
 	
 	/**
 	 * 입력값이 한글로만 구성되었는지 검사

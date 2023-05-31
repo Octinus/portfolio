@@ -69,5 +69,36 @@ public class MembersServiceImpl implements MembersService{
   public int selectCount(Members input) throws NullPointerException, Exception {
     return  membersMapper.selectCount(input);
   }
+
+  @Override
+  public Members checkId(Members input) throws Exception {
+    Members output = membersMapper.selectItem(input);
+
+    if(output != null){
+      throw new Exception("중복된 아이디입니다.");
+    }
+
+    return output;
+  }
+
+  @Override
+  public List<Members> onlyCustList(Members input) throws NullPointerException, Exception {
+    return membersMapper.onlyCustList(input);
+  }
+
+  @Override
+  public int onlyCustCount(Members input) throws NullPointerException, Exception {
+    return  membersMapper.onlyCustCount(input);
+  }
+
+  @Override
+  public List<Members> onlyTechList(Members input) throws NullPointerException, Exception {
+    return membersMapper.onlyTechList(input);
+  }
+
+  @Override
+  public int onlyTechCount(Members input) throws NullPointerException, Exception {
+    return  membersMapper.onlyTechCount(input);
+  }
   
 }

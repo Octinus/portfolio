@@ -115,7 +115,7 @@
 <div class="join-container">
   <form action="${contextPath}/join_ok" method="post" class="join">
     <input type="hidden" name="mem_type" id="mem_type" value="C" />
-    <input type="hidden" name="reg_date" id="reg_date" value="2023-05-30" />
+    <input type="hidden" name="reg_date" id="reg_date" value="" />
     <input type="hidden" name="is_out" id="is_out" value="N" />
     <table border="1">
     <tr>

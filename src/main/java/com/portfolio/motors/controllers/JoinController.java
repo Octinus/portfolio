@@ -1,5 +1,8 @@
 package com.portfolio.motors.controllers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,11 +51,15 @@ public class JoinController {
                             @RequestParam(value="is_out") String isOut){
 
     String totTel = tel.replace(",", "-");
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    regDate = dateTime.format(formatter);
 
     try{
       regexHelper.isValue(name, "이름을 입력하세요.");
       regexHelper.isKor(name, "이름은 한글만 입력 가능합니다.");
       regexHelper.isValue(memid, "아이디를 입력하세요.");
+      regexHelper.onlyNum(memid, "아이디는 숫자로만 이루어질 수 없습니다.");
       regexHelper.isMaxLength(memid, "아이디는 16자를 넘을 수 없습니다.");
       regexHelper.isMinLength(memid, "아이디는 4자 이상이어야 합니다..");
       regexHelper.isValue(mempw, "비밀번호를 입력하세요.");
@@ -90,13 +97,9 @@ public class JoinController {
 
     Members output = null;
     try {
-      output = membersService.selectItem(input);
+      output = membersService.checkId(input);
     } catch (Exception e) {
       return webHelper.serverError(e);
-    }
-
-    if (input.getMem_id().equals(output.getMem_id())) {
-      return webHelper.badRequest("이미 존재하는 아이디입니다.");
     }
 
     try {

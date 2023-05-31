@@ -4,6 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <c:import url="/WEB-INF/views/inc/top.jsp" />
-  <p>고객 관리페이지</p>
+  <p>정비사 관리페이지</p>
 
   <c:import url="/WEB-INF/views/inc/bottom.jsp" />
