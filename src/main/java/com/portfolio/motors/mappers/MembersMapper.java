@@ -32,7 +32,7 @@ public interface MembersMapper {
 
         // SELECT문(단일행 조회)을 수행하는 메서드 정의
         @Select("<script>" +
-                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, is_out from members " +
+                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, level, is_out from members " +
                 "WHERE mem_id=#{mem_id} or id=#{id} " +
                 "ORDER BY id DESC LIMIT 0, 1" +
                 "</script>")
@@ -53,6 +53,7 @@ public interface MembersMapper {
                 @Result(property = "postcode", column = "postcode"),
                 @Result(property = "addr1", column = "addr1"),
                 @Result(property = "addr2", column = "addr2"),
+                @Result(property = "level", column = "level"),
                 @Result(property = "is_out", column = "is_out") })
         public Members selectItem(Members input);
 

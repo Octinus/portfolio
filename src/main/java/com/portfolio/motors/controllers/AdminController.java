@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.portfolio.motors.exception.StringFormatException;
 import com.portfolio.motors.helpers.Pagenation;
 import com.portfolio.motors.helpers.RegexHelper;
 import com.portfolio.motors.helpers.WebHelper;
@@ -68,7 +70,7 @@ public class AdminController {
   }
 
   @GetMapping("/cust/read.do") // 고객 상세 정보 페이지
-  public ModelAndView read(Model model,
+  public ModelAndView readCust(Model model,
                           @RequestParam(value="id", defaultValue = "") String id){
 
     // 데이터 조회에 필요한 조건값을 Beans에 저장하기
@@ -92,7 +94,7 @@ public class AdminController {
   }
 
   @GetMapping("/cust/edit.do")
-  public ModelAndView edit(Model model,
+  public ModelAndView editCust(Model model,
                           @RequestParam(value="id") String id){
 
     // 데이터 조회에 필요한 조건값을 Beans에 저장하기
@@ -113,6 +115,8 @@ public class AdminController {
 
     return new ModelAndView("admin/cust/edit");
   }
+
+  //TODO 수정 액션 페이지 만들어야함
 
   @GetMapping("/techmanagement") // 정비사 관리
   public ModelAndView adTech(Model model,
@@ -154,6 +158,114 @@ public class AdminController {
 
     return new ModelAndView("admin/tech/list");
   }
+
+  @GetMapping("/tech/read.do") // 고객 상세 정보 페이지
+  public ModelAndView readTech(Model model,
+                          @RequestParam(value="id", defaultValue = "") String id){
+
+    // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+    Members input = new Members();
+    input.setId(id);
+
+    // 조회결과를 저장할 객체 선언
+    Members output = null;
+
+    try {
+      //데이터 조회
+      output = membersService.selectItem(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    // view 처리
+    model.addAttribute("output", output);
+
+    return new ModelAndView("admin/tech/read");
+  }
+
+  @GetMapping("/tech/edit.do")
+  public ModelAndView editTech(Model model,
+                          @RequestParam(value="id") String id){
+
+    // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+    Members input = new Members();
+    input.setId(id);
+
+    // 수정할 데이터의 원본 조회하기
+    Members output = null;
+
+    try {
+      output = membersService.selectItem(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    // View 처리
+    model.addAttribute("output", output);
+
+    return new ModelAndView("admin/tech/edit");
+  }
+
+  //TODO 맵퍼랑 더 해야함
+  @PostMapping("/tech/edit_ok.do")
+  public ModelAndView editOk(Model model,
+                    @RequestParam(value="id") String id,
+                    @RequestParam(value="name") String name,
+                    @RequestParam(value="mem_id") String mem_id,
+                    @RequestParam(value="level") String level,
+                    @RequestParam(value="tel") String tel,
+                    @RequestParam(value="email") String email,
+                    @RequestParam(value="birthdate") String birthdate,
+                    @RequestParam(value="postcode") String postcode,
+                    @RequestParam(value="addr1") String addr1,
+                    @RequestParam(value="addr2") String addr2,
+                    @RequestParam(value="mem_type") String mem_type,
+                    @RequestParam(value="is_out") String is_out,
+                    @RequestParam(value="edit_date") String edit_date){
+
+    try {
+      regexHelper.isValue(name, "학과이름을 입력하세요.");
+      regexHelper.isKor(name, "학과이름은 한글만 입력 가능합니다.");
+    } catch (StringFormatException e) {
+      return webHelper.badRequest(e);
+    }
+
+    //수정할 값들을 Beans에 담는다.
+    Members input = new Members();
+    input.setId(id);
+    input.setName(name);
+    input.setMem_id(mem_id);
+    input.setLevel(level);
+    input.setTel(tel);
+    input.setEmail(email);
+    input.setBirthdate(birthdate);
+    input.setPostcode(postcode);
+    input.setAddr1(addr1);
+    input.setAddr2(addr2);
+    input.setEdit_date(edit_date);
+
+    try {
+      //데이터 수정
+      membersService.update(input);
+    }  catch (Exception e) {
+      return webHelper.redirect(null, "데이터 수정에 실패했습니다. 관리자에게 문의해주세요.");
+    }
+
+    // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
+    return webHelper.redirect("/department/read.do?deptno=" + input.getId(), "수정 완료");
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   @GetMapping("/admin/adReservation") // 예약 관리
   public ModelAndView adReservation() {

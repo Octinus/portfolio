@@ -8,10 +8,10 @@
     
     <div class="myinfo-container">
       <form class="myinfo" method="post" action="${contextPath}/my_edit_ok">
-        <input type="hidden" name="id" id="id" value="${login_info.getId()}"/>
+        <input type="hidden" name="id" id="id" value="${output.id}"/>
         <input type="hidden" name="mem_type" id="mem_type" value="C" />
         <input type="hidden" name="is_out" id="is_out" value="N" />
-    
+        <input type="hidden" name="edit_date" id="edit_date" value="" />
         <table>
           <tr>
             <th>고객 정보</th>
