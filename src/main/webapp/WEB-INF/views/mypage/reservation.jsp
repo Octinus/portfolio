@@ -207,11 +207,12 @@
   </div>
 
   <div class="reserbottom">
-    <form>
-      <label for="reserdate">예약일자</label>
-      <input type="text" name="reserdate" id="reserdate" value="" readonly/>
-      <label for="resertiem">예약시간</label>
-      <input type="text" name="resertiem" id="resertiem" value="" readonly/>
+    <form method="post" action="${contextPath}/myReservation.ok">
+      <input type="hidden" name="customer_id" id="customer_id" value="${login_info.getId()}"/>
+      <label for="booking_date">예약일자</label>
+      <input type="text" name="booking_date" id="booking_date" value="" readonly/>
+      <label for="booking_time">예약시간</label>
+      <input type="text" name="booking_time" id="booking_time" value="" readonly/>
       <button type="submit">예약</button>
     </form>
   </div>
@@ -221,16 +222,16 @@
     $('.datebtn').on('click', (e) => {
       const idx = $(e.currentTarget).parent().index()
       if(idx == 0 || idx == 6) {
-        $('#reserdate').attr('value', '')
+        $('#booking_date').attr('value', '')
         return
       }
       const date = $(e.currentTarget).attr('value')
-      $('#reserdate').attr('value', '${yy}-${mm}-' + date)
-      $('#resertiem').attr('value', '')
+      $('#booking_date').attr('value', '${yy}-${mm}-' + date)
+      $('#booking_time').attr('value', '')
     });
     $('.timebtn').on('click', (e) => {
       const time = $(e.currentTarget).attr('value')
-      $('#resertiem').attr('value', time)
+      $('#booking_time').attr('value', time)
     });
   </script>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />

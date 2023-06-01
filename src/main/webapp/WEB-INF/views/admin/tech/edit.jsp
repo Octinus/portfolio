@@ -6,12 +6,13 @@
 <c:import url="/WEB-INF/views/inc/top.jsp" />
     <h1>정비사 정보 수정</h1>
     
-    <div class="myinfo-container">
-      <form class="myinfo" method="post" action="${contextPath}/my_edit_ok">
+    <div class="techEdit-container">
+      <form class="techEdit" method="post" action="${contextPath}/tech/edit_ok.do">
         <input type="hidden" name="id" id="id" value="${output.id}"/>
-        <input type="hidden" name="mem_type" id="mem_type" value="T" />
-        <input type="hidden" name="is_out" id="is_out" value="N" />
-        <input type="hidden" name="edit_date" id="edit_date" value="" />
+        <input type="hidden" name="mem_type" id="mem_type" value="${output.mem_type}" />
+        <input type="hidden" name="is_out" id="is_out" value="${output.is_out}" />
+        <input type="hidden" name="reg_date" id="reg_date" value="${output.reg_date}" />
+        <input type="hidden" name="edit_date" id="edit_date" value="${output.edit_date}" />
         <table>
           <tr>
             <th>고객 정보</th>
@@ -23,6 +24,14 @@
           <tr>
             <th><label for="mem_id">아이디</label></th>
             <td><input type="text" name="mem_id" id="mem_id" value="${output.mem_id}" readonly /></td>
+          </tr>
+          <tr>
+            <th><label for="userpw">비밀번호</label></th>
+            <td><input type="password" name="mem_pw" id="mem_pw" value="${output.mem_pw}"/></td>
+          </tr>
+          <tr>
+            <th><label for="userpwre">비밀번호 확인</label></th>
+            <td><input type="password" name="mem_pwre" id="mem_pwre" value="${output.mem_pw}"/></td>
           </tr>
           <tr>
             <th><label for="level">등급</label></th>

@@ -121,7 +121,7 @@
 </div>
 
 <div class="myinfo-container">
-  <form class="myinfo" method="post" action="${contextPath}/my_edit_ok">
+  <form class="myinfo" method="post" action="${contextPath}/myEdit.ok">
     <input type="hidden" name="id" id="id" value="${login_info.getId()}"/>
     <input type="hidden" name="mem_type" id="mem_type" value="C" />
     <input type="hidden" name="is_out" id="is_out" value="N" />
@@ -180,6 +180,18 @@
           <input type="tel" name="tel" id="tel" value="${login_info.getTel().substring(4, 8)}" />
           -
           <input type="tel" name="tel" id="tel" value="${login_info.getTel().substring(9)}" /></td>
+      </tr>
+      <tr>
+        <th><label for="booking_date">예약 일자</label></th>
+        <td><input type="text" name="booking_date" id="booking_date" value= "${login_info.getBooking_date()}" readonly /></td>
+      </tr>
+      <tr>
+        <th><label for="booking_time">예약 시간</label></th>
+        <td><input type="text" name="booking_time" id="booking_time" value= "${login_info.getBooking_time()}" readonly /></td>
+      </tr>
+      <tr>
+        <th><label for="booking_time">정비사</label></th>
+        <td><input type="text" name="tech_name" id="tech_name" value= "${login_info.getTech_name()}" readonly /></td>
       </tr>
       <tr>
         <th><label for="email">E-mail<span>*</span></label></th>

@@ -11,8 +11,6 @@
   <p>연락처 : ${output.tel}</p>
   <p>E-mail : ${output.email}</p>
   <p>생년월일 : ${output.birthdate}</p>
-  <p>차번호 : ${output.carno}</p>
-  <p>차종 : ${output.carmo}</p>
   <p>우편번호 : ${output.postcode}</p>
   <p>기본주소 : ${output.addr1}</p>
   <p>상세주소 : ${output.addr2}</p>

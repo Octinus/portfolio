@@ -27,6 +27,10 @@ public class Members {
   private String edit_date;
   private String is_out;
 
+  private String tech_name;
+  private String booking_date;
+  private String booking_time;
+
   private static int offset;
   private static int listCount;
   

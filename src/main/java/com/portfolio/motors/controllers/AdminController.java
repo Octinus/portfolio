@@ -1,5 +1,7 @@
 package com.portfolio.motors.controllers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -95,7 +97,7 @@ public class AdminController {
 
   @GetMapping("/cust/edit.do")
   public ModelAndView editCust(Model model,
-                          @RequestParam(value="id") String id){
+                              @RequestParam(value="id") String id){
 
     // 데이터 조회에 필요한 조건값을 Beans에 저장하기
     Members input = new Members();
@@ -116,7 +118,71 @@ public class AdminController {
     return new ModelAndView("admin/cust/edit");
   }
 
-  //TODO 수정 액션 페이지 만들어야함
+  @PostMapping("/cust/edit_ok.do")
+  public ModelAndView editCustOk(Model model,
+                            @RequestParam(value="id") String id,
+                            @RequestParam(value="name") String name,
+                            @RequestParam(value="mem_id") String mem_id,
+                            @RequestParam(value="mem_pw") String mem_pw,
+                            @RequestParam(value="tel") String tel,
+                            @RequestParam(value="email") String email,
+                            @RequestParam(value="birthdate") String birthdate,
+                            @RequestParam(value="carno") String carno,
+                            @RequestParam(value="carmo") String carmo,
+                            @RequestParam(value="postcode") String postcode,
+                            @RequestParam(value="addr1") String addr1,
+                            @RequestParam(value="addr2") String addr2,
+                            @RequestParam(value="mem_type") String mem_type,
+                            @RequestParam(value="is_out") String is_out,
+                            @RequestParam(value="reg_date") String reg_date,
+                            @RequestParam(value="edit_date") String edit_date){
+
+    String totTel = tel.replace(",", "-");
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    edit_date = dateTime.format(formatter);      
+
+    try {
+      regexHelper.isValue(tel, "연락처를 설정하세요.");
+      regexHelper.isValue(email, "이메일을 설정하세요.");
+      regexHelper.isValue(birthdate, "생년월일을 설정하세요.");
+      regexHelper.isValue(postcode, "우편번호를 설정하세요.");
+      regexHelper.isValue(addr1, "기본주소를 설정하세요.");
+      regexHelper.isValue(addr2, "상세주소를 설정하세요.");
+    } catch (StringFormatException e) {
+      return webHelper.badRequest(e);
+    }
+
+    //수정할 값들을 Beans에 담는다.
+    Members input = new Members();
+    input.setId(id);
+    input.setName(name);
+    input.setMem_type(mem_type);
+    input.setMem_id(mem_id);
+    input.setMem_pw(mem_pw);
+    input.setTel(totTel);
+    input.setEmail(email);
+    input.setBirthdate(birthdate);
+    input.setCarno(carno);
+    input.setCarmo(carmo);
+    input.setPostcode(postcode);
+    input.setAddr1(addr1);
+    input.setAddr2(addr2);
+    input.setReg_date(reg_date);
+    input.setEdit_date(edit_date);
+    input.setIs_out(is_out);
+
+    try {
+      //데이터 수정
+      membersService.update(input);
+    }  catch (Exception e) {
+      return webHelper.redirect(null, "데이터 수정에 실패했습니다. 관리자에게 문의해주세요.");
+    }
+
+    // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
+    return webHelper.redirect("/cust/read.do?id=" + input.getId(), "수정 완료");
+  }
+
 
   @GetMapping("/techmanagement") // 정비사 관리
   public ModelAndView adTech(Model model,
@@ -206,26 +272,39 @@ public class AdminController {
     return new ModelAndView("admin/tech/edit");
   }
 
-  //TODO 맵퍼랑 더 해야함
   @PostMapping("/tech/edit_ok.do")
-  public ModelAndView editOk(Model model,
-                    @RequestParam(value="id") String id,
-                    @RequestParam(value="name") String name,
-                    @RequestParam(value="mem_id") String mem_id,
-                    @RequestParam(value="level") String level,
-                    @RequestParam(value="tel") String tel,
-                    @RequestParam(value="email") String email,
-                    @RequestParam(value="birthdate") String birthdate,
-                    @RequestParam(value="postcode") String postcode,
-                    @RequestParam(value="addr1") String addr1,
-                    @RequestParam(value="addr2") String addr2,
-                    @RequestParam(value="mem_type") String mem_type,
-                    @RequestParam(value="is_out") String is_out,
-                    @RequestParam(value="edit_date") String edit_date){
+  public ModelAndView editTechOk(Model model,
+                            @RequestParam(value="id") String id,
+                            @RequestParam(value="name") String name,
+                            @RequestParam(value="mem_id") String mem_id,
+                            @RequestParam(value="mem_pw") String mem_pw,
+                            @RequestParam(value="level") String level,
+                            @RequestParam(value="tel") String tel,
+                            @RequestParam(value="email") String email,
+                            @RequestParam(value="birthdate") String birthdate,
+                            @RequestParam(value="postcode") String postcode,
+                            @RequestParam(value="addr1") String addr1,
+                            @RequestParam(value="addr2") String addr2,
+                            @RequestParam(value="mem_type") String mem_type,
+                            @RequestParam(value="is_out") String is_out,
+                            @RequestParam(value="reg_date") String reg_date,
+                            @RequestParam(value="edit_date") String edit_date){
+
+    String totTel = tel.replace(",", "-");
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    edit_date = dateTime.format(formatter);      
 
     try {
-      regexHelper.isValue(name, "학과이름을 입력하세요.");
-      regexHelper.isKor(name, "학과이름은 한글만 입력 가능합니다.");
+      regexHelper.isValue(level, "등급을 설정하세요.");
+      regexHelper.isNum(level, "등급은 숫자로만 구성하세요.");
+      regexHelper.isValue(level, "등급을 설정하세요.");
+      regexHelper.isValue(tel, "연락처를 설정하세요.");
+      regexHelper.isValue(email, "이메일을 설정하세요.");
+      regexHelper.isValue(birthdate, "생년월일을 설정하세요.");
+      regexHelper.isValue(postcode, "우편번호를 설정하세요.");
+      regexHelper.isValue(addr1, "기본주소를 설정하세요.");
+      regexHelper.isValue(addr2, "상세주소를 설정하세요.");
     } catch (StringFormatException e) {
       return webHelper.badRequest(e);
     }
@@ -234,15 +313,19 @@ public class AdminController {
     Members input = new Members();
     input.setId(id);
     input.setName(name);
+    input.setMem_type(mem_type);
     input.setMem_id(mem_id);
+    input.setMem_pw(mem_pw);
     input.setLevel(level);
-    input.setTel(tel);
+    input.setTel(totTel);
     input.setEmail(email);
     input.setBirthdate(birthdate);
     input.setPostcode(postcode);
     input.setAddr1(addr1);
     input.setAddr2(addr2);
+    input.setReg_date(reg_date);
     input.setEdit_date(edit_date);
+    input.setIs_out(is_out);
 
     try {
       //데이터 수정
@@ -252,7 +335,7 @@ public class AdminController {
     }
 
     // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
-    return webHelper.redirect("/department/read.do?deptno=" + input.getId(), "수정 완료");
+    return webHelper.redirect("/tech/read.do?id=" + input.getId(), "수정 완료");
   }
 
 

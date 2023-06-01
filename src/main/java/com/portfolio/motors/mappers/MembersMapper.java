@@ -23,7 +23,7 @@ public interface MembersMapper {
         public int insert(Members input);
 
         @Update("update members set name=#{name}, mem_type=#{mem_type}, mem_id=#{mem_id}, mem_pw=#{mem_pw}, tel=#{tel}, email=#{email}, " +
-                "birthdate=#{birthdate}, carno=#{carno}, carmo=#{carmo}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2}, level=#{level}, reg_date=#{reg_date}, edit_date=#{edit_date}, is_out=#{is_out}" +
+                "birthdate=#{birthdate}, carno=#{carno}, carmo=#{carmo}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2}, level=#{level}, reg_date=#{reg_date}, edit_date=#{edit_date}, is_out=#{is_out} " +
                 "where id=#{id}")
         public int update(Members input);
 
@@ -32,7 +32,7 @@ public interface MembersMapper {
 
         // SELECT문(단일행 조회)을 수행하는 메서드 정의
         @Select("<script>" +
-                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, level, is_out from members " +
+                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, level, is_out, reg_date, edit_date from members " +
                 "WHERE mem_id=#{mem_id} or id=#{id} " +
                 "ORDER BY id DESC LIMIT 0, 1" +
                 "</script>")
@@ -54,8 +54,23 @@ public interface MembersMapper {
                 @Result(property = "addr1", column = "addr1"),
                 @Result(property = "addr2", column = "addr2"),
                 @Result(property = "level", column = "level"),
-                @Result(property = "is_out", column = "is_out") })
+                @Result(property = "is_out", column = "is_out"),
+                @Result(property = "reg_date", column = "reg_date"),
+                @Result(property = "edit_date", column = "edit_date"),
+                @Result(property = "booking-date", column = "booking-date"),
+                @Result(property = "booking-date", column = "booking-date"),
+                @Result(property = "tech_name", column = "tech_name")
+                })
         public Members selectItem(Members input);
+
+        @Select("<script>" +
+                "select m.id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, level, is_out, m.reg_date, edit_date, booking_date, booking_time from members m " +
+                "inner join booking on m.id = customer_id " +
+                "WHERE mem_id=#{mem_id} or m.id=#{id} " +
+                "ORDER BY booking_date DESC LIMIT 0, 1" +
+                "</script>")
+        @ResultMap("myResultId")
+        public Members selectInfoItem(Members input);
 
         // SELECT문(다중행 조회)을 수행하는 메서드 정의
         @Select("<script>" +

@@ -6,12 +6,14 @@
 <c:import url="/WEB-INF/views/inc/top.jsp" />
     <h1>회원 정보 수정</h1>
     
-    <div class="myinfo-container">
-      <form class="myinfo" method="post" action="${contextPath}/my_edit_ok">
+    <div class="custEdit-container">
+      <form class="custEdit" method="post" action="${contextPath}/cust/edit_ok.do">
         <input type="hidden" name="id" id="id" value="${output.id}"/>
-        <input type="hidden" name="mem_type" id="mem_type" value="C" />
-        <input type="hidden" name="is_out" id="is_out" value="N" />
-        <input type="hidden" name="edit_date" id="edit_date" value="" />
+        <input type="hidden" name="mem_pw" id="mem_pw" value="${output.mem_pw}"/>
+        <input type="hidden" name="mem_type" id="mem_type" value="${output.mem_type}" />
+        <input type="hidden" name="is_out" id="is_out" value="${output.is_out}" />
+        <input type="hidden" name="reg_date" id="reg_date" value="${output.reg_date}" />
+        <input type="hidden" name="edit_date" id="edit_date" value="${output.edit_date}" />
         <table>
           <tr>
             <th>고객 정보</th>
@@ -60,28 +62,28 @@
           </tr>
           <tr>
             <th><label for="email">E-mail</label></th>
-            <td><input type="email" name="email" id="email" value="${output.email}"/></td>
+            <td><input type="email" name="email" id="email" value="${output.email}" /></td>
           </tr>
           <tr>
             <th><label for="birthdate">생년월일</label></th>
-            <td><input type="date" name="birthdate" id="birthdate" value="${output.birthdate}" readonly /></td>
+            <td><input type="date" name="birthdate" id="birthdate" value="${output.birthdate}" /></td>
           </tr>
           <tr>
             <th><label for="carnum">자동차번호</label></th>
-            <td><input type="text" name="carno" id="carno" value="${output.carno}"/></td>
+            <td><input type="text" name="carno" id="carno" value="${output.carno}" /></td>
           </tr>
           <tr>
             <th><label for="carmodel">차종</label></th>
-            <td><input type="text" name="carmo" id="carmo" value="${output.carmo}"/></td>
+            <td><input type="text" name="carmo" id="carmo" value="${output.carmo}" /></td>
           </tr>
           <tr>
             <th rowspan="3"><label for="postcode">주소</th>
             <td>
-            <input type="tel" name="postcode" id="postcode" value="${output.postcode}"/><button type="button" onclick="check_Postcode()">우편번호 ></button>
+            <input type="tel" name="postcode" id="postcode" value="${output.postcode}" /><button type="button" onclick="check_Postcode()">우편번호 ></button>
             <br />
-            <input type="text" name="addr1" id="addr1" value="${output.addr1}"/>
+            <input type="text" name="addr1" id="addr1" value="${output.addr1}" />
             <br />
-            <input type="text" name="addr2" id="addr2" value="${output.addr2}"/>
+            <input type="text" name="addr2" id="addr2" value="${output.addr2}" />
           </td>
           </tr>
           </label>

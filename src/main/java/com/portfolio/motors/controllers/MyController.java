@@ -9,7 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.portfolio.motors.exception.StringFormatException;
 import com.portfolio.motors.helpers.RegexHelper;
 import com.portfolio.motors.helpers.WebHelper;
+import com.portfolio.motors.models.Booking;
 import com.portfolio.motors.models.Members;
+import com.portfolio.motors.services.BookingService;
 import com.portfolio.motors.services.MembersService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +24,8 @@ public class MyController {
   
   private final MembersService membersService;
 
+  private final BookingService bookingService;
+
   private final WebHelper webHelper;
 
   private final RegexHelper regexHelper;
@@ -32,7 +36,7 @@ public class MyController {
     return new ModelAndView("/mypage/my");
   }
 
-  @PostMapping("/my_edit_ok")
+  @PostMapping("/myEdit.ok")
   public ModelAndView myEditOk(HttpServletRequest request,
                               @RequestParam(value="id") String id,
                               @RequestParam(value="name") String name,
@@ -98,12 +102,32 @@ public class MyController {
     }
 
     session.setAttribute("login_info", input);
-    return webHelper.redirect("/my", "회원정보 수정이 완료되었습니다.");
+    return webHelper.redirect("/my", input.getName() + "님의 정보 수정이 완료되었습니다.");
   }
 
   @GetMapping("/reservation") // 예약 페이지
   public ModelAndView reservation(){
 
     return new ModelAndView("/mypage/reservation");
+  }
+
+  @PostMapping("/myReservation.ok")
+  public ModelAndView reservationOk(@RequestParam(value="booking_date") String booking_date,
+                                  @RequestParam(value="booking_time") String booking_time,
+                                  @RequestParam(value="customer_id") int customer_id
+                                  ){
+
+    Booking input = new Booking();
+    input.setCustomer_id(customer_id);
+    input.setBooking_date(booking_date);
+    input.setBooking_time(booking_time);
+
+    try {
+      // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
+      bookingService.insert(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+    return webHelper.redirect("/", input.getBooking_date() + " " +input.getBooking_time() + " 예약이 완료되었습니다.");
   }
 }
