@@ -65,6 +65,21 @@
   .myinfo tr:nth-child(7) input:nth-child(2) {
     margin: 5px 0 5px 0px;
   }
+  .myinfo .switchreserv {
+    text-indent: 5px;
+    text-decoration: none;
+    background-color: #a3a3a3;
+    color: white;
+    border: 1px solid #a3a3a3;
+    transition: all 0.5s;
+    margin-left: 5px;
+    padding: 3px 0 1.5px 0;
+  }
+  .myinfo .switchreserv:hover {
+    background-color: #f7f7f7;
+    color: black;
+    border: 1px solid #a3a3a3;
+  }
   .myinfo td input {
     margin: 5px 0 5px 20px;
     border: 1px solid #a3a3a3;
@@ -183,15 +198,11 @@
       </tr>
       <tr>
         <th><label for="booking_date">예약 일자</label></th>
-        <td><input type="text" name="booking_date" id="booking_date" value= "${login_info.getBooking_date()}" readonly /></td>
+        <td><input type="text" name="booking_date" id="booking_date" value= "${login_info.getBooking_date()}" readonly /><a href="${contextPath}/reservation" class="switchreserv">예약변경</a></td>
       </tr>
       <tr>
         <th><label for="booking_time">예약 시간</label></th>
         <td><input type="text" name="booking_time" id="booking_time" value= "${login_info.getBooking_time()}" readonly /></td>
-      </tr>
-      <tr>
-        <th><label for="booking_time">정비사</label></th>
-        <td><input type="text" name="tech_name" id="tech_name" value= "${login_info.getTech_name()}" readonly /></td>
       </tr>
       <tr>
         <th><label for="email">E-mail<span>*</span></label></th>

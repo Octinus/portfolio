@@ -58,6 +58,15 @@ public interface MembersService {
     public Members selectItem(Members input) throws NullPointerException, Exception;
 
     /**
+     * 
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public Members selectInfoItem(Members input) throws NullPointerException, Exception;
+
+    /**
      * 회원 가입시 아이디의 중복을 확인하여 리턴한다.
      * @param input - 조회할 대상의 정보를 담고 있는 Beans
      * @return - 조회 결과를 담고 있는 Beans

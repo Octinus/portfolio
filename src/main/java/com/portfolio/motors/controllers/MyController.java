@@ -1,6 +1,11 @@
 package com.portfolio.motors.controllers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +36,9 @@ public class MyController {
   private final RegexHelper regexHelper;
   
   @GetMapping("/my") // 나의 정보 페이지
-  public ModelAndView my(){
+  public ModelAndView my(Model model){
+
+    
 
     return new ModelAndView("/mypage/my");
   }
@@ -55,7 +62,7 @@ public class MyController {
                               @RequestParam(value="is_out") String isOut){
 
     HttpSession session = request.getSession();
-
+    
     String totTel = tel.replace(",", "-");
 
     try{
@@ -114,6 +121,7 @@ public class MyController {
   @PostMapping("/myReservation.ok")
   public ModelAndView reservationOk(@RequestParam(value="booking_date") String booking_date,
                                   @RequestParam(value="booking_time") String booking_time,
+                                  @RequestParam(value="is_done") String is_done,
                                   @RequestParam(value="customer_id") int customer_id
                                   ){
 
@@ -121,6 +129,14 @@ public class MyController {
     input.setCustomer_id(customer_id);
     input.setBooking_date(booking_date);
     input.setBooking_time(booking_time);
+    input.setIs_done(is_done);
+
+    Booking output = null;
+    try {
+      output = bookingService.checkdate(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
 
     try {
       // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
@@ -128,6 +144,7 @@ public class MyController {
     } catch (Exception e) {
       return webHelper.serverError(e);
     }
-    return webHelper.redirect("/", input.getBooking_date() + " " +input.getBooking_time() + " 예약이 완료되었습니다.");
+
+    return webHelper.redirect("/my", input.getBooking_date() + " " +input.getBooking_time() + " 예약이 완료되었습니다.");
   }
 }

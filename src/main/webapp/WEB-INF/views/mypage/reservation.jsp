@@ -5,14 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-  StringBuffer html = new StringBuffer();
-
   Calendar c = Calendar.getInstance();
 
   int yy = c.get(Calendar.YEAR);
   request.setAttribute("yy", yy);
 
-  String mm = String.format("%02d",c.get(Calendar.MONTH) + 1);
+  String mm = String.format("%02d", c.get(Calendar.MONTH) + 1);
   request.setAttribute("mm", mm);
 
   int weekCnt = c.getActualMaximum(c.WEEK_OF_MONTH);
@@ -41,6 +39,7 @@
       }
   }
   request.setAttribute("cal", cal);
+  
 %>
 <style>
   .resertop {
@@ -85,7 +84,7 @@
     color: blue;
   }
   
-  .date td button {
+  .date td .opendatebtn {
     border: none;
     width: 40px;
     font-size: 20px;
@@ -94,11 +93,11 @@
     background-color: #ccf8ced3;
     margin: 10px;
   }
-  .date td button:hover {
+  .date td .opendatebtn:hover {
     background-color: #b5d1fa;
   }
-  .date td:nth-child(1) button,
-  .date td:nth-child(7) button {
+  .date td:nth-child(1) .opendatebtn,
+  .date td:nth-child(7) .opendatebtn {
     font-size: 20px;
     font-weight: 300;
     background-color: #e9e9e9;
@@ -120,6 +119,7 @@
     font-size: 20px;
     margin-bottom: 10px;
     border: none;
+    font-weight: 300;
     background-color: #ccf8ced3;
   }
   .time td button:hover {
@@ -142,7 +142,7 @@
   <div class="resertop">
     <h1>RESERVATIOM</h1>
   </div>
-    <!-- <%    out.println(html.toString());    %> -->
+
   <div class="resermain">
     <div class="calendar">
       <table>
@@ -162,7 +162,7 @@
                   <td></td>
                 </c:when>
                 <c:otherwise>
-                    <td><button class="datebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
+                    <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
                 </c:otherwise>
               </c:choose>
             </c:forEach>
@@ -209,6 +209,7 @@
   <div class="reserbottom">
     <form method="post" action="${contextPath}/myReservation.ok">
       <input type="hidden" name="customer_id" id="customer_id" value="${login_info.getId()}"/>
+      <input type="hidden" name="is_done" id="is_done" value="N"/>
       <label for="booking_date">예약일자</label>
       <input type="text" name="booking_date" id="booking_date" value="" readonly/>
       <label for="booking_time">예약시간</label>

@@ -68,5 +68,20 @@ public class BookingServiceImpl implements BookingService{
   public int selectCount(Booking input) throws NullPointerException, Exception {
     return  bookingMapper.selectCount(input);
   }
-  
+
+  @Override
+  public Booking checkdate(Booking input) throws Exception {
+    Booking output = bookingMapper.selectCheckDate(input);
+
+    if(output != null){
+      throw new Exception(output.getBooking_date() + " " + output.getBooking_time() + " 는 예약이 완료된 날짜입니다.");
+    }
+
+    return output;
+  }
+
+  @Override
+  public List<Booking> selectTodayList(Booking input) throws NullPointerException, Exception {
+    return bookingMapper.selectTodayList(input);
+  }
 }

@@ -59,12 +59,14 @@ public interface MembersMapper {
                 @Result(property = "edit_date", column = "edit_date"),
                 @Result(property = "booking-date", column = "booking-date"),
                 @Result(property = "booking-date", column = "booking-date"),
-                @Result(property = "tech_name", column = "tech_name")
+                @Result(property = "customer_id", column = "customer_id"),
+                @Result(property = "tech_id", column = "tech_id")
                 })
         public Members selectItem(Members input);
 
         @Select("<script>" +
-                "select m.id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, level, is_out, m.reg_date, edit_date, booking_date, booking_time from members m " +
+                "select m.id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, " +
+                "postcode, addr1, addr2, level, is_out, m.reg_date, edit_date, booking_date, booking_time from members m " +
                 "inner join booking on m.id = customer_id " +
                 "WHERE mem_id=#{mem_id} or m.id=#{id} " +
                 "ORDER BY booking_date DESC LIMIT 0, 1" +
@@ -74,7 +76,8 @@ public interface MembersMapper {
 
         // SELECT문(다중행 조회)을 수행하는 메서드 정의
         @Select("<script>" +
-                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, postcode, addr1, addr2, is_out from members" +
+                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, " +
+                "postcode, addr1, addr2, is_out from members" +
                 "<where>" +
                 "<if test='name != null'>name like concat('%', #{name}, '%')</if>" +
                 "</where>" +

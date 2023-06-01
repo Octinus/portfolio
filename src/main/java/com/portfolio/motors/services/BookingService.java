@@ -58,6 +58,14 @@ public interface BookingService {
     public Booking selectItem(Booking input) throws NullPointerException, Exception;
 
     /**
+     * 예약시 예약일자의 중복을 확인하여 리턴한다.
+     * @param input - 조회할 대상의 정보를 담고 있는 Beans
+     * @return - 조회 결과를 담고 있는 Beans
+     * @throws Exception - 예약 일자 조회시 이미 예약이 완료된 일자일 경우 
+     */
+    public Booking checkdate(Booking input) throws Exception;
+
+    /**
      * 멤버 목록을 조회하여 리턴한다.
      * 
      * @param input - 검색이 필요한 경우 검색어를 저장하고 있는 Beans
@@ -66,6 +74,15 @@ public interface BookingService {
      * @throws Exception            - SQL처리에 실패한 경우
      */
     public List<Booking> selectList(Booking input) throws NullPointerException, Exception;
+
+    /**
+     * 메인 화면에 보여줄 오늘 날짜의 예약 현황을 리턴한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public List<Booking> selectTodayList(Booking input) throws NullPointerException, Exception;
 
     /**
      * 멤버 목록의 개수를 조회하여 개수를 리턴한다.

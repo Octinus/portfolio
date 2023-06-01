@@ -54,7 +54,7 @@ public class MembersServiceImpl implements MembersService{
     Members output = membersMapper.selectItem(input);
 
     if(output == null){
-      throw new NullPointerException("조회된 데이터가 없습니다.");
+      throw new NullPointerException("등록되지 않은 계정입니다.");
     }
 
     return output;
@@ -99,6 +99,17 @@ public class MembersServiceImpl implements MembersService{
   @Override
   public int onlyTechCount(Members input) throws NullPointerException, Exception {
     return  membersMapper.onlyTechCount(input);
+  }
+
+  @Override
+  public Members selectInfoItem(Members input) throws NullPointerException, Exception {
+    Members output = membersMapper.selectInfoItem(input);
+
+    if(output == null){
+      throw new NullPointerException("등록되지 않은 계정입니다.");
+    }
+
+    return output;
   }
   
 }
