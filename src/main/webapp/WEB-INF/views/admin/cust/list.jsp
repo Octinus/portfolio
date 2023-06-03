@@ -75,7 +75,7 @@
         <%-- 조회 결과가 없는 경우 --%>
         <c:when test="${output == null || fn:length(output) == 0}">
         <tr>
-          <td colspan="12">조회 결과가 없습니다.</td>
+          <td colspan="8">검색하신 결과는 없습니다.</td>
         </tr>
           </c:when>
           <%-- 조회 결과가 있는 경우 --%>
@@ -83,7 +83,7 @@
               <%-- 조회 결과에 따른 반복 처리 --%>
               <c:forEach var="item" items="${output}" varStatus="status">
 
-              <%-- 출력을 위해 준비한 학과이름과 위치 --%>
+              <%-- 출력을 위해 준비한 컬럼들 --%>
               <c:set var="id" value="${item.id}" />
               <c:set var="name" value="${item.name}" />
               <c:set var="mem_id" value="${item.mem_id}" />
@@ -98,7 +98,7 @@
               <%-- 검색어에 <mark> 태그를 적용한 문자열 변수를 준비 --%>
                   <c:set var="mark" value="<mark>${keyword}</mark>" />
 
-                  <%-- 출력을 위해 준비한 학과이름과 위치에서 검색어와 일치하는 단어를 형광팬 효과로 변경 --%>
+                  <%-- 출력을 위해 준비한 검색어와 일치하는 단어를 형광팬 효과로 변경 --%>
                   <c:set var="name" value="${fn:replace(name, keyword, mark)}" />
                   <c:set var="mem_id" value="${fn:replace(mem_id, keyword, mark)}" />
               </c:if> 

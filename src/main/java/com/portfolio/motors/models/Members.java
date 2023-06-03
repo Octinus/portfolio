@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Members {
-  private String id;
+  private int id;
   private String mem_type;
   private String mem_id;
   private String mem_pw;
@@ -27,6 +27,8 @@ public class Members {
   private String edit_date;
   private String is_out;
 
+  private Integer tech_id;
+  private String customer_id;
   private String tech_name;
   private String booking_date;
   private String booking_time;

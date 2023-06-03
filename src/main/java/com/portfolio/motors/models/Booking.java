@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Booking {
   
-  private String id;
+  private int id;
   private String booking_date;
   private String booking_time;
   private String subject;
@@ -23,4 +23,21 @@ public class Booking {
   private String carno;
   private String carmo;
   private String name;
+  private String tech_name;
+
+  private static int offset;
+  private static int listCount;
+  
+  public static int getOffset() {
+    return offset;
+  }
+  public static void setOffset(int offset) {
+    Booking.offset = offset;
+  }
+  public static int getListCount() {
+    return listCount;
+  }
+  public static void setListCount(int listCount) {
+    Booking.listCount = listCount;
+  }
 }

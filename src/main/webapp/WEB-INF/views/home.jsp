@@ -228,6 +228,9 @@
     width: 400px;
     line-height: 3;
   }
+  .booking .noreserv {
+    color: red;
+  }
 </style>
 <div class="ad-container">
   <div class="ad">
@@ -292,9 +295,9 @@
       </tr>
       <c:choose>
       <%-- 조회 결과가 없는 경우 --%>
-      <c:when test="${output == null}">
+      <c:when test="${output == null || fn:length(output) == 0}">
       <tr>
-        <td colspan="4">오늘은 저희 영업소의 휴무일 입니다.</td>
+        <td colspan="4" class="noreserv">오늘은 저희 영업소의 휴무일 입니다.</td>
       </tr>
         </c:when>
         <%-- 조회 결과가 있는 경우 --%>

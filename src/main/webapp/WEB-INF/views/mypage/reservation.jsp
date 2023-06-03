@@ -1,46 +1,8 @@
-<%@ page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-  Calendar c = Calendar.getInstance();
-
-  int yy = c.get(Calendar.YEAR);
-  request.setAttribute("yy", yy);
-
-  String mm = String.format("%02d", c.get(Calendar.MONTH) + 1);
-  request.setAttribute("mm", mm);
-
-  int weekCnt = c.getActualMaximum(c.WEEK_OF_MONTH);
-  request.setAttribute("weekCnt", weekCnt);
-  int dayCnt = c.getActualMaximum(c.DAY_OF_MONTH);
-  request.setAttribute("dayCnt", dayCnt);
-
-  c.set(c.DAY_OF_MONTH, 1);
-  int first = c.get(c.DAY_OF_WEEK);
-  request.setAttribute("first", first);
-
-  String[] dayName = { "일", "월", "화", "수", "목", "금", "토" };
-  request.setAttribute("dayName", dayName);
-
-  int[][] cal = new int[weekCnt + 1][7];
-  
-  int cnt = 1;
-
-  for (int i = 0; i < cal.length; i++) {
-      for (int j = 0; j < cal[i].length; j++) {
-          if ((i == 0) || (i == 1 && j < first - 1) || cnt > dayCnt) {
-              cal[i][j] = 0;
-          } else {
-              cal[i][j] = cnt++;
-          }
-      }
-  }
-  request.setAttribute("cal", cal);
-  
-%>
 <style>
   .resertop {
     margin: 20px auto 80px auto;
@@ -68,14 +30,16 @@
   .calendar th {
     width: 400px;
     font-size: 25px;
+    
   }
   .month {
     border-bottom: 1px dotted #8b8b8b;
     background-color: #b5d1fa;
+    font-weight: 600;
   }
   .calendar .day td {
     font-size: 25px;
-    padding: 10px;
+    line-height: 2;
   }
   .calendar .day td:first-child {
     color: red;
@@ -97,10 +61,15 @@
     background-color: #b5d1fa;
   }
   .date td:nth-child(1) .opendatebtn,
-  .date td:nth-child(7) .opendatebtn {
+  .date td:nth-child(7) .opendatebtn,
+  .closedatebtn {
     font-size: 20px;
     font-weight: 300;
     background-color: #e9e9e9;
+    border: none;
+    width: 40px;
+    text-align: center;
+    margin: 10px;
   }
   .time table {
     line-height: 3;
@@ -147,14 +116,14 @@
     <div class="calendar">
       <table>
         <tr class="month">
-          <th colspan="7"><h3>${yy}년 ${mm}월</h3></th>
+          <th colspan="7"><h3>${cal.yy}년 ${cal.mm}월</h3></th>
         </tr>
         <tr class="day">
-          <c:forEach var="i" items="${dayName}">
+          <c:forEach var="i" items="${cal.dayName}">
             <td>${i}</td>
           </c:forEach>
         </tr>
-          <c:forEach var="j" items="${cal}">
+          <c:forEach var="j" items="${cal.calen}">
             <tr class="date">
             <c:forEach var="k" items="${j}">
               <c:choose>
@@ -162,7 +131,14 @@
                   <td></td>
                 </c:when>
                 <c:otherwise>
-                    <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
+                  <c:choose>
+                    <c:when test="${cal.today.substring(8) >= k}">
+                      <td><button class="closedatebtn" type="button" value="">${k}</button></td>
+                    </c:when>
+                    <c:otherwise>
+                      <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
+                    </c:otherwise>
+                  </c:choose>
                 </c:otherwise>
               </c:choose>
             </c:forEach>
@@ -220,14 +196,14 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script>
-    $('.datebtn').on('click', (e) => {
+    $('.opendatebtn').on('click', (e) => {
       const idx = $(e.currentTarget).parent().index()
       if(idx == 0 || idx == 6) {
         $('#booking_date').attr('value', '')
         return
       }
       const date = $(e.currentTarget).attr('value')
-      $('#booking_date').attr('value', '${yy}-${mm}-' + date)
+      $('#booking_date').attr('value', '${cal.yy}-${cal.mm}-' + date)
       $('#booking_time').attr('value', '')
     });
     $('.timebtn').on('click', (e) => {

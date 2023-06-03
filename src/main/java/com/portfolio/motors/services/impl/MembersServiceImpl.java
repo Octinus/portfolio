@@ -97,6 +97,11 @@ public class MembersServiceImpl implements MembersService{
   }
 
   @Override
+  public List<Members> onlyTech() throws NullPointerException, Exception {
+    return membersMapper.onlyTech();
+  }
+
+  @Override
   public int onlyTechCount(Members input) throws NullPointerException, Exception {
     return  membersMapper.onlyTechCount(input);
   }
@@ -111,5 +116,7 @@ public class MembersServiceImpl implements MembersService{
 
     return output;
   }
+
+  
   
 }

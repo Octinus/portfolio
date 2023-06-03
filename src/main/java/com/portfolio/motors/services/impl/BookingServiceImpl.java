@@ -36,6 +36,16 @@ public class BookingServiceImpl implements BookingService{
   }
 
   @Override
+  public Booking techUpdate(Booking input) throws NullPointerException, Exception {
+    int rows = bookingMapper.techUpdate(input);
+
+    if (rows == 0) {
+      throw new NullPointerException("수정된 데이터가 없습니다.");
+    }
+    return bookingMapper.selectItem(input);
+  }
+
+  @Override
   public void delete(Booking input) throws NullPointerException, Exception {
     Booking booking = new Booking();
     booking.setId(input.getId());
@@ -84,4 +94,21 @@ public class BookingServiceImpl implements BookingService{
   public List<Booking> selectTodayList(Booking input) throws NullPointerException, Exception {
     return bookingMapper.selectTodayList(input);
   }
+
+  @Override
+  public int todayBookingCount(Booking input) throws NullPointerException, Exception {
+    return  bookingMapper.todayBookingCount(input);
+  }
+
+  @Override
+  public List<Booking> noTechList(Booking input) throws NullPointerException, Exception {
+    return bookingMapper.noTechList(input);
+  }
+
+  @Override
+  public int noTechCount(Booking input) throws NullPointerException, Exception {
+    return  bookingMapper.noTechCount(input);
+  }
+
+  
 }

@@ -2,7 +2,7 @@ package com.portfolio.motors.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.Calendar;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +15,7 @@ import com.portfolio.motors.exception.StringFormatException;
 import com.portfolio.motors.helpers.RegexHelper;
 import com.portfolio.motors.helpers.WebHelper;
 import com.portfolio.motors.models.Booking;
+import com.portfolio.motors.models.Cal;
 import com.portfolio.motors.models.Members;
 import com.portfolio.motors.services.BookingService;
 import com.portfolio.motors.services.MembersService;
@@ -45,7 +46,7 @@ public class MyController {
 
   @PostMapping("/myEdit.ok")
   public ModelAndView myEditOk(HttpServletRequest request,
-                              @RequestParam(value="id") String id,
+                              @RequestParam(value="id") int id,
                               @RequestParam(value="name") String name,
                               @RequestParam(value="mem_type") String memType,
                               @RequestParam(value="mem_id") String memid,
@@ -113,7 +114,35 @@ public class MyController {
   }
 
   @GetMapping("/reservation") // 예약 페이지
-  public ModelAndView reservation(){
+  public ModelAndView reservation(Model model){
+    Calendar c = Calendar.getInstance();
+
+    int yy = c.get(Calendar.YEAR);
+    String mm = String.format("%02d", c.get(Calendar.MONTH) + 1);
+    int weekCnt = c.getActualMaximum(c.WEEK_OF_MONTH);
+    int dayCnt = c.getActualMaximum(c.DAY_OF_MONTH);
+    c.set(c.DAY_OF_MONTH, 1);
+    int first = c.get(c.DAY_OF_WEEK);
+    String[] dayName = { "일", "월", "화", "수", "목", "금", "토" };
+    int[][] calen = new int[weekCnt + 1][7];
+    int cnt = 1;
+    for (int i = 0; i < calen.length; i++) {
+        for (int j = 0; j < calen[i].length; j++) {
+            if ((i == 0) || (i == 1 && j < first - 1) || cnt > dayCnt) {
+              calen[i][j] = 0;
+            } else {
+              calen[i][j] = cnt++;
+            }
+        }
+    }
+
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    String today = dateTime.format(formatter);
+
+    Cal cal = new Cal(yy, mm, weekCnt, dayCnt, first, dayName, calen, today);
+
+    model.addAttribute("cal", cal);
 
     return new ModelAndView("/mypage/reservation");
   }
