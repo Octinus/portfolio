@@ -3,79 +3,120 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-  <c:import url="/WEB-INF/views/inc/top.jsp" />
+<c:import url="/WEB-INF/views/inc/top.jsp" />
+
   <style>
-    .adcusttop {
-      width: 460px;
+    .main .notop {
+      display: inline;
+      width: 150px;
       border-bottom: 1px solid black;
-      font-size: 40px;
-      padding-bottom: 5px;
-      margin: 50px auto 0 auto;
     }
-    .adcusttop h1 {
-      font-size: 40px;
-      font-weight: 600;
+    
+    .main .notop h1 {
+      display: contents;
+      font-size: 30px;
     }
 
-    .adcustsearch {
-      margin: 10px auto 20px auto;
+    .main .notop p {
+      font-size: 15px;
+      color: #8b8b8b;
+      margin: 20px 0 50px 0;
     }
-    .adcustsearch form {
-      text-align: left;
+
+    .main .nomain {
+      border: 1px solid  #b9b8b8;
+      width: 1200px;
+      line-height: 3;
+      margin-bottom: 20px;
     }
-    .adcustsearch input,
-    .adcustsearch button {
-      border: 1px solid #c5c5c5;
+    .main .nomain tr:first-child {
+      border-bottom: 1px dotted #8b8b8b;
     }
-    .adcustsearch input {
+    .main .nomain tr {
+      border-bottom: 1px dotted #8b8b8b;
+    }
+    .main .nomain tr:last-child {
+      border: none;
+    }
+    .main .nomain tr th:first-child {
+      width: 100px;
+    }
+    .main .nomain tr th:nth-child(2) {
+      width: 900px;
+    }
+    .main .nomain tr th {
+      width: 100px;
+    }
+    .main .nomain tr td {
+      font-size: 12px;
+    }
+    .main .nomain tr td:last-child {
+      color: #8b8b8b;
+    }
+    
+    .main .nobottom {
+      margin: 40px 0 80px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .main .nobottom .noticesearch {
+      text-indent: 20px;
+    }
+    .main .nobottom .gowriter a {
+      display: block;
+      text-decoration: none;
+      background-color: black;
+      color: white;
+      border: 1px solid black;
+      font-size: 13px;
+      padding: 10px;
       width: 150px;
     }
-    .adcustsearch button {
-      cursor: pointer;
+    .main .nobottom .gowriter a:hover {
+      background-color: #f7f7f7;
+      color: black;
+      border: 1px solid black;
+      transition: all 0.5s;
     }
-
-    .adcustmain {
-      margin: 100px auto 20px auto;
+    .noticesearch select {
+      background-color: white;
     }
-    .adcustmain table {
-      width: 1200px;
-      border-top: 2px solid #c5c5c5;
-      line-height: 2.5;
+    .noticesearch input {
+      border: 1px solid #8b8b8b;
+      background-color: white;
     }
-    .adcustmain tr {
-      border: 1px solid #c5c5c5;
+    .noticesearch button{
+      border: 1px solid black;
+      width: 100px;
+      font-size: 12px;
+      color: white;
+      background-color: black;
+      line-height: 1.6;
     }
-    .adcustmain tr:first-child th {
-      background-color: #e2e1e1;
-    }
-
-    .adcustbottom {
-      margin-bottom: 100px;
+    .noticesearch button:hover {
+      background-color: #f7f7f7;
+      color: black;
+      border: 1px solid black;
+      transition: all 0.5s;
     }
   </style>
+  <div class="notop">
+    <h1>NOTICE</h1>
+    <p>공지사항</p>
+  </div>
 
-    <div class="adcusttop">
-      <h1>Customer Management</h1>
-    </div>    
-
-    <div class="adcustmain">
-      <!-- 조회 결과 목록 -->
-      <table>
-        <tr>
-          <th>등록번호</th>
-          <th>이름</th>
-          <th>아이디</th>
-          <th>연락처</th>
-          <th>E-mail</th>
-          <th>생년월일</th>
-          <th>차번호</th>
-          <th>차종</th>
-        </tr>
-        <c:choose>
+  <table class="nomain">
+    <tr>
+      <th>NO</th>
+      <th>SUBJECT</th>
+      <th>NAME</th>
+      <th>DATE</th>
+    </tr>
+    <c:choose>
         <%-- 조회 결과가 없는 경우 --%>
         <c:when test="${output == null || fn:length(output) == 0}">
         <tr>
-          <td colspan="8">검색하신 결과는 없습니다.</td>
+          <td colspan="4">검색하신 결과는 없습니다.</td>
         </tr>
           </c:when>
           <%-- 조회 결과가 있는 경우 --%>
@@ -85,13 +126,9 @@
 
               <%-- 출력을 위해 준비한 컬럼들 --%>
               <c:set var="id" value="${item.id}" />
-              <c:set var="name" value="${item.name}" />
-              <c:set var="mem_id" value="${item.mem_id}" />
-              <c:set var="tel" value="${item.tel}" />
-              <c:set var="email" value="${item.email}" />
-              <c:set var="birthdate" value="${item.birthdate}" />
-              <c:set var="carno" value="${item.carno}" />
-              <c:set var="carmo" value="${item.carmo}" />
+              <c:set var="subject" value="${item.subject}" />
+              <c:set var="members_id" value="${item.members_id}" />
+              <c:set var="reg_date" value="${item.reg_date}" />
 
               <%-- 검색어가 있다면? --%>
               <c:if test="${keyword != ''}">
@@ -99,41 +136,26 @@
                   <c:set var="mark" value="<mark>${keyword}</mark>" />
 
                   <%-- 출력을 위해 준비한 검색어와 일치하는 단어를 형광팬 효과로 변경 --%>
-                  <c:set var="name" value="${fn:replace(name, keyword, mark)}" />
-                  <c:set var="mem_id" value="${fn:replace(mem_id, keyword, mark)}" />
+                  <c:set var="subject" value="${fn:replace(subject, keyword, mark)}" />
               </c:if> 
                       
               <%-- 상세페이지로 이동하기 위한 URL --%>
-              <c:url value="/notice/read.do" var="viewUrl">
+              <c:url value="/cust/read.do" var="viewUrl">
                   <c:param name="id" value="${item.id}" />
               </c:url>
 
               <tr>
                   <td>${id}</td>
-                  <td><a href="${viewUrl}">${name}</a></td>
-                  <td>${mem_id}</td>
-                  <td>${tel}</td>
-                  <td>${email}</td>
-                  <td>${birthdate}</td>
-                  <td>${carno}</td>
-                  <td>${carmo}</td>
+                  <td><a href="${viewUrl}">${subject}</a></td>
+                  <td>${members_id}</td>
+                  <td>${reg_date}</td>
               </tr>
               </c:forEach>
             </c:otherwise>
           </c:choose>
-        </table>
-      </div>
-
-      <div class="adcustsearch">
-        <!-- 검색 form -->
-        <form method="get" action="${contextPath}/customermanagement">
-          <label for="keyword">검색</label>
-            <input type="search" name="keyword" id="keyword" value="${keyword}" />
-            <button type="submit">SEARCH</button>
-        </form>
-      </div>
-
-    <div class="adcustbottom">
+  </table>
+  
+  <div class="adcustbottom">
     <!-- 페이지 번호 구현 -->
     <%-- 이전 그룹에 대한 링크 --%>
     <c:choose>
@@ -187,4 +209,22 @@
         </c:otherwise>
     </c:choose>
   </div>
-  <c:import url="/WEB-INF/views/inc/bottom.jsp" />
+
+  <div class="nobottom">
+    <div class="noticesearch">
+      <form method="get" action="${contextPath}/notice">
+        <select>
+          <option value="subject">제목</option>
+          <option value="content">내용</option>
+        </select>
+        <input type="search" id="keyword" name="keyword" />
+        <button type="submit">SEARCH</button>
+    </form>
+  </div>
+  <div class="gowriter">
+    <c:if test="${login_info.getMem_type().equals('A')}">
+      <a href="${contextPath}/notice/add.do">WIRTER</a>
+    </c:if>
+  </div>
+</div>
+<c:import url="/WEB-INF/views/inc/bottom.jsp" />

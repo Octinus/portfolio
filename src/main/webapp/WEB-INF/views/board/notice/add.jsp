@@ -47,7 +47,10 @@
   </style>
   <p class="noticeWtop">NOTICE</p>
 
-  <form method="post" action="${contextPath}/notice_ok.do" enctype="multipart/form-data">
+  <form method="post" action="${contextPath}/notice/add_ok.do" enctype="multipart/form-data">
+    <input type="hidden" name="category" id="category" value="N" />
+    <input type="hidden" name="reg_date" id="reg_date" value="" />
+    <input type="hidden" name="members_id" id="members_id" value="${login_info.getId()}" />
   <table class="noticetable">
     <tr>
       <th>SUBJECT</th>
@@ -62,12 +65,6 @@
       <th>첨부파일</th>
       <td>
         <input type="file" name="file" id="file" />
-      </td>
-    </tr>
-    <tr>
-      <th>게시글비밀번호</th>
-      <td>
-        <input type="password" name="notipw" id="notipw" />
       </td>
     </tr>
   </table>

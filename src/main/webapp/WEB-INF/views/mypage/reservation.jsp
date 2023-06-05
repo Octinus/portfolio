@@ -97,6 +97,7 @@
 
   .reserbottom {
     margin-bottom: 100px;
+    display: inline-flex;
   }
   .reserbottom input {
     border: 1px solid #8b8b8b;
