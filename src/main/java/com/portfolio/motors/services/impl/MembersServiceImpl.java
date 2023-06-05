@@ -117,6 +117,11 @@ public class MembersServiceImpl implements MembersService{
     return output;
   }
 
+  @Override
+  public List<Members> onlyCust() throws NullPointerException, Exception {
+    return membersMapper.onlyCust();
+  }
+
   
   
 }

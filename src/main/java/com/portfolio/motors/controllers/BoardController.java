@@ -16,7 +16,9 @@ import com.portfolio.motors.helpers.Pagenation;
 import com.portfolio.motors.helpers.RegexHelper;
 import com.portfolio.motors.helpers.WebHelper;
 import com.portfolio.motors.models.BbsDocument;
+import com.portfolio.motors.models.Members;
 import com.portfolio.motors.services.BbsDocumentService;
+import com.portfolio.motors.services.MembersService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,8 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
   
   private final BbsDocumentService bbsDocumentService;
+
+  private final MembersService membersService;
 
   private final WebHelper webHelper;
 
@@ -42,7 +46,6 @@ public class BoardController {
     
     List<BbsDocument> output = null; //조회결과가 저장될 객체
     Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
-
     // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
     BbsDocument input = new BbsDocument();
     input.setSubject(keyword);
@@ -50,7 +53,7 @@ public class BoardController {
 
     try {
       // 전체 게시글 수 조회
-      totalCount = bbsDocumentService.selectCount(input);
+      totalCount = bbsDocumentService.qnaCount(input);
       //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
       pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
 
@@ -63,7 +66,6 @@ public class BoardController {
     } catch (Exception e) {
       return webHelper.serverError(e);
     }
-
     // view 처리
     model.addAttribute("output", output);
     model.addAttribute("keyword", keyword);
@@ -165,7 +167,7 @@ public class BoardController {
 
     try {
       // 전체 게시글 수 조회
-      totalCount = bbsDocumentService.selectCount(input);
+      totalCount = bbsDocumentService.noticeCount(input);
       //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
       pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
 
@@ -174,7 +176,7 @@ public class BoardController {
       BbsDocument.setListCount(pagenation.getListCount());
 
       //데이터 조회하기
-      output = bbsDocumentService.selectList(input);
+      output = bbsDocumentService.noticeList(input);
     } catch (Exception e) {
       return webHelper.serverError(e);
     }
@@ -308,12 +310,12 @@ public class BoardController {
   @GetMapping("/record") // 공지사항 페이지
   public ModelAndView recordboard(){
 
-    return new ModelAndView("/board/record");
+    return new ModelAndView("/board/record/list");
   }
 
-  @GetMapping("/record.do") // 공지사항 페이지
+  @GetMapping("/record/add.do") // 공지사항 페이지
   public ModelAndView record(){
 
-    return new ModelAndView("/board/recordW");
+    return new ModelAndView("/board/record/add");
   }
 }

@@ -154,4 +154,15 @@ public interface MembersMapper {
                 "</where>" +
                 "</script>")
         public int onlyTechCount(Members input);
+
+        @Select("<script>" +
+                "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, postcode, addr1, addr2, level, is_out from members " +
+                "<where>" +
+                "mem_type = 'T' " +
+                "and is_out = 'N'" +
+                "</where>" +
+                "</script>")
+        // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+        @ResultMap("myResultId")
+        public List<Members> onlyCust();
 }

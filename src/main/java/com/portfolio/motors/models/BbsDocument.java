@@ -20,6 +20,7 @@ public class BbsDocument {
   private String field;
 
   private int members_id;
+  private String name;
 
   private static int offset;
   private static int listCount;

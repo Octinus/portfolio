@@ -129,6 +129,7 @@
               <c:set var="id" value="${item.id}" />
               <c:set var="subject" value="${item.subject}" />
               <c:set var="members_id" value="${item.members_id}" />
+              <c:set var="name" value="${item.name}" />
               <c:set var="reg_date" value="${item.reg_date}" />
 
               <%-- 검색어가 있다면? --%>
@@ -148,7 +149,9 @@
               <tr>
                   <td>${id}</td>
                   <td><a href="${viewUrl}">${subject}</a></td>
-                  <td>${members_id}</td>
+                  <c:if test="${name.equals('관리자')}">
+                    <td>C.MOTORS</td>
+                  </c:if>
                   <td>${reg_date}</td>
               </tr>
               </c:forEach>
