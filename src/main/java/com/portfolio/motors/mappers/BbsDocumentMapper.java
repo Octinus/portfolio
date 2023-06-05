@@ -17,7 +17,8 @@ import com.portfolio.motors.models.BbsDocument;
 @Mapper
 public interface BbsDocumentMapper {
   
-  @Insert("insert into bbs_document(category, subject, content, reg_date, members_id) values(#{category}, #{subject}, #{content}, #{reg_date}, #{members_id})")
+  @Insert("insert into bbs_document(category, writer_pw, q_type, subject, content, reg_date, members_id) " +
+          "values(#{category}, #{writer_pw}, #{q_type}, #{subject}, #{content}, #{reg_date}, #{members_id})")
   @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
   public int insert(BbsDocument input);
 
@@ -28,13 +29,14 @@ public interface BbsDocumentMapper {
   public int delete(BbsDocument input);
 
   // SELECT문(단일행 조회)을 수행하는 메서드 정의
-  @Select("select id, category, subject, content, reg_date, edit_date, members_id from bbs_document where id=#{id}")
+  @Select("select id, category, q_type, subject, content, reg_date, edit_date, members_id from bbs_document where id=#{id}")
   // 조회 결과와 MODEL 객체를 연결하기 위한 규칙 정의
   // -> property : MODEL 객체를 연결하기 위한 규칙 정의
   // -> column : SELECT문에 명시된 필드 이름(AS 옵션을 사용한 경우 별칭으로 명시)
   @Results(id = "myResultId", value = {
           @Result(property = "id", column = "id"),
           @Result(property = "category", column = "category"),
+          @Result(property = "q_type", column = "q_type"),
           @Result(property = "subject", column = "subject"), 
           @Result(property = "content", column = "content"), 
           @Result(property = "reg_date", column = "reg_date"),
@@ -47,7 +49,8 @@ public interface BbsDocumentMapper {
   @Select("<script>" +
           "select id, category, subject, content, reg_date, members_id from bbs_document" +
           "<where>" +
-          "<if test='subject != null'>subject like concat('%', #{subject}, '%')</if>" +
+          "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
+          "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
           "</where>" +
           "order by id desc" +
           "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
@@ -55,12 +58,26 @@ public interface BbsDocumentMapper {
   // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
   @ResultMap("myResultId")
   public List<BbsDocument> selectList(BbsDocument input);
-  // TODO 질문 제목 관련이면 이거 따로 내용관련 이면 이거 따로 해야하는건가요?
+
+  @Select("<script>" +
+          "select id, category, subject, content, reg_date, members_id from bbs_document" +
+          "<where>" +
+          "category = 'Q'" +
+          "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
+          "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+          "</where>" +
+          "order by id desc" +
+          "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
+          "</script>")
+  // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+  @ResultMap("myResultId")
+  public List<BbsDocument> qnaList(BbsDocument input);
 
   @Select("<script>" +
           "select count(*) as cnt from bbs_document" +
           "<where>" +
-          "<if test='subject != null'>subject like concat('%', #{subject}, '%')</if>" +
+          "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
+          "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
           "</where>" +
           "</script>")
   public int selectCount(BbsDocument input);

@@ -69,5 +69,9 @@ public class BbsDocumentServiceImpl implements BbsDocumentService{
   public int selectCount(BbsDocument input) throws NullPointerException, Exception {
     return  bbsDocumentMapper.selectCount(input);
   }
-  
+
+  @Override
+  public List<BbsDocument> qnaList(BbsDocument input) throws NullPointerException, Exception {
+    return bbsDocumentMapper.qnaList(input);
+  }
 }

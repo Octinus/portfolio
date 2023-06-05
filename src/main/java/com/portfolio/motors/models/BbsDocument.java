@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BbsDocument {
   
-  private String id;
+  private int id;
   private String category;
   private String writer_pw;
+  private String q_type;
   private String subject;
   private String content;
   private String reg_date;
   private String edit_date;
+  private String field;
 
   private int members_id;
 

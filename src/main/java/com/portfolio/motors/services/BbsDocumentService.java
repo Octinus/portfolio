@@ -76,4 +76,6 @@ public interface BbsDocumentService {
      * @throws Exception - SQL처리에 실패한 경우
      */
     public int selectCount(BbsDocument input) throws NullPointerException, Exception;
+
+    public List<BbsDocument> qnaList(BbsDocument input) throws NullPointerException, Exception;
 }

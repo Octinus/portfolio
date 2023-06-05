@@ -104,7 +104,7 @@
               </c:if> 
                       
               <%-- 상세페이지로 이동하기 위한 URL --%>
-              <c:url value="/notice/read.do" var="viewUrl">
+              <c:url value="/cust/read.do" var="viewUrl">
                   <c:param name="id" value="${item.id}" />
               </c:url>
 

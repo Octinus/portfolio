@@ -44,11 +44,24 @@
   </style>
   <p class="qnatop">Q&A</p>
 
-  <form method="post" action="${contextPath}/qna_ok.do" enctype="multipart/form-data">
+  <form method="post" action="${contextPath}/qna/add_ok.do" enctype="multipart/form-data">
+    <input type="hidden" name="category" id="category" value="Q" />
+    <input type="hidden" name="reg_date" id="reg_date" value="" />
+    <input type="hidden" name="members_id" id="members_id" value="${login_info.getId()}" />
   <table class="qnatable">
     <tr>
       <th>SUBJECT</th>
       <td><input type="text" name="subject" id="subject" /></td>
+    </tr>
+    <tr>
+      <th>TYPE</th>
+      <td>
+        <select name="q_type">
+          <option value="R">예약문의</option>
+          <option value="P">부품문의</option>
+          <option value="E">기타문의</option>
+        </select> 
+      </td>
     </tr>
     <tr>
       <td colspan="2">
@@ -64,7 +77,7 @@
     <tr>
       <th>게시글비밀번호</th>
       <td>
-        <input type="password" name="qnapw" id="qnapw" />
+        <input type="password" name="writer_pw" id="writer_pw" />
       </td>
     </tr>
   </table>
