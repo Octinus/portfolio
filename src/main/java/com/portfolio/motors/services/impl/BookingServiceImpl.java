@@ -110,5 +110,26 @@ public class BookingServiceImpl implements BookingService{
     return  bookingMapper.noTechCount(input);
   }
 
+  @Override
+  public List<Booking> yetDoneList(Booking input) throws NullPointerException, Exception {
+    return bookingMapper.yetDoneList(input);
+  }
+
+  @Override
+  public int yetDoneCount(Booking input) throws NullPointerException, Exception {
+    return  bookingMapper.yetDoneCount(input);
+  }
+
+  @Override
+  public Booking yetDoneItem(Booking input) throws NullPointerException, Exception {
+    Booking output = bookingMapper.yetDoneItem(input);
+
+    if(output == null){
+      throw new NullPointerException("조회된 데이터가 없습니다.");
+    }
+
+    return output;
+  }
+
   
 }

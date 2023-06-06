@@ -191,6 +191,8 @@
       <input type="text" name="booking_date" id="booking_date" value="" readonly/>
       <label for="booking_time">예약시간</label>
       <input type="text" name="booking_time" id="booking_time" value="" readonly/>
+      <label for="problem">입고 사유</label>
+      <input type="text" name="problem" id="problem" placeholder="ex)오일 교환, 차량 소음"/>
       <button type="submit">예약</button>
     </form>
   </div>

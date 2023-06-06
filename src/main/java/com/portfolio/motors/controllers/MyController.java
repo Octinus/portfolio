@@ -150,14 +150,23 @@ public class MyController {
   @PostMapping("/myReservation.ok")
   public ModelAndView reservationOk(@RequestParam(value="booking_date") String booking_date,
                                   @RequestParam(value="booking_time") String booking_time,
+                                  @RequestParam(value="problem") String problem,
                                   @RequestParam(value="is_done") String is_done,
                                   @RequestParam(value="customer_id") int customer_id
                                   ){
+
+    try{
+      regexHelper.isValue(problem, "예약 사유를 입력하세요.");
+    }
+    catch(StringFormatException e){
+      return webHelper.badRequest(e);
+    }
 
     Booking input = new Booking();
     input.setCustomer_id(customer_id);
     input.setBooking_date(booking_date);
     input.setBooking_time(booking_time);
+    input.setProblem(problem);
     input.setIs_done(is_done);
 
     Booking output = null;

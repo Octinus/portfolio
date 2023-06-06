@@ -291,7 +291,7 @@
   <button type="submit">SEARCH</button>
 </div>
 <div class="gowriter">
-  <a href="${contextPath}/record/add.do">WIRTER</a>
+  <a href="${contextPath}/record/add_list">WIRTER</a>
 </div>
 </div>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />

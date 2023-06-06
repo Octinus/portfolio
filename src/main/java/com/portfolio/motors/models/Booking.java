@@ -12,8 +12,10 @@ public class Booking {
   private int id;
   private String booking_date;
   private String booking_time;
+  private String problem;
   private String subject;
   private String content;
+  private String writer_name;
   private String reg_date;
   private String edit_date;
   private String is_done;
