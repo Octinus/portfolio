@@ -120,7 +120,7 @@
             </c:url>
 
             <tr>
-                <td>${status.index + 1}</td>
+                <td>${id}</td>
                 <td><a href="${viewUrl}">${name}</a></td>
                 <td>${booking_date}</td>
                 <td>${booking_time}</td>

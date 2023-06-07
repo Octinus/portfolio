@@ -86,6 +86,11 @@ public class BbsDocumentServiceImpl implements BbsDocumentService{
   }
 
   @Override
+  public List<BbsDocument> notiQnaList() throws NullPointerException, Exception {
+    return bbsDocumentMapper.notiQnaList();
+  }
+
+  @Override
   public int noticeCount(BbsDocument input) throws NullPointerException, Exception {
     return  bbsDocumentMapper.noticeCount(input);
   }

@@ -17,12 +17,12 @@ import com.portfolio.motors.models.Booking;
 @Mapper
 public interface BookingMapper {
 
-@Insert("insert into booking(booking_date, booking_time, problem, subject, content, reg_date, is_done, customer_id, tech_id) " +
-        "values(#{booking_date}, #{booking_time}, #{problem}, #{subject}, #{content}, #{reg_date}, #{is_done}, #{customer_id}, #{tech_id})")
+@Insert("insert into booking(booking_date, booking_time, problem, writer_name, subject, content, reg_date, is_done, customer_id, tech_id) " +
+        "values(#{booking_date}, #{booking_time}, #{problem}, #{writer_name}, #{subject}, #{content}, #{reg_date}, #{is_done}, #{customer_id}, #{tech_id})")
 @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 public int insert(Booking input);
 
-@Update("update booking set booking_date=#{booking_date}, booking_time=#{booking_time}, subject=#{subject}, content=#{content}, reg_date=#{reg_date},  is_done=#{is_done}, customer_id=#{customer_id}, tech_id=#{tech_id} " +
+@Update("update booking set booking_date=#{booking_date}, booking_time=#{booking_time}, problem=#{problem}, writer_name=#{writer_name}, subject=#{subject}, content=#{content}, reg_date=#{reg_date},  is_done=#{is_done}, customer_id=#{customer_id}, tech_id=#{tech_id} " +
         "where id=#{id}")
 public int update(Booking input);
 
@@ -59,7 +59,7 @@ public int delete(Booking input);
 public Booking selectItem(Booking input);
 
 @Select("<script>" +
-        "select b.id, booking_date, booking_time, problem, c.carmo, c.carno, c.name, t.name as 'tech_name', tech_id, is_done from booking b " +
+        "select b.id, booking_date, booking_time, problem, c.carmo, c.carno, c.name, customer_id, t.name as 'tech_name', tech_id, is_done from booking b " +
         "inner join members c on c.id = customer_id " +
         "inner join members t on t.id = tech_id " +
         "where is_done = 'N' and b.id=#{id}" +
@@ -170,4 +170,43 @@ public List<Booking> yetDoneList(Booking input);
         "</script>")
 // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
 public int yetDoneCount(Booking input);
+
+@Select("<script>" +
+        "select b.id, booking_date, booking_time, problem, writer_name, subject, content, c.carmo, c.carno, c.name, t.name as 'tech_name', tech_id, is_done, b.reg_date from booking b " +
+        "inner join members c on c.id = customer_id " +
+        "inner join members t on t.id = tech_id " +
+        "where is_done = 'Y' " +
+        "ORDER BY id DESC LIMIT 0, 1" +
+        "</script>")
+// 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+@ResultMap("myResultId")
+public Booking doneItem(Booking input);
+
+@Select("<script>" +
+        "select b.id, booking_date, booking_time, writer_name, subject, content, c.carmo, c.carno, c.name, t.name as 'tech_name', tech_id, is_done, b.reg_date from booking b " +
+        "inner join members c on c.id = customer_id " +
+        "inner join members t on t.id = tech_id" +
+        "<where>" +
+        "is_done = 'Y'" +
+        "<if test='name != null'> and (name like concat('%', #{name}, '%')</if>" +
+        "<if test='carno != null'> or carno like concat('%', #{carno}, '%'))</if>" +
+        "</where>" +
+        "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
+        "</script>")
+// 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+@ResultMap("myResultId")
+public List<Booking> doneList(Booking input);
+
+@Select("<script>" +
+        "select count(*) as cnt from booking " +
+        "inner join members c on c.id = customer_id " +
+        "inner join members t on t.id = tech_id" +
+        "<where>" +
+        "is_done = 'Y'" +
+        "<if test='name != null'> and (name like concat('%', #{name}, '%')</if>" +
+        "<if test='booking_date != null'> or booking_date like concat('%', #{booking_date}, '%'))</if>" +
+        "</where>" +
+        "</script>")
+// 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+public int doneCount(Booking input);
 }

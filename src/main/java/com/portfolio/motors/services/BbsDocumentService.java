@@ -105,6 +105,15 @@ public interface BbsDocumentService {
     public List<BbsDocument> noticeList(BbsDocument input) throws NullPointerException, Exception;
 
     /**
+     * 자유게시판 최상위 3개글을 공지사항으로 불러오기 위해 최근 3개의 목록을 조회하여 리턴한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public List<BbsDocument> notiQnaList() throws NullPointerException, Exception;
+
+    /**
      * 공지사항게시판 목록의 개수를 조회하여 개수를 리턴한다.
      * @param input
      * @return

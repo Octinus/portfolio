@@ -111,6 +111,17 @@ public class BookingServiceImpl implements BookingService{
   }
 
   @Override
+  public Booking yetDoneItem(Booking input) throws NullPointerException, Exception {
+    Booking output = bookingMapper.yetDoneItem(input);
+
+    if(output == null){
+      throw new NullPointerException("조회된 데이터가 없습니다.");
+    }
+
+    return output;
+  }
+
+  @Override
   public List<Booking> yetDoneList(Booking input) throws NullPointerException, Exception {
     return bookingMapper.yetDoneList(input);
   }
@@ -121,14 +132,24 @@ public class BookingServiceImpl implements BookingService{
   }
 
   @Override
-  public Booking yetDoneItem(Booking input) throws NullPointerException, Exception {
-    Booking output = bookingMapper.yetDoneItem(input);
+  public Booking doneItem(Booking input) throws NullPointerException, Exception {
+    Booking output = bookingMapper.doneItem(input);
 
     if(output == null){
       throw new NullPointerException("조회된 데이터가 없습니다.");
     }
 
     return output;
+  }
+
+  @Override
+  public List<Booking> doneList(Booking input) throws NullPointerException, Exception {
+    return bookingMapper.doneList(input);
+  }
+
+  @Override
+  public int doneCount(Booking input) throws NullPointerException, Exception {
+    return  bookingMapper.yetDoneCount(input);
   }
 
   

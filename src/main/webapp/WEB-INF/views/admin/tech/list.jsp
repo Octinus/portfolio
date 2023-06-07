@@ -124,9 +124,8 @@
     <div class="adtechsearch">
       <!-- 검색 form -->
       <form method="get" action="${contextPath}/techmanagement">
-        <label for="keyword">검색</label>
-          <input type="search" name="keyword" id="keyword" value="${keyword}" />
-          <button type="submit">SEARCH</button>
+        <input type="search" name="keyword" id="keyword" value="${keyword}" placeholder="이름 or 등급"/>
+        <button type="submit">SEARCH</button>
       </form>
     </div>
 

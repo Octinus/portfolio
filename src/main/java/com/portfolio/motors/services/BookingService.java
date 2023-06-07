@@ -160,4 +160,31 @@ public interface BookingService {
      */
     public int yetDoneCount(Booking input) throws NullPointerException, Exception;
 
+    /**
+     * 정비 이력 작성이 완료된 예약 한건을 리턴한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public Booking doneItem(Booking input) throws NullPointerException, Exception;
+
+    /**
+     * 정비 이력 작성이 완료된 예약 현황을 리턴한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public List<Booking> doneList(Booking input) throws NullPointerException, Exception;
+
+    /**
+     * 정비 이력 작성이 완료된 예약 개수를 리턴한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public int doneCount(Booking input) throws NullPointerException, Exception;
+
 }

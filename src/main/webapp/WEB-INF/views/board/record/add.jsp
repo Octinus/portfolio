@@ -44,8 +44,12 @@
   background-color: white;
 }
 .ck.ck-editor__editable_inline>:last-child {
-  height: 600px;
+  max-height: 600px;
+  min-height: 600px;
   background-color: white;
+}
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
+    max-height: 600px;
 }
 .recordbottom {
   display: flex;
@@ -87,9 +91,12 @@
 </div>  
 
 <div class="recordmain">
-  <form method="post" action="${contextPath}/record_ok.do" enctype="multipart/form-data">
+  <form method="post" action="${contextPath}/record/add_ok.do" enctype="multipart/form-data">
     <input type="hidden" name="reg_date" id="reg_date" value="" />
     <input type="hidden" name="is_done" id="is_done" value="Y" />
+    <input type="hidden" name="id" id="id" value="${output.id}" />
+    <input type="hidden" name="customer_id" id="customer_id" value="${output.customer_id}" />
+    <input type="hidden" name="tech_id" id="tech_id" value="${output.tech_id}" />
   <table class="recordtable">
     <tr>
       <th>고객 이름</th>
@@ -144,6 +151,7 @@
   <button type="submit">OK</button>
 </div>
 </form>
+
 <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ko.js"></script>
   <script>

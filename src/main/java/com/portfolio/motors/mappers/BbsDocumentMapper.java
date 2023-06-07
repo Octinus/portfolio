@@ -84,6 +84,15 @@ public int selectCount(BbsDocument input);
 public List<BbsDocument> noticeList(BbsDocument input);
 
 @Select("<script>" +
+        "select bbs.id, category, subject, content, bbs.reg_date, members_id, c.name from bbs_document bbs " +
+        "inner join members c on c.id = members_id and category = 'N'" +
+        "order by id desc limit 0, 3" +
+        "</script>")
+// 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+@ResultMap("myResultId")
+public List<BbsDocument> notiQnaList();
+
+@Select("<script>" +
         "select count(*) as cnt from bbs_document" +
         "<where>" +
         "category = 'N'" +
