@@ -57,6 +57,15 @@
     background-color: #ccf8ced3;
     margin: 10px;
   }
+  .date td .donedatebtn {
+    border: none;
+    width: 40px;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    background-color: #f8ccced3;
+    margin: 10px;
+  }
   .date td .opendatebtn:hover {
     background-color: #b5d1fa;
   }
@@ -202,21 +211,25 @@
     </form>
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script>
-    $('.opendatebtn').on('click', (e) => {
-      const idx = $(e.currentTarget).parent().index()
-      if(idx == 0 || idx == 6) {
-        $('#booking_date').attr('value', '')
-        return
-      }
-      const date = $(e.currentTarget).attr('value')
-      $('#booking_date').attr('value', '${cal.yy}-${cal.mm}-' + date)
-      $('#booking_time').attr('value', '')
-    });
-    $('.timebtn').on('click', (e) => {
-      const time = $(e.currentTarget).attr('value')
-      $('#booking_time').attr('value', time)
-    });
-  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+
+  $('.opendatebtn').on('click', (e) => {
+    const idx = $(e.currentTarget).parent().index()
+    if(idx == 0 || idx == 6) {
+      $('#booking_date').attr('value', '')
+      return
+    }
+    const date = $(e.currentTarget).attr('value')
+    $('#booking_date').attr('value', '${cal.yy}-${cal.mm}-' + date)
+    $('#booking_time').attr('value', '')
+  });
+  $('.timebtn').on('click', (e) => {
+    const time = $(e.currentTarget).attr('value')
+    $('#booking_time').attr('value', time)
+  });
+
+  
+  
+</script>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />
