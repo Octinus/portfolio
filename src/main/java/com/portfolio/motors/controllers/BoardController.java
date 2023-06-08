@@ -53,8 +53,14 @@ public class BoardController {
     Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
     // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
     BbsDocument input = new BbsDocument();
-    input.setSubject(keyword);
-    input.setField(field);
+    if(field == null || field.length() == 0) {
+
+    } else {
+      input.setField(field);
+      input.setSubject(keyword);
+      input.setContent(keyword);
+      input.setName(keyword);
+    }
 
     try {
       // 전체 게시글 수 조회
@@ -76,6 +82,7 @@ public class BoardController {
     model.addAttribute("output", output);
     model.addAttribute("noti", noti);
     model.addAttribute("keyword", keyword);
+    model.addAttribute("field", field);
     model.addAttribute("pagenation", pagenation);
     
     return new ModelAndView("/board/qna/list");
@@ -90,7 +97,6 @@ public class BoardController {
   @PostMapping("/qna/add_ok.do") // 공지사항 페이지
   public ModelAndView qnaAddOk(Model model,
                             @RequestParam(value="category") String category,
-                            @RequestParam(value="writer_pw") String writer_pw,
                             @RequestParam(value="q_type") String q_type,
                             @RequestParam(value="subject") String subject,
                             @RequestParam(value="content") String content,
@@ -113,7 +119,6 @@ public class BoardController {
 
     BbsDocument input = new BbsDocument();
     input.setCategory(category);
-    input.setWriter_pw(writer_pw);
     input.setQ_type(q_type);
     input.setSubject(subject);
     input.setContent(content);
@@ -154,7 +159,89 @@ public class BoardController {
     return new ModelAndView("board/qna/read");
   }
 
-    // ------------------------------------------------------------------------------------------------------------------------
+  @GetMapping("/qna/edit.do")
+public ModelAndView qnaEdit(Model model,
+                            @RequestParam(value="id") int id){
+
+  // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+  BbsDocument input = new BbsDocument();
+  input.setId(id);
+
+  // 수정할 데이터의 원본 조회하기
+  BbsDocument output = null;
+
+  try {
+    output = bbsDocumentService.selectItem(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
+  }
+
+  // View 처리
+  model.addAttribute("output", output);
+
+  return new ModelAndView("board/qna/edit");
+}
+
+@PostMapping("/qna/edit_ok.do")
+public ModelAndView qnaEditOk(Model model,
+                          @RequestParam(value="id") int id,
+                          @RequestParam(value="category") String category,
+                          @RequestParam(value="subject") String subject,
+                          @RequestParam(value="content") String content,
+                          @RequestParam(value="members_id") int members_id,
+                          @RequestParam(value="reg_date") String reg_date,
+                          @RequestParam(value="edit_date") String edit_date){
+
+  LocalDateTime dateTime = LocalDateTime.now();
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  edit_date = dateTime.format(formatter);      
+
+  try {
+    regexHelper.isValue(subject, "제목을 입력하세요.");
+    regexHelper.isValue(content, "내용이 없이는 수정할 수 없습니다.");
+  } catch (StringFormatException e) {
+    return webHelper.badRequest(e);
+  }
+
+  //수정할 값들을 Beans에 담는다.
+  BbsDocument input = new BbsDocument();
+  input.setId(id);
+  input.setCategory(category);
+  input.setSubject(subject);
+  input.setContent(content);
+  input.setMembers_id(members_id);
+  input.setReg_date(reg_date);
+  input.setEdit_date(edit_date);
+
+  try {
+    //데이터 수정
+    bbsDocumentService.update(input);
+  }  catch (Exception e) {
+    return webHelper.redirect(null, "데이터 수정에 실패했습니다. 관리자에게 문의해주세요.");
+  }
+
+  // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
+  return webHelper.redirect("/notice/read.do?id=" + input.getId(), "수정 되었습니다.");
+}
+
+@GetMapping("/qna/delete.do")
+  public ModelAndView qnaDelete(Model model,
+                            @RequestParam(value="id") int id){
+
+    // 데이터 삭제에 필요한 조건값을 Beans에 저장하기
+    BbsDocument input = new BbsDocument();
+    input.setId(id);
+
+    try {
+      bbsDocumentService.delete(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    return webHelper.redirect("/qna", "삭제 되었습니다");
+  }
+
+// ------------------------------------------------------------------------------------------------------------------------
 
   @GetMapping("/notice") // 공지사항 페이지
   public ModelAndView noticeboard(Model model,
@@ -171,9 +258,14 @@ public class BoardController {
 
     // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
     BbsDocument input = new BbsDocument();
-    input.setSubject(keyword);
-    input.setField(field);
+    if(field == null || field.length() == 0) {
 
+    } else {
+      input.setField(field);
+      input.setSubject(keyword);
+      input.setContent(keyword);
+    }
+    
     try {
       // 전체 게시글 수 조회
       totalCount = bbsDocumentService.noticeCount(input);
@@ -193,6 +285,7 @@ public class BoardController {
     // view 처리
     model.addAttribute("output", output);
     model.addAttribute("keyword", keyword);
+    model.addAttribute("field", field);
     model.addAttribute("pagenation", pagenation);
     
     return new ModelAndView("/board/notice/list");
@@ -243,7 +336,7 @@ public class BoardController {
     return webHelper.redirect("/notice", "작성이 완료 되었습니다.");
   }
 
-  @GetMapping("/notice/read.do") // 고객 상세 정보 페이지
+  @GetMapping("/notice/read.do") // 공지사항 상세 정보 페이지
   public ModelAndView notiRead(Model model,
                           @RequestParam(value="id", defaultValue = "") int id){
 
@@ -267,298 +360,340 @@ public class BoardController {
     return new ModelAndView("board/notice/read");
   }
 
-  @GetMapping("/notice/edit.do")
-  public ModelAndView notiEdit(Model model,
-                              @RequestParam(value="id") int id){
+@GetMapping("/notice/edit.do")
+public ModelAndView notiEdit(Model model,
+                            @RequestParam(value="id") int id){
 
-    // 데이터 조회에 필요한 조건값을 Beans에 저장하기
-    BbsDocument input = new BbsDocument();
-    input.setId(id);
+  // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+  BbsDocument input = new BbsDocument();
+  input.setId(id);
 
-    // 수정할 데이터의 원본 조회하기
-    BbsDocument output = null;
+  // 수정할 데이터의 원본 조회하기
+  BbsDocument output = null;
 
-    try {
-      output = bbsDocumentService.selectItem(input);
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
-
-    // View 처리
-    model.addAttribute("output", output);
-
-    return new ModelAndView("board/notice/edit");
+  try {
+    output = bbsDocumentService.selectItem(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
   }
 
-  // ------------------------------------------------------------------------------------------------------------------------
+  // View 처리
+  model.addAttribute("output", output);
 
-  @GetMapping("/record") // 정비이력 페이지
-  public ModelAndView recordboard(Model model,
-                                @RequestParam(value="keyword", required = false) String keyword,
-                                @RequestParam(value="page", defaultValue = "1") int nowPage){
+  return new ModelAndView("board/notice/edit");
+}
 
-    int totalCount = 0; // 전체 게시글 수
-    int listCount = 10; // 한 페이지당 표시할 목록 수
-    int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
+@PostMapping("/notice/edit_ok.do")
+public ModelAndView editCustOk(Model model,
+                          @RequestParam(value="id") int id,
+                          @RequestParam(value="category") String category,
+                          @RequestParam(value="subject") String subject,
+                          @RequestParam(value="content") String content,
+                          @RequestParam(value="members_id") int members_id,
+                          @RequestParam(value="reg_date") String reg_date,
+                          @RequestParam(value="edit_date") String edit_date){
 
-    List<Booking> output = null; //조회결과가 저장될 객체
-    Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
+  LocalDateTime dateTime = LocalDateTime.now();
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  edit_date = dateTime.format(formatter);      
 
-    // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
-    Booking input = new Booking();
-    input.setName(keyword);
-    input.setCarno(keyword);
-
-    try {
-      // 전체 게시글 수 조회
-      totalCount = bookingService.doneCount(input);
-      //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
-      pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
-
-      //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-      Members.setOffset(pagenation.getOffset());
-      Members.setListCount(pagenation.getListCount());
-
-      //데이터 조회하기
-      output = bookingService.doneList(input);
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
-
-    // view 처리
-    model.addAttribute("output", output);
-    model.addAttribute("keyword", keyword);
-    model.addAttribute("pagenation", pagenation);
-
-    return new ModelAndView("/board/record/list");
+  try {
+    regexHelper.isValue(subject, "제목을 입력하세요.");
+    regexHelper.isValue(content, "내용이 없이는 수정할 수 없습니다.");
+  } catch (StringFormatException e) {
+    return webHelper.badRequest(e);
   }
 
-  @GetMapping("/record/add_list") // 공지사항 페이지
-  public ModelAndView recordAddList(Model model,
+  //수정할 값들을 Beans에 담는다.
+  BbsDocument input = new BbsDocument();
+  input.setId(id);
+  input.setCategory(category);
+  input.setSubject(subject);
+  input.setContent(content);
+  input.setMembers_id(members_id);
+  input.setReg_date(reg_date);
+  input.setEdit_date(edit_date);
+
+  try {
+    //데이터 수정
+    bbsDocumentService.update(input);
+  }  catch (Exception e) {
+    return webHelper.redirect(null, "데이터 수정에 실패했습니다. 관리자에게 문의해주세요.");
+  }
+
+  // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
+  return webHelper.redirect("/notice/read.do?id=" + input.getId(), "수정 되었습니다.");
+}
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+@GetMapping("/record") // 정비이력 페이지
+public ModelAndView recordboard(Model model,
                               @RequestParam(value="keyword", required = false) String keyword,
                               @RequestParam(value="page", defaultValue = "1") int nowPage){
 
-    int totalCount = 0; // 전체 게시글 수
-    int listCount = 10; // 한 페이지당 표시할 목록 수
-    int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
+  int totalCount = 0; // 전체 게시글 수
+  int listCount = 10; // 한 페이지당 표시할 목록 수
+  int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
+
+  List<Booking> output = null; //조회결과가 저장될 객체
+  Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
+
+  // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
+  Booking input = new Booking();
+  input.setName(keyword);
+  input.setCarno(keyword);
+
+  try {
+    // 전체 게시글 수 조회
+    totalCount = bookingService.doneCount(input);
+    //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
+    pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
+
+    //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+    Members.setOffset(pagenation.getOffset());
+    Members.setListCount(pagenation.getListCount());
+
+    //데이터 조회하기
+    output = bookingService.doneList(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
+  }
+
+  // view 처리
+  model.addAttribute("output", output);
+  model.addAttribute("keyword", keyword);
+  model.addAttribute("pagenation", pagenation);
+
+  return new ModelAndView("/board/record/list");
+}
+
+@GetMapping("/record/add_list") // 공지사항 페이지
+public ModelAndView recordAddList(Model model,
+                            @RequestParam(value="keyword", required = false) String keyword,
+                            @RequestParam(value="page", defaultValue = "1") int nowPage){
+
+  int totalCount = 0; // 전체 게시글 수
+  int listCount = 10; // 한 페이지당 표시할 목록 수
+  int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
+  
+  List<Booking> output = null; //조회결과가 저장될 객체
+  Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
+
+  // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
+  Booking input = new Booking();
+  input.setBooking_date(keyword);
+  input.setName(keyword);
+
+  try {
+    // 전체 게시글 수 조회
+    totalCount = bookingService.yetDoneCount(input);
+    //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
+    pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
+
+    //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+    Members.setOffset(pagenation.getOffset());
+    Members.setListCount(pagenation.getListCount());
+
+    //데이터 조회하기
+    output = bookingService.yetDoneList(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
+  }
+
+  // view 처리
+  model.addAttribute("output", output);
+  model.addAttribute("keyword", keyword);
+  model.addAttribute("pagenation", pagenation);
+
+  return new ModelAndView("/board/record/add_list");
+}
+
+@GetMapping("/record/add_list.do") // 고객 상세 정보 페이지
+public ModelAndView recordAddListDo(Model model,
+                        @RequestParam(value="id", defaultValue = "") int id){
+
+  // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+  Booking input = new Booking();
+  List<Members> tech = null;
+  input.setId(id);
+
+  // 조회결과를 저장할 객체 선언
+  Booking output = null;
+
+  try {
+    //데이터 조회
+    output = bookingService.yetDoneItem(input);
+    tech = membersService.onlyTech();
+  } catch (Exception e) {
+    return webHelper.serverError(e);
+  }
+
+  // view 처리
+  model.addAttribute("output", output);
+  model.addAttribute("tech", tech);
+
+  return new ModelAndView("board/record/add");
+}
+
+@PostMapping("/record/add_ok.do") // 공지사항 페이지
+public ModelAndView recordAddOk(Model model,
+                          @RequestParam(value="id") int id,
+                          @RequestParam(value="booking_date") String booking_date,
+                          @RequestParam(value="booking_time") String booking_time,
+                          @RequestParam(value="subject") String subject,
+                          @RequestParam(value="content") String content,
+                          @RequestParam(value="reg_date") String reg_date,
+                          @RequestParam(value="is_done") String is_done,
+                          @RequestParam(value="problem") String problem,
+                          @RequestParam(value="customer_id") int customer_id,
+                          @RequestParam(value="tech_id") int tech_id,
+                          @RequestParam(value="writer_name") String writer_name
+                          ){
+
+  LocalDateTime dateTime = LocalDateTime.now();
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  String today = dateTime.format(formatter);
+
+  try{
+    regexHelper.isValue(subject, "제목을 입력하세요.");
+    regexHelper.isValue(content, "내용이 없이는 작성을 완료 할 수 없습니다.");
     
-    List<Booking> output = null; //조회결과가 저장될 객체
-    Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
-
-    // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
-    Booking input = new Booking();
-    input.setBooking_date(keyword);
-    input.setName(keyword);
-
-    try {
-      // 전체 게시글 수 조회
-      totalCount = bookingService.yetDoneCount(input);
-      //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
-      pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
-
-      //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-      Members.setOffset(pagenation.getOffset());
-      Members.setListCount(pagenation.getListCount());
-
-      //데이터 조회하기
-      output = bookingService.yetDoneList(input);
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
-
-    // view 처리
-    model.addAttribute("output", output);
-    model.addAttribute("keyword", keyword);
-    model.addAttribute("pagenation", pagenation);
-
-    return new ModelAndView("/board/record/add_list");
+  }
+  catch(StringFormatException e){
+    return webHelper.badRequest(e);
   }
 
-  @GetMapping("/record/add_list.do") // 고객 상세 정보 페이지
-  public ModelAndView recordAddListDo(Model model,
-                          @RequestParam(value="id", defaultValue = "") int id){
+  Booking input = new Booking();
+  input.setId(id);
+  input.setBooking_date(booking_date);
+  input.setBooking_time(booking_time);
+  input.setSubject(subject);
+  input.setContent(content);
+  input.setReg_date(today);
+  input.setCustomer_id(customer_id);
+  input.setTech_id(tech_id);
+  input.setIs_done(is_done);
+  input.setProblem(problem);
+  input.setWriter_name(writer_name);
 
-    // 데이터 조회에 필요한 조건값을 Beans에 저장하기
-    Booking input = new Booking();
-    List<Members> tech = null;
-    input.setId(id);
-
-    // 조회결과를 저장할 객체 선언
-    Booking output = null;
-
-    try {
-      //데이터 조회
-      output = bookingService.yetDoneItem(input);
-      tech = membersService.onlyTech();
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
-
-    // view 처리
-    model.addAttribute("output", output);
-    model.addAttribute("tech", tech);
-
-    return new ModelAndView("board/record/add");
+  try {
+    // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
+    bookingService.update(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
   }
 
-  @PostMapping("/record/add_ok.do") // 공지사항 페이지
-  public ModelAndView recordAddOk(Model model,
-                            @RequestParam(value="id") int id,
-                            @RequestParam(value="booking_date") String booking_date,
-                            @RequestParam(value="booking_time") String booking_time,
-                            @RequestParam(value="subject") String subject,
-                            @RequestParam(value="content") String content,
-                            @RequestParam(value="reg_date") String reg_date,
-                            @RequestParam(value="is_done") String is_done,
-                            @RequestParam(value="problem") String problem,
-                            @RequestParam(value="customer_id") int customer_id,
-                            @RequestParam(value="tech_id") int tech_id,
-                            @RequestParam(value="writer_name") String writer_name
-                            ){
+  return webHelper.redirect("/record", "작성이 완료 되었습니다.");
+}
 
-    LocalDateTime dateTime = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    String today = dateTime.format(formatter);
+@GetMapping("/record/read.do") // 고객 상세 정보 페이지
+public ModelAndView recordRead(Model model,
+                        @RequestParam(value="id", defaultValue = "") int id){
 
-    try{
-      regexHelper.isValue(subject, "제목을 입력하세요.");
-      regexHelper.isValue(content, "내용이 없이는 작성을 완료 할 수 없습니다.");
-      
-    }
-    catch(StringFormatException e){
-      return webHelper.badRequest(e);
-    }
+  // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+  Booking input = new Booking();
+  input.setId(id);
 
-    Booking input = new Booking();
-    input.setId(id);
-    input.setBooking_date(booking_date);
-    input.setBooking_time(booking_time);
-    input.setSubject(subject);
-    input.setContent(content);
-    input.setReg_date(today);
-    input.setCustomer_id(customer_id);
-    input.setTech_id(tech_id);
-    input.setIs_done(is_done);
-    input.setProblem(problem);
-    input.setWriter_name(writer_name);
+  // 조회결과를 저장할 객체 선언
+  Booking output = null;
 
-    try {
-      // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
-      bookingService.update(input);
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
-
-    return webHelper.redirect("/record", "작성이 완료 되었습니다.");
+  try {
+    //데이터 조회
+    output = bookingService.doneItem(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
   }
 
-  @GetMapping("/record/read.do") // 고객 상세 정보 페이지
-  public ModelAndView recordRead(Model model,
-                          @RequestParam(value="id", defaultValue = "") int id){
+  // view 처리
+  model.addAttribute("output", output);
 
-    // 데이터 조회에 필요한 조건값을 Beans에 저장하기
-    Booking input = new Booking();
-    input.setId(id);
+  return new ModelAndView("board/record/read");
+}
 
-    // 조회결과를 저장할 객체 선언
-    Booking output = null;
+@GetMapping("/record/edit.do")
+public ModelAndView editRecord(Model model,
+                            @RequestParam(value="id") int id){
 
-    try {
-      //데이터 조회
-      output = bookingService.doneItem(input);
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
+  // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+  Booking input = new Booking();
+  input.setId(id);
 
-    // view 처리
-    model.addAttribute("output", output);
+  // 수정할 데이터의 원본 조회하기
+  Booking output = null;
 
-    return new ModelAndView("board/record/read");
+  try {
+    output = bookingService.doneItem(input);
+  } catch (Exception e) {
+    return webHelper.serverError(e);
   }
 
-  @GetMapping("/record/edit.do")
-  public ModelAndView editRecord(Model model,
-                              @RequestParam(value="id") int id){
+  // View 처리
+  model.addAttribute("output", output);
 
-    // 데이터 조회에 필요한 조건값을 Beans에 저장하기
-    Booking input = new Booking();
-    input.setId(id);
+  return new ModelAndView("board/record/edit");
+}
 
-    // 수정할 데이터의 원본 조회하기
-    Booking output = null;
+@PostMapping("/record/edit_ok.do")
+public ModelAndView editRecordOk(Model model,
+                          @RequestParam(value="id") int id,
+                          @RequestParam(value="name") String name,
+                          @RequestParam(value="mem_id") String mem_id,
+                          @RequestParam(value="mem_pw") String mem_pw,
+                          @RequestParam(value="tel") String tel,
+                          @RequestParam(value="email") String email,
+                          @RequestParam(value="birthdate") String birthdate,
+                          @RequestParam(value="carno") String carno,
+                          @RequestParam(value="carmo") String carmo,
+                          @RequestParam(value="postcode") String postcode,
+                          @RequestParam(value="addr1") String addr1,
+                          @RequestParam(value="addr2") String addr2,
+                          @RequestParam(value="mem_type") String mem_type,
+                          @RequestParam(value="is_out") String is_out,
+                          @RequestParam(value="reg_date") String reg_date,
+                          @RequestParam(value="edit_date") String edit_date){
 
-    try {
-      output = bookingService.doneItem(input);
-    } catch (Exception e) {
-      return webHelper.serverError(e);
-    }
+  String totTel = tel.replace(",", "-");
+  LocalDateTime dateTime = LocalDateTime.now();
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  edit_date = dateTime.format(formatter);      
 
-    // View 처리
-    model.addAttribute("output", output);
-
-    return new ModelAndView("board/record/edit");
+  try {
+    regexHelper.isValue(tel, "연락처를 설정하세요.");
+    regexHelper.isValue(email, "이메일을 설정하세요.");
+    regexHelper.isValue(birthdate, "생년월일을 설정하세요.");
+    regexHelper.isValue(postcode, "우편번호를 설정하세요.");
+    regexHelper.isValue(addr1, "기본주소를 설정하세요.");
+    regexHelper.isValue(addr2, "상세주소를 설정하세요.");
+  } catch (StringFormatException e) {
+    return webHelper.badRequest(e);
   }
 
-  @PostMapping("/record/edit_ok.do")
-  public ModelAndView editRecordOk(Model model,
-                            @RequestParam(value="id") int id,
-                            @RequestParam(value="name") String name,
-                            @RequestParam(value="mem_id") String mem_id,
-                            @RequestParam(value="mem_pw") String mem_pw,
-                            @RequestParam(value="tel") String tel,
-                            @RequestParam(value="email") String email,
-                            @RequestParam(value="birthdate") String birthdate,
-                            @RequestParam(value="carno") String carno,
-                            @RequestParam(value="carmo") String carmo,
-                            @RequestParam(value="postcode") String postcode,
-                            @RequestParam(value="addr1") String addr1,
-                            @RequestParam(value="addr2") String addr2,
-                            @RequestParam(value="mem_type") String mem_type,
-                            @RequestParam(value="is_out") String is_out,
-                            @RequestParam(value="reg_date") String reg_date,
-                            @RequestParam(value="edit_date") String edit_date){
+  //수정할 값들을 Beans에 담는다.
+  Members input = new Members();
+  input.setId(id);
+  input.setName(name);
+  input.setMem_type(mem_type);
+  input.setMem_id(mem_id);
+  input.setMem_pw(mem_pw);
+  input.setTel(totTel);
+  input.setEmail(email);
+  input.setBirthdate(birthdate);
+  input.setCarno(carno);
+  input.setCarmo(carmo);
+  input.setPostcode(postcode);
+  input.setAddr1(addr1);
+  input.setAddr2(addr2);
+  input.setReg_date(reg_date);
+  input.setEdit_date(edit_date);
+  input.setIs_out(is_out);
 
-    String totTel = tel.replace(",", "-");
-    LocalDateTime dateTime = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    edit_date = dateTime.format(formatter);      
-
-    try {
-      regexHelper.isValue(tel, "연락처를 설정하세요.");
-      regexHelper.isValue(email, "이메일을 설정하세요.");
-      regexHelper.isValue(birthdate, "생년월일을 설정하세요.");
-      regexHelper.isValue(postcode, "우편번호를 설정하세요.");
-      regexHelper.isValue(addr1, "기본주소를 설정하세요.");
-      regexHelper.isValue(addr2, "상세주소를 설정하세요.");
-    } catch (StringFormatException e) {
-      return webHelper.badRequest(e);
-    }
-
-    //수정할 값들을 Beans에 담는다.
-    Members input = new Members();
-    input.setId(id);
-    input.setName(name);
-    input.setMem_type(mem_type);
-    input.setMem_id(mem_id);
-    input.setMem_pw(mem_pw);
-    input.setTel(totTel);
-    input.setEmail(email);
-    input.setBirthdate(birthdate);
-    input.setCarno(carno);
-    input.setCarmo(carmo);
-    input.setPostcode(postcode);
-    input.setAddr1(addr1);
-    input.setAddr2(addr2);
-    input.setReg_date(reg_date);
-    input.setEdit_date(edit_date);
-    input.setIs_out(is_out);
-
-    try {
-      //데이터 수정
-      membersService.update(input);
-    }  catch (Exception e) {
-      return webHelper.redirect(null, "데이터 수정에 실패했습니다. 관리자에게 문의해주세요.");
-    }
+  try {
+    //데이터 수정
+    membersService.update(input);
+  }  catch (Exception e) {
+    return webHelper.redirect(null, "데이터 수정에 실패했습니다. 관리자에게 문의해주세요.");
+  }
 
     // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
     return webHelper.redirect("/cust/read.do?id=" + input.getId(), "수정 완료");

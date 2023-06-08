@@ -11,7 +11,6 @@ public class BbsDocument {
   
   private int id;
   private String category;
-  private String writer_pw;
   private String q_type;
   private String subject;
   private String content;

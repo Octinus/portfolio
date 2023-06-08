@@ -67,7 +67,7 @@ public interface MembersMapper {
 
         @Select("<script>" +
                 "select m.id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, carno, carmo, " +
-                "postcode, addr1, addr2, level, is_out, m.reg_date, edit_date, booking_date, booking_time from members m " +
+                "postcode, addr1, addr2, level, is_out, m.reg_date, m.edit_date, booking_date, booking_time from members m " +
                 "inner join booking on m.id = customer_id " +
                 "WHERE mem_id=#{mem_id} or m.id=#{id} " +
                 "ORDER BY booking_date DESC LIMIT 0, 1" +

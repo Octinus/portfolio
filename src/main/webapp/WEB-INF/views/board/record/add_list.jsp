@@ -18,7 +18,7 @@
     }
 
     .requiredrecordsearch {
-      margin: 10px auto 20px auto;
+      margin: 10px auto 100px auto;
     }
     .requiredrecordsearch form {
       text-align: left;
@@ -29,9 +29,19 @@
     }
     .requiredrecordsearch input {
       width: 150px;
+      background-color: white;
     }
     .requiredrecordsearch button {
       cursor: pointer;
+      border: 1px solid black;
+      background-color: black;
+      color: white;
+      transition: all 0.5s;
+    }
+    .requiredrecordsearch button:hover {
+      background-color: #f7f7f7;
+      color: black;
+      border: 1px solid black;
     }
 
     .requiredrecordmain {
@@ -41,6 +51,13 @@
       width: 1200px;
       line-height: 2.5;
     }
+    .requiredrecordmain tr td {
+      background-color: white;
+    }
+    .requiredrecordmain tr td a {
+      text-decoration: none;
+      background-color: white;
+    }
     .requiredrecordmain tr:first-child {
       text-align: right;
       border: none;
@@ -48,6 +65,7 @@
     .requiredrecordmain tr:first-child td {
       font-size: 12px;
       color: #acacac;
+      background-color: #f7f7f7;
     }
     .requiredrecordmain tr:nth-child(2) {
       border-top: 2px solid #c5c5c5;
@@ -60,7 +78,7 @@
     }
 
     .requiredrecordbottom {
-      margin-bottom: 100px;
+      margin-bottom: 10px;
     }
   </style>
   <div class="requiredrecordtop">
@@ -134,15 +152,6 @@
       </table>
     </div>
 
-    <div class="requiredrecordsearch">
-      <!-- 검색 form -->
-      <form method="get" action="${contextPath}/reservationmanagement">
-        <label for="keyword">검색</label>
-          <input type="search" name="keyword" id="keyword" value="${keyword}" />
-          <button type="submit">SEARCH</button>
-      </form>
-    </div>
-
   <div class="requiredrecordbottom">
   <!-- 페이지 번호 구현 -->
   <%-- 이전 그룹에 대한 링크 --%>
@@ -197,4 +206,15 @@
       </c:otherwise>
   </c:choose>
 </div>
+
+
+<div class="requiredrecordsearch">
+  <!-- 검색 form -->
+  <form method="get" action="${contextPath}/reservationmanagement">
+    <label for="keyword">검색</label>
+    <input type="search" name="keyword" id="keyword" value="${keyword}" />
+    <button type="submit">SEARCH</button>
+  </form>
+</div>
+
   <c:import url="/WEB-INF/views/inc/bottom.jsp" />

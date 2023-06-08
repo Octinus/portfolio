@@ -11,12 +11,10 @@
     width: 150px;
     border-bottom: 1px solid black;
   }
-  
   .qnatop h1 {
     display: contents;
     font-size: 30px;
   }
-
   .qnatop p {
     font-size: 15px;
     color: #8b8b8b;
@@ -32,6 +30,9 @@
   .qnamain tr:first-child {
     border-bottom: 1px dotted #8b8b8b;
   }
+  .qnamain tr:first-child th {
+    border-top: 2px solid #8b8b8b;
+  }
   .qnamain tr {
     border-bottom: 1px dotted #8b8b8b;
   }
@@ -46,9 +47,15 @@
   }
   .qnamain tr th {
     width: 100px;
+    background-color: #d6d6d6;
   }
   .qnamain tr td {
     font-size: 12px;
+    background-color: white;
+  }
+  .qnamain tr td a {
+    text-decoration: none;
+    background-color: white;
   }
   .qnamain tr td:last-child {
     color: #8b8b8b;
@@ -132,7 +139,7 @@
     </c:url>
 
       <tr>
-        <td>${noti.id}</td>
+        <td>공&nbsp;&nbsp;&nbsp;지</td>
         <c:if test="${noti.q_type == null}">
           <td>공&nbsp;&nbsp;&nbsp;지</td>
         </c:if>
@@ -262,13 +269,15 @@
 
 <div class="qnabottom">
   <div class="qnasearch">
-    <select name="field">
-      <option value="subject">제목</option>
-      <option value="content">내용</option>
-      <option value="writer">작성자</option>
-    </select>
-    <input type="text" id="keyword" name="keyword" />
-    <button type="submit">SEARCH</button>
+    <form method="get" action="${contextPath}/qna">
+      <select name="field">
+        <option value="subject">제목</option>
+        <option value="content">내용</option>
+        <option value="name">작성자</option>
+      </select>
+      <input type="search" id="keyword" name="keyword" value="${keyword}" />
+      <button type="submit">SEARCH</button>
+    </form>
   </div>
 
   <div class="gowriter">

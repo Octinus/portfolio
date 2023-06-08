@@ -7,8 +7,9 @@
 
 <style>
   .recordtop {
-    font-weight: 900;
-    margin: 20px 0 50px 0;
+    display: inline;
+    width: 150px;
+    border-bottom: 1px solid black;
   }
   .recordtop h1 {
     display: contents;
@@ -19,7 +20,10 @@
     border: 1px solid #b9b8b8;
     width: 1200px;
     line-height: 3;
-    margin-bottom: 20px;
+    margin: 50px 0 20px 0;
+  }
+  .recordmain mark {
+    background-color: #c2d6ff;
   }
   .recordmain tr:first-child {
     border-bottom: 1px dotted #8b8b8b;
@@ -38,9 +42,15 @@
   }
   .recordmain tr th {
     width: 100px;
+    border-top: 2px solid #8b8b8b;
   }
   .recordmain tr td {
     font-size: 12px;
+    background-color: white;
+  }
+  .recordmain tr td a {
+    background-color: white;
+    text-decoration: none;
   }
   .recordmain tr td:last-child {
     color: #8b8b8b;

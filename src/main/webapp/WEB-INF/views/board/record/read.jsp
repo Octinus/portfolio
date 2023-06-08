@@ -29,17 +29,19 @@
     width: 120px;
     text-align: center;
   }
-  .recordRtable tr td {
+  .recordRtable tr td,
+  .recordRtable tr td p {
     width: 250px;
     background-color: white;
   }
-  .ck.ck-editor__editable_inline {
-    background-color: white;
+  .recordRtable tr:nth-child(6) td {
     height: 600px;
   }
-  .ck.ck-editor__editable_inline>p {
-    background-color: white;
+  .recordRtable tr:nth-child(6) td p {
+    width: 1180px;
+    margin: 5px auto 5px auto;
   }
+
   .recordRbottom {
     display: flex;
     justify-content: space-between;
@@ -96,9 +98,7 @@
       <td>${output.writer_name}</td>
     </tr>
     <tr>
-      <td colspan="4">
-        <textarea name="content" id="content">${output.content}</textarea>
-      </td>
+      <td colspan="4">${output.content}</td>
     </tr>
   </table>
 </div>
@@ -110,13 +110,4 @@
   </c:if>
 </div>
 
-  <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
-  <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/translations/ko.js"></script>
-    <script>
-      ClassicEditor.create( document.querySelector( '#content' ), {
-
-        toolbar: false,
-        language: "ko"
-  } );
-    </script>
-  <c:import url="/WEB-INF/views/inc/bottom.jsp" />
+<c:import url="/WEB-INF/views/inc/bottom.jsp" />

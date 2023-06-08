@@ -7,90 +7,96 @@
 
 <style>
 
-.qnatop {
+
+  .qnatop {
+  display: inline;
   width: 150px;
   border-bottom: 1px solid black;
-  font-size: 40px;
-  padding-bottom: 5px;
-  margin: 50px auto 50px auto;
-}
-.qnatop h1 {
-  font-size: 40px;
-  font-weight: 600;
-}
+  }
 
-.qnamain input {
-  border: none;
-}
-.qnamain .qnatable {
-  border: 1px solid #c5c5c5;
-  width: 1200px;
-}
-.qnamain .qnatable tr {
-  text-align: left;
-  text-indent: 10px;
-  line-height: 3;
-  font-size: 13px;
-}
-.qnamain .qnatable tr th {
-  width: 80px;
-}
-.qnamain .qnatable tr:nth-child(5) input {
-  width: 300px;
-  border: 1px solid #d5d5d5;
-  background-color: white;
-}
-.qnamain .qnatable select,
-.qnamain .qnatable option {
-  background-color: white;
-}
-.ck.ck-editor__editable_inline>:last-child {
-  max-height: 600px;
-  min-height: 600px;
-  background-color: white;
-}
-.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
-    max-height: 600px;
-}
-.qnabottom {
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 0 100px 0;
-}
-.qnabottom a {
-  text-decoration: none;
-  display: block;
-  font-size: 13px;
-  color: white;
-  width: 140px;
-  height: 35px;
-  padding-top: 10px;
-  background-color: #d5d5d5;
-  transition: all 0.5s;
-}
-.qnabottom a:hover {
-  background-color: #c5c5c5;
-  color: black;
-  border: 1px solid #c5c5c5;
-}
-.qnabottom button {
-  cursor: pointer;
-  width: 140px;
-  background-color: black;
-  color: white;
-  border: 1px solid black;
-  transition: all 0.5s;
-}
-.qnabottom button:hover {
-  background-color: #c5c5c5;
-  color: black;
-  border: 1px solid #c5c5c5;
-}
+  .qnatop h1 {
+    display: contents;
+    font-size: 30px;
+  }
+
+  .qnatop p {
+    font-size: 15px;
+    color: #8b8b8b;
+    margin: 20px 0 50px 0;
+  }
+
+  .qnamain input {
+    border: none;
+  }
+  .qnamain .qnatable {
+    border: 1px solid #c5c5c5;
+    width: 1200px;
+  }
+  .qnamain .qnatable tr {
+    text-align: left;
+    text-indent: 10px;
+    line-height: 3;
+    font-size: 13px;
+  }
+  .qnamain .qnatable tr th {
+    width: 80px;
+  }
+  .qnamain .qnatable tr:first-child input {
+    width: 300px;
+    border: 1px solid #d5d5d5;
+    background-color: white;
+  }
+  .qnamain .qnatable select,
+  .qnamain .qnatable option {
+    background-color: white;
+  }
+  .ck.ck-editor__editable_inline {
+    min-height: 600px;
+    background-color: white;
+  }
+  .ck.ck-editor__editable_inline p {
+    background-color: white;
+  }
+  .qnabottom {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 100px 0;
+  }
+  .qnabottom a {
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    color: black;
+    width: 140px;
+    height: 35px;
+    padding-top: 10px;
+    background-color: #d5d5d5;
+    transition: all 0.5s;
+  }
+  .qnabottom a:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+  }
+  .qnabottom button {
+    width: 140px;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  .qnabottom button:hover {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+  }
 </style>
 
 <div class="qnatop">
-  <h1>Q&A</h1>
-</div> 
+  <h1>Q & A</h1>
+  <p>자유롭게 이용하시는 게시판입니다.</p>
+</div>
 
 <div class="qnamain">
 <form method="post" action="${contextPath}/qna/add_ok.do" enctype="multipart/form-data">

@@ -38,9 +38,6 @@ public class BbsDocumentServiceImpl implements BbsDocumentService{
 
   @Override
   public void delete(BbsDocument input) throws NullPointerException, Exception {
-    BbsDocument output = new BbsDocument();
-    output.setId(input.getId());
-    bbsDocumentMapper.delete(output);
 
     int rows = bbsDocumentMapper.delete(input);
 

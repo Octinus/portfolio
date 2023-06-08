@@ -152,5 +152,9 @@ public class BookingServiceImpl implements BookingService{
     return  bookingMapper.yetDoneCount(input);
   }
 
-  
+  @Override
+  public List<Booking> bookingCount() throws NullPointerException, Exception {
+    return  bookingMapper.bookingCount();
+  }
+
 }

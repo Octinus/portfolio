@@ -8,20 +8,20 @@
 <style>
 
 .noticetop {
+  display: inline;
   width: 150px;
   border-bottom: 1px solid black;
-  font-size: 40px;
-  padding-bottom: 5px;
-  margin: 50px auto 50px auto;
 }
 .noticetop h1 {
-  font-size: 40px;
-  font-weight: 600;
+  display: contents;
+  font-size: 30px;
+}
+.noticetop p {
+  font-size: 15px;
+  color: #8b8b8b;
+  margin: 20px 0 50px 0;
 }
 
-.noticemain input {
-  border: none;
-}
 .noticemain .noticetable {
   border: 1px solid #c5c5c5;
   width: 1200px;
@@ -35,22 +35,21 @@
 .noticemain .noticetable tr th {
   width: 80px;
 }
-.noticemain .noticetable tr:nth-child(5) input {
+.noticemain .noticetable tr:nth-child(1) input {
   width: 300px;
-  border: 1px solid #d5d5d5;
   background-color: white;
+  border: 1px solid #d5d5d5;
 }
 .noticemain .noticetable select,
 .noticemain .noticetable option {
   background-color: white;
 }
-.ck.ck-editor__editable_inline>:last-child {
-  max-height: 600px;
+.ck.ck-editor__editable_inline {
   min-height: 600px;
   background-color: white;
 }
-.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
-    max-height: 600px;
+.ck.ck-editor__editable_inline p {
+  background-color: white;
 }
 .noticebottom {
   display: flex;
@@ -90,7 +89,8 @@
 
 <div class="noticetop">
   <h1>NOTICE</h1>
-</div> 
+  <p>공지사항</p>
+</div>
 
 <div class="noticemain">
   <form method="post" action="${contextPath}/notice/add_ok.do" enctype="multipart/form-data">
@@ -114,7 +114,7 @@
       </td>
     </tr>
   </table>
-  </div>
+</div>
 
   <div class="noticebottom">
     <a href="${contextPath}/notice">LIST</a>

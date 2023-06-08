@@ -110,6 +110,9 @@ public class HomeController {
     if (!input.getMem_pw().equals(output.getMem_pw())) {
       return webHelper.badRequest("비밀번호가 잘못되었습니다.");
     }
+    if(output.getIs_out().equals("Y")) {
+      return webHelper.badRequest("입력하신 계정 정보가 없습니다.");
+    }
 
     session.setAttribute("login_info", output);
     return webHelper.redirect("/", "환영합니다");

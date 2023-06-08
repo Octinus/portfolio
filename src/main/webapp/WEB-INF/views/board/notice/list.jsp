@@ -11,12 +11,10 @@
     width: 150px;
     border-bottom: 1px solid black;
   }
-  
   .notop h1 {
     display: contents;
     font-size: 30px;
   }
-
   .notop p {
     font-size: 15px;
     color: #8b8b8b;
@@ -29,8 +27,12 @@
     line-height: 3;
     margin-bottom: 20px;
   }
+  .nomain mark {
+  background-color: #c2d6ff;
+  }
   .nomain tr:first-child {
     border-bottom: 1px dotted #8b8b8b;
+    border-top: 2px solid #8b8b8b;
   }
   .nomain tr {
     border-bottom: 1px dotted #8b8b8b;
@@ -46,9 +48,15 @@
   }
   .nomain tr th {
     width: 100px;
+    background-color: #d6d6d6;
   }
   .nomain tr td {
     font-size: 12px;
+    background-color: white;
+  }
+  .nomain tr td a {
+    text-decoration: none;
+    background-color: white;
   }
   .nomain tr td:last-child {
     color: #8b8b8b;
@@ -81,6 +89,7 @@
   }
   .noticesearch select {
     background-color: white;
+    width: 80px;
   }
   .noticesearch input {
     border: 1px solid #8b8b8b;
@@ -140,6 +149,7 @@
 
                 <%-- 출력을 위해 준비한 검색어와 일치하는 단어를 형광팬 효과로 변경 --%>
                 <c:set var="subject" value="${fn:replace(subject, keyword, mark)}" />
+                <c:set var="content" value="${fn:replace(content, keyword, mark)}" />
             </c:if> 
                     
             <%-- 상세페이지로 이동하기 위한 URL --%>
@@ -175,7 +185,6 @@
           <a href="${prevPageUrl}">[이전]</a>
       </c:when>
       <c:otherwise>
-
       </c:otherwise>
   </c:choose>
 
@@ -221,11 +230,11 @@
 <div class="nobottom">
   <div class="noticesearch">
     <form method="get" action="${contextPath}/notice">
-      <select name="field">
+      <select name="field" >
         <option value="subject">제목</option>
         <option value="content">내용</option>
       </select>
-      <input type="search" id="keyword" name="keyword" />
+      <input type="search" id="keyword" name="keyword" value="${keyword}" />
       <button type="submit">SEARCH</button>
     </form>
   </div>

@@ -128,6 +128,7 @@ public int todayBookingCount(Booking input);
 @Result(property = "carmo", column = "carmo"),
 @Result(property = "carno", column = "carno"),
 @Result(property = "name", column = "name"),
+@Result(property = "cnt", column = "cnt"),
 @Result(property = "tech_id", column = "tech_id")})
 public List<Booking> noTechList(Booking input);
 
@@ -209,4 +210,9 @@ public List<Booking> doneList(Booking input);
         "</script>")
 // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
 public int doneCount(Booking input);
+
+@Select("select count(*) as cnt, booking_date from booking group by booking_date")
+// 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+@ResultMap("myResultId")
+public List<Booking> bookingCount();
 }

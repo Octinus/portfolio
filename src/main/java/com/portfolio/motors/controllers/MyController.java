@@ -3,6 +3,7 @@ package com.portfolio.motors.controllers;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -135,14 +136,23 @@ public class MyController {
             }
         }
     }
-
+    
     LocalDateTime dateTime = LocalDateTime.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     String today = dateTime.format(formatter);
-
+    
     Cal cal = new Cal(yy, mm, weekCnt, dayCnt, first, dayName, calen, today);
+    
+    List<Booking> count = null;
 
+    try {
+      count = bookingService.bookingCount();
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+    
     model.addAttribute("cal", cal);
+    model.addAttribute("count", count);
 
     return new ModelAndView("/mypage/reservation");
   }
@@ -156,6 +166,8 @@ public class MyController {
                                   ){
 
     try{
+      regexHelper.isValue(booking_date, "예약 일자를 선택하세요.");
+      regexHelper.isValue(booking_time, "예약 시간을 선택하세요.");
       regexHelper.isValue(problem, "예약 사유를 입력하세요.");
     }
     catch(StringFormatException e){

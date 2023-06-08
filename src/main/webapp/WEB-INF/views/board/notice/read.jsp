@@ -7,16 +7,22 @@
 
 <style>
   .noticeRtop {
-    font-weight: 900;
-    margin: 20px 0 50px 0;
+    display: inline;
+    width: 150px;
+    border-bottom: 1px solid black;
   }
   .noticeRtop h1 {
     display: contents;
     font-size: 30px;
   }
+  .noticeRtop p {
+    font-size: 15px;
+    color: #8b8b8b;
+    margin: 20px 0 50px 0;
+  }
 
   .noticeRtable {
-    border: 1px solid #8b8b8b;
+    border: 1px solid #d5d5d5;
     width: 1200px;
   }
   .noticeRtable tr {
@@ -35,17 +41,19 @@
     width: 120px;
     text-align: center;
   }
-  .noticeRtable tr td {
+  .noticeRtable tr td,
+  .noticeRtable tr td p {
     width: 250px;
     background-color: white;
   }
-  .ck.ck-editor__editable_inline {
-    background-color: white;
+  .noticeRtable tr:nth-child(3) td {
     height: 600px;
   }
-  .ck.ck-editor__editable_inline>p {
-    background-color: white;
+  .noticeRtable tr:nth-child(3) td p {
+    width: 1180px;
+    margin: 5px auto 5px auto;
   }
+  
   .noticeRbottom {
     display: flex;
     justify-content: space-between;
@@ -56,31 +64,46 @@
     text-decoration: none;
     display: block;
     font-size: 13px;
-    color: black;
+    color: white;
     width: 140px;
     height: 35px;
     padding-top: 10px;
-    background-color: #d5d5d5;
+    background-color: black;
+    transition: all 0.5s;
   }
-  .noticeRbottom button {
-    width: 140px;
+  .noticeRbottom a:hover {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
   }
 </style>
 
 <div class="noticeRtop">
   <h1>NOTICE</h1>
+  <p>공지사항</p>
 </div>
 
 <div class="noticeRmain">
   <table class="noticeRtable">
     <tr>
       <th>SUBJECT</th>
-      <td>${output.subject}</td>
+      <td colspan="3">${output.subject}</td>
     </tr>
     <tr>
-      <td colspan="2">
-        ${output.content}
-      </td>
+      <th>NAME</th>
+      <c:choose>
+        <c:when test="${output.name.equals('관리자')}">
+          <td>C.MOTORS</td>
+        </c:when>
+        <c:otherwise>
+          <td>${output.name}</td>
+        </c:otherwise>
+      </c:choose>
+      <th>DATE</th>
+      <td>${output.reg_date}</td>
+    </tr>
+    <tr>
+      <td colspan="4">${output.content}</td>
     </tr>
   </table>
 </div>

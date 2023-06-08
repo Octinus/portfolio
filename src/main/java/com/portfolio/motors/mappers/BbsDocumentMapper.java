@@ -17,19 +17,19 @@ import com.portfolio.motors.models.BbsDocument;
 @Mapper
 public interface BbsDocumentMapper {
 
-@Insert("insert into bbs_document(category, writer_pw, q_type, subject, content, reg_date, members_id) " +
-        "values(#{category}, #{writer_pw}, #{q_type}, #{subject}, #{content}, #{reg_date}, #{members_id})")
+@Insert("insert into bbs_document(category, q_type, subject, content, reg_date, members_id) " +
+        "values(#{category}, #{q_type}, #{subject}, #{content}, #{reg_date}, #{members_id})")
 @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 public int insert(BbsDocument input);
 
-@Update("update bbs_document set category=#{category}, subject=#{subject}, content=#{content}, reg_date=#{reg_date}, edit_date=#{edit_date}, members_id=#{members_id}")
+@Update("update bbs_document set category=#{category}, subject=#{subject}, content=#{content}, reg_date=#{reg_date}, edit_date=#{edit_date}, members_id=#{members_id} where id=#{id}")
 public int update(BbsDocument input);
 
 @Delete("delete from bbs_document where id=#{id}")
 public int delete(BbsDocument input);
 
 // SELECT문(단일행 조회)을 수행하는 메서드 정의
-@Select("select id, category, q_type, subject, content, reg_date, edit_date, members_id from bbs_document where id=#{id}")
+@Select("select bbs.id, category, q_type, subject, content, bbs.reg_date, bbs.edit_date, members_id, name from bbs_document bbs inner join members m on members_id = m.id where bbs.id=#{id}")
 // 조회 결과와 MODEL 객체를 연결하기 위한 규칙 정의
 // -> property : MODEL 객체를 연결하기 위한 규칙 정의
 // -> column : SELECT문에 명시된 필드 이름(AS 옵션을 사용한 경우 별칭으로 명시)
@@ -50,8 +50,8 @@ public BbsDocument selectItem(BbsDocument input);
 @Select("<script>" +
         "select id, category, subject, content, reg_date, members_id from bbs_document" +
         "<where>" +
-        "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
-        "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+        "<if test='subject != null'>${field} like concat('%', #{subject}, '%')</if>" +
+        "<if test='content != null'>or ${field} like concat('%', #{content}, '%')</if>" +
         "</where>" +
         "order by id desc" +
         "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
@@ -63,18 +63,18 @@ public List<BbsDocument> selectList(BbsDocument input);
 @Select("<script>" +
         "select count(*) as cnt from bbs_document" +
         "<where>" +
-        "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
-        "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+        "<if test='subject != null'>${field} like concat('%', #{subject}, '%')</if>" +
+        "<if test='content != null'>or ${field} like concat('%', #{content}, '%')</if>" +
         "</where>" +
         "</script>")
 public int selectCount(BbsDocument input);
 
 @Select("<script>" +
         "select bbs.id, category, subject, content, bbs.reg_date, members_id, c.name from bbs_document bbs " +
-        "inner join members c on c.id = members_id and category = 'N'" +
+        "inner join members c on c.id = members_id and category = 'N' " +
         "<where>" +
-        "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
-        "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+        "<if test='subject != null'>and ${field} like concat('%', #{subject}, '%')</if>" +
+        "<if test='content != null'>or ${field} like concat('%', #{content}, '%')</if>" +
         "</where>" +
         "order by id desc" +
         "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
@@ -93,21 +93,22 @@ public List<BbsDocument> noticeList(BbsDocument input);
 public List<BbsDocument> notiQnaList();
 
 @Select("<script>" +
-        "select count(*) as cnt from bbs_document" +
+        "select count(*) as cnt from bbs_document " +
         "<where>" +
-        "category = 'N'" +
-        "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
-        "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+        "category = 'N' " +
+        "<if test='subject != null'>and (${field} like concat('%', #{subject}, '%')</if>" +
+        "<if test='content != null'>or ${field} like concat('%', #{content}, '%'))</if>" +
         "</where>" +
         "</script>")
 public int noticeCount(BbsDocument input);
 
 @Select("<script>" +
         "select bbs.id, category, q_type, subject, content, bbs.reg_date, members_id, c.name from bbs_document bbs " +
-        "inner join members c on c.id = members_id and category = 'Q'" +
+        "inner join members c on c.id = members_id and category = 'Q' " +
         "<where>" +
-        "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
-        "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+        "<if test='subject != null'>and ${field} like concat('%', #{subject}, '%')</if>" +
+        "<if test='content != null'>or ${field} like concat('%', #{content}, '%')</if>" +
+        "<if test='name != null'>or ${field} like concat('%', #{name}, '%')</if>" +
         "</where>" +
         "order by id desc" +
         "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
@@ -117,11 +118,13 @@ public int noticeCount(BbsDocument input);
 public List<BbsDocument> qnaList(BbsDocument input);
 
 @Select("<script>" +
-        "select count(*) as cnt from bbs_document" +
+        "select count(*) as cnt from bbs_document " +
+        "inner join members c on c.id = members_id " +
         "<where>" +
-        "category = 'Q'" +
-        "<if test='subject != null'>#{field} like concat('%', #{subject}, '%')</if>" +
-        "<if test='content != null'>or #{field} like concat('%', #{content}, '%')</if>" +
+        "and category = 'Q' " +
+        "<if test='subject != null'>and (${field} like concat('%', #{subject}, '%')</if>" +
+        "<if test='content != null'>or ${field} like concat('%', #{content}, '%')</if>" +
+        "<if test='name != null'>or ${field} like concat('%', #{name}, '%'))</if>" +
         "</where>" +
         "</script>")
 public int qnaCount(BbsDocument input);

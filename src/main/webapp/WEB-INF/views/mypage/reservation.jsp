@@ -137,7 +137,12 @@
                       <td><button class="closedatebtn" type="button" value="">${k}</button></td>
                     </c:when>
                     <c:otherwise>
-                      <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
+                      <c:forEach var="count" items="${count}" varStatus="status">
+                        <c:if test="${count.booking_date.substring(8) == k && count.cnt == 16}">
+                          <td><button class="donedatebtn" type="button" value="">${k}</button></td>
+                        </c:if>
+                      </c:forEach>
+                        <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
                     </c:otherwise>
                   </c:choose>
                 </c:otherwise>

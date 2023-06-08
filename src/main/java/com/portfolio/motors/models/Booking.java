@@ -19,6 +19,7 @@ public class Booking {
   private String reg_date;
   private String edit_date;
   private String is_done;
+  private int cnt;
 
   private int customer_id; // 참조한 고객 일련번호
   private Integer tech_id; // 참조한 정비사 일련번호
