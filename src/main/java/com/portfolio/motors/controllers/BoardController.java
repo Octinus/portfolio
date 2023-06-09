@@ -53,9 +53,7 @@ public class BoardController {
     Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
     // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
     BbsDocument input = new BbsDocument();
-    if(field == null || field.length() == 0) {
-
-    } else {
+    if(!(field == null || field.length() == 0)) {
       input.setField(field);
       input.setSubject(keyword);
       input.setContent(keyword);
@@ -94,15 +92,15 @@ public class BoardController {
     return new ModelAndView("/board/qna/add");
   }
 
-  @PostMapping("/qna/add_ok.do") // 공지사항 페이지
+  @PostMapping("/qna/add_ok.do") // 자유게시판 작성 액션 페이지
   public ModelAndView qnaAddOk(Model model,
-                            @RequestParam(value="category") String category,
-                            @RequestParam(value="q_type") String q_type,
-                            @RequestParam(value="subject") String subject,
-                            @RequestParam(value="content") String content,
-                            @RequestParam(value="reg_date") String reg_date,
-                            @RequestParam(value="members_id") int members_id
-                            ){
+                              @RequestParam(value="category") String category,
+                              @RequestParam(value="q_type") String q_type,
+                              @RequestParam(value="subject") String subject,
+                              @RequestParam(value="content") String content,
+                              @RequestParam(value="reg_date") String reg_date,
+                              @RequestParam(value="members_id") int members_id
+                              ){
 
     LocalDateTime dateTime = LocalDateTime.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -135,9 +133,9 @@ public class BoardController {
     return webHelper.redirect("/qna", "작성이 완료 되었습니다.");
   }
 
-  @GetMapping("/qna/read.do") // 고객 상세 정보 페이지
+  @GetMapping("/qna/read.do") // 자유게시판 상세 정보 페이지
   public ModelAndView qnaRead(Model model,
-                          @RequestParam(value="id", defaultValue = "") int id){
+                            @RequestParam(value="id", defaultValue = "") int id){
 
     // 데이터 조회에 필요한 조건값을 Beans에 저장하기
     BbsDocument input = new BbsDocument();
@@ -159,7 +157,7 @@ public class BoardController {
     return new ModelAndView("board/qna/read");
   }
 
-  @GetMapping("/qna/edit.do")
+  @GetMapping("/qna/edit.do") // 자유게시판 수정 게시판 페이지
 public ModelAndView qnaEdit(Model model,
                             @RequestParam(value="id") int id){
 
@@ -182,7 +180,7 @@ public ModelAndView qnaEdit(Model model,
   return new ModelAndView("board/qna/edit");
 }
 
-@PostMapping("/qna/edit_ok.do")
+@PostMapping("/qna/edit_ok.do") // 자유게시판 수정 게시판 액션 페이지
 public ModelAndView qnaEditOk(Model model,
                           @RequestParam(value="id") int id,
                           @RequestParam(value="category") String category,
@@ -224,7 +222,7 @@ public ModelAndView qnaEditOk(Model model,
   return webHelper.redirect("/notice/read.do?id=" + input.getId(), "수정 되었습니다.");
 }
 
-@GetMapping("/qna/delete.do")
+@GetMapping("/qna/delete.do") // 자유게시판 게시물 삭제 액션
   public ModelAndView qnaDelete(Model model,
                             @RequestParam(value="id") int id){
 
@@ -258,9 +256,7 @@ public ModelAndView qnaEditOk(Model model,
 
     // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
     BbsDocument input = new BbsDocument();
-    if(field == null || field.length() == 0) {
-
-    } else {
+    if(!(field == null || field.length() == 0)) {
       input.setField(field);
       input.setSubject(keyword);
       input.setContent(keyword);
@@ -299,12 +295,12 @@ public ModelAndView qnaEditOk(Model model,
 
   @PostMapping("/notice/add_ok.do") // 공지사항 페이지
   public ModelAndView notiAddOk(Model model,
-                            @RequestParam(value="category") String category,
-                            @RequestParam(value="subject") String subject,
-                            @RequestParam(value="content") String content,
-                            @RequestParam(value="reg_date") String reg_date,
-                            @RequestParam(value="members_id") int members_id
-                            ){
+                              @RequestParam(value="category") String category,
+                              @RequestParam(value="subject") String subject,
+                              @RequestParam(value="content") String content,
+                              @RequestParam(value="reg_date") String reg_date,
+                              @RequestParam(value="members_id") int members_id
+                              ){
 
     LocalDateTime dateTime = LocalDateTime.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -451,8 +447,8 @@ public ModelAndView recordboard(Model model,
     pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
 
     //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-    Members.setOffset(pagenation.getOffset());
-    Members.setListCount(pagenation.getListCount());
+    Booking.setOffset(pagenation.getOffset());
+    Booking.setListCount(pagenation.getListCount());
 
     //데이터 조회하기
     output = bookingService.doneList(input);
@@ -470,8 +466,8 @@ public ModelAndView recordboard(Model model,
 
 @GetMapping("/record/add_list") // 공지사항 페이지
 public ModelAndView recordAddList(Model model,
-                            @RequestParam(value="keyword", required = false) String keyword,
-                            @RequestParam(value="page", defaultValue = "1") int nowPage){
+                                @RequestParam(value="keyword", required = false) String keyword,
+                                @RequestParam(value="page", defaultValue = "1") int nowPage){
 
   int totalCount = 0; // 전체 게시글 수
   int listCount = 10; // 한 페이지당 표시할 목록 수
@@ -492,8 +488,8 @@ public ModelAndView recordAddList(Model model,
     pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
 
     //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
-    Members.setOffset(pagenation.getOffset());
-    Members.setListCount(pagenation.getListCount());
+    Booking.setOffset(pagenation.getOffset());
+    Booking.setListCount(pagenation.getListCount());
 
     //데이터 조회하기
     output = bookingService.yetDoneList(input);

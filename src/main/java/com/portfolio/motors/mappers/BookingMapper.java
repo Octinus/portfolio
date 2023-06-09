@@ -150,7 +150,7 @@ public int noTechCount(Booking input);
         "inner join members t on t.id = tech_id" +
         "<where>" +
         "is_done = 'N'" +
-        "<if test='name != null'> and (name like concat('%', #{name}, '%')</if>" +
+        "<if test='name != null'> and (c.name like concat('%', #{name}, '%')</if>" +
         "<if test='booking_date != null'> or booking_date like concat('%', #{booking_date}, '%'))</if>" +
         "</where>" +
         "<if test='listCount > 0'>limit #{offset}, #{listCount}</if>" +
@@ -165,7 +165,7 @@ public List<Booking> yetDoneList(Booking input);
         "inner join members t on t.id = tech_id" +
         "<where>" +
         "is_done = 'N'" +
-        "<if test='name != null'> and (name like concat('%', #{name}, '%')</if>" +
+        "<if test='name != null'> and (c.name like concat('%', #{name}, '%')</if>" +
         "<if test='booking_date != null'> or booking_date like concat('%', #{booking_date}, '%'))</if>" +
         "</where>" +
         "</script>")
@@ -176,8 +176,7 @@ public int yetDoneCount(Booking input);
         "select b.id, booking_date, booking_time, problem, writer_name, subject, content, c.carmo, c.carno, c.name, t.name as 'tech_name', tech_id, is_done, b.reg_date from booking b " +
         "inner join members c on c.id = customer_id " +
         "inner join members t on t.id = tech_id " +
-        "where is_done = 'Y' " +
-        "ORDER BY id DESC LIMIT 0, 1" +
+        "where is_done = 'Y' and b.id = #{id}" +
         "</script>")
 // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
 @ResultMap("myResultId")

@@ -43,14 +43,13 @@
 .recordmain .recordtable option {
   background-color: white;
 }
-.ck.ck-editor__editable_inline>:last-child {
-  max-height: 600px;
-  min-height: 600px;
-  background-color: white;
-}
-.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
-    max-height: 600px;
-}
+.ck.ck-editor__editable_inline {
+    min-height: 600px;
+    background-color: white;
+  }
+  .ck.ck-editor__editable_inline p {
+    background-color: white;
+  }
 .recordbottom {
   display: flex;
   justify-content: space-between;

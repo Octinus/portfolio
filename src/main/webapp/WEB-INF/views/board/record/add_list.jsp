@@ -132,7 +132,7 @@
                 <c:set var="booking_date" value="${fn:replace(booking_date, keyword, mark)}" />
             </c:if> 
                     
-            <%-- 상세페이지로 이동하기 위한 URL --%>
+            <%-- 이력 작성 페이지로 이동하기 위한 URL --%>
             <c:url value="/record/add_list.do" var="viewUrl">
                 <c:param name="id" value="${item.id}" />
             </c:url>
@@ -159,7 +159,7 @@
       <%-- 이전 그룹으로 이동 가능하다면? --%>
       <c:when test="${pagenation.prevPage > 0}">
           <%-- 이동할 URL 생성--%>
-          <c:url value="/reservationmanagement" var="prevPageUrl">
+          <c:url value="/record/add_list" var="prevPageUrl">
               <c:param name="page" value="${pagenation.prevPage}" />
               <c:param name="keyword" value="${keyword}"/>
           </c:url>
@@ -173,7 +173,7 @@
   <%-- 페이지 번호 (시작 페이지부터 끝 페이지까지 반복) --%>
   <c:forEach var="i" begin="${pagenation.startPage}" end="${pagenation.endPage}" varStatus="status">
       <%-- 이동할 URL 생성 --%>
-      <c:url value="/reservationmanagement" var="pageUrl">
+      <c:url value="/record/add_list" var="pageUrl">
           <c:param name="page" value="${i}" />
           <c:param name="keyword" value="${keyword}" />
       </c:url>
@@ -196,7 +196,7 @@
       <%-- 다음 그룹으로 이동 가능하다면? --%>
       <c:when test="${pagenation.nextPage > 0}">
           <%-- 이동할 URL 생성--%>
-          <c:url value="/reservationmanagement" var="nextPageUrl">
+          <c:url value="/record/add_list" var="nextPageUrl">
               <c:param name="page" value="${pagenation.nextPage}" />
               <c:param name="keyword" value="${keyword}"/>
           </c:url>
@@ -210,7 +210,7 @@
 
 <div class="requiredrecordsearch">
   <!-- 검색 form -->
-  <form method="get" action="${contextPath}/reservationmanagement">
+  <form method="get" action="${contextPath}/record/add_list">
     <label for="keyword">검색</label>
     <input type="search" name="keyword" id="keyword" value="${keyword}" />
     <button type="submit">SEARCH</button>
