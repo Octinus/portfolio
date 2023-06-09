@@ -151,7 +151,7 @@
                           <td><button class="donedatebtn" type="button" value="">${k}</button></td>
                         </c:if>
                       </c:forEach>
-                        <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
+                      <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
                     </c:otherwise>
                   </c:choose>
                 </c:otherwise>
