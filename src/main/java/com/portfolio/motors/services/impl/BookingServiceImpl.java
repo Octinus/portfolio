@@ -153,8 +153,8 @@ public class BookingServiceImpl implements BookingService{
   }
 
   @Override
-  public List<Booking> bookingCount() throws NullPointerException, Exception {
-    return  bookingMapper.bookingCount();
+  public List<Booking> bookingCount(int yy, int mm) throws NullPointerException, Exception {
+    return  bookingMapper.bookingCount(yy, mm);
   }
 
 }

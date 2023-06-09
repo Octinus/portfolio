@@ -187,5 +187,5 @@ public interface BookingService {
      */
     public int doneCount(Booking input) throws NullPointerException, Exception;
 
-    public List<Booking> bookingCount() throws NullPointerException, Exception;
+    public List<Booking> bookingCount(int year, int month) throws NullPointerException, Exception;
 }

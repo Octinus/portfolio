@@ -141,19 +141,26 @@
                   <td></td>
                 </c:when>
                 <c:otherwise>
-                  <c:choose>
-                    <c:when test="${cal.today.substring(8) >= k}">
-                      <td><button class="closedatebtn" type="button" value="">${k}</button></td>
-                    </c:when>
-                    <c:otherwise>
-                      <c:forEach var="count" items="${count}" varStatus="status">
-                        <c:if test="${count.booking_date.substring(8) == k && count.cnt == 16}">
-                          <td><button class="donedatebtn" type="button" value="">${k}</button></td>
-                        </c:if>
-                      </c:forEach>
-                      <td><button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button></td>
-                    </c:otherwise>
-                  </c:choose>
+                  <td>
+                    <c:choose>
+                        <c:when test="${cal.today.substring(8) >= k}">
+                            <button class="closedatebtn" type="button" value="">${k}</button>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="find" value="0"/>
+                            <c:forEach var="count" items="${count}" varStatus="status">
+                                <c:if test="${count.dd == k && count.cnt == 16}">
+                                    <c:set var="find" value="1"/>
+                                    <button class="donedatebtn" type="button" value="">${k}</button>
+                                </c:if>
+                            </c:forEach>
+
+                            <c:if test="${find == 0}">
+                                <button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+                  </td>
                 </c:otherwise>
               </c:choose>
             </c:forEach>

@@ -119,11 +119,12 @@ public class MyController {
     Calendar c = Calendar.getInstance();
 
     int yy = c.get(Calendar.YEAR);
-    String mm = String.format("%02d", c.get(Calendar.MONTH) + 1);
-    int weekCnt = c.getActualMaximum(c.WEEK_OF_MONTH);
-    int dayCnt = c.getActualMaximum(c.DAY_OF_MONTH);
-    c.set(c.DAY_OF_MONTH, 1);
-    int first = c.get(c.DAY_OF_WEEK);
+    int month = c.get(Calendar.MONTH) + 1;
+    String mm = String.format("%02d", month);
+    int weekCnt = c.getActualMaximum(Calendar.WEEK_OF_MONTH);
+    int dayCnt = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+    c.set(Calendar.DAY_OF_MONTH, 1);
+    int first = c.get(Calendar.DAY_OF_WEEK);
     String[] dayName = { "일", "월", "화", "수", "목", "금", "토" };
     int[][] calen = new int[weekCnt + 1][7];
     int cnt = 1;
@@ -146,7 +147,7 @@ public class MyController {
     List<Booking> count = null;
 
     try {
-      count = bookingService.bookingCount();
+      count = bookingService.bookingCount(yy, month);
     } catch (Exception e) {
       return webHelper.serverError(e);
     }

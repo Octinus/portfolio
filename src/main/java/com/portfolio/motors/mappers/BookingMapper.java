@@ -211,8 +211,13 @@ public List<Booking> doneList(Booking input);
 // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
 public int doneCount(Booking input);
 
-@Select("select count(*) as cnt, booking_date from booking group by booking_date")
+@Select("select count(*) as cnt, booking_date, date_format(booking_date, '%e') as dd from booking " +
+        "WHERE date_format(booking_date, '%Y') = #{yy} AND date_format(booking_date, '%m') = #{mm} " +
+        "group by booking_date")
 // 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
-@ResultMap("myResultId")
-public List<Booking> bookingCount();
+@Results(id = "bookingResult", value = {
+@Result(property = "cnt", column = "cnt"),
+@Result(property = "booking_date", column = "booking_date"),
+@Result(property = "dd", column = "dd")})
+public List<Booking> bookingCount(int yy, int mm);
 }
