@@ -152,7 +152,7 @@
                                 <c:if test="${count.dd == k && count.cnt == 16}">
                                     <c:set var="find" value="1"/>
                                     <button class="donedatebtn" type="button" value="">${k}</button>
-                                </c:if>
+                                </c:if> 
                             </c:forEach>
 
                             <c:if test="${find == 0}">
