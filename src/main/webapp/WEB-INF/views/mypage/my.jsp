@@ -27,6 +27,23 @@
   .myinfo td{
     border: 1px solid #c5c5c5;
   }
+  .myinfo tr:nth-child(14) td {
+    border: none;
+    text-align: right;
+  }
+  .myinfo tr:nth-child(14) td a {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    padding: 2px;
+    transition: all 0.5s;
+  }
+  .myinfo tr:nth-child(14) td a:hover {
+    background-color: #f7f7f7;
+    color: black;
+    border: 1px solid black;
+  }
   .myinfo > table tr:nth-child(1) th {
     border: none;
     font-size: 12px;
@@ -196,6 +213,7 @@
           -
           <input type="tel" name="tel" id="tel" value="${login_info.getTel().substring(9)}" /></td>
       </tr>
+      <c:if test="${login_info.getMem_type().equals('C')}">
       <tr>
         <th><label for="booking_date">예약 일자</label></th>
         <td><input type="text" name="booking_date" id="booking_date" value= "${login_info.getBooking_date()}" readonly /><a href="${contextPath}/reservation" class="switchreserv">예약변경</a></td>
@@ -204,6 +222,7 @@
         <th><label for="booking_time">예약 시간</label></th>
         <td><input type="text" name="booking_time" id="booking_time" value= "${login_info.getBooking_time()}" readonly /></td>
       </tr>
+      </c:if>
       <tr>
         <th><label for="email">E-mail<span>*</span></label></th>
         <td><input type="email" name="email" id="email" value="${login_info.getEmail()}"/></td>
@@ -212,16 +231,18 @@
         <th><label for="birthdate">생년월일<span>*</span></label></th>
         <td><input type="date" name="birthdate" id="birthdate" value="${login_info.getBirthdate()}"/></td>
       </tr>
+      <c:if test="${login_info.getMem_type().equals('C')}">
       <tr>
-        <th><label for="carnum">자동차번호<span>*</span></label></th>
+        <th><label for="carno">자동차번호<span>*</span></label></th>
         <td><input type="text" name="carno" id="carno" value="${login_info.getCarno()}"/></td>
       </tr>
       <tr>
-        <th><label for="carmodel">차종<span>*</span></label></th>
+        <th><label for="carmo">차종<span>*</span></label></th>
         <td><input type="text" name="carmo" id="carmo" value="${login_info.getCarmo()}"/></td>
       </tr>
+      </c:if>
       <tr>
-        <th rowspan="3"><label for="postcode">주소<span>*</span></th>
+        <th><label for="postcode">주소<span>*</span></label></th>
         <td>
         <input type="tel" name="postcode" id="postcode" value="${login_info.getPostcode()}"/><button type="button" onclick="check_Postcode()">우편번호 ></button>
         <br />
@@ -230,7 +251,11 @@
         <input type="text" name="addr2" id="addr2" value="${login_info.getAddr2()}"/>
       </td>
       </tr>
-      </label>
+      <c:if test="${login_info.getMem_type().equals('C')}">
+      <tr>
+        <td colspan="2"><a href="${contextPath}/my/drop.do?id=${login_info.getId()}">회원탈퇴</a></td>
+      </tr>
+      </c:if>
     </table>
     <div class="editbtn">    		
       <button type="submit">EDIT</button>

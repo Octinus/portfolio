@@ -27,6 +27,10 @@ public interface MembersMapper {
                 "where id=#{id}")
         public int update(Members input);
 
+        @Update("update members set is_out=#{is_out} " +
+                "where id=#{id}")
+        public int drop(Members input);
+
         @Delete("delete from members where id=#{id}")
         public int delete(Members input);
 

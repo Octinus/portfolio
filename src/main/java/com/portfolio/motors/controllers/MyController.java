@@ -114,8 +114,32 @@ public class MyController {
     return webHelper.redirect("/my", input.getName() + "님의 정보 수정이 완료되었습니다.");
   }
 
+  @GetMapping("/my/drop.do")
+  public ModelAndView delete(Model model,
+                            HttpServletRequest request,
+                            @RequestParam(value="id") int id){
+
+    // 데이터 삭제에 필요한 조건값을 Beans에 저장하기
+    Members input = new Members();
+    input.setId(id);
+    input.setIs_out("Y");
+
+    try {
+      membersService.drop(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    HttpSession session = request.getSession();
+
+    session.invalidate();
+
+    return webHelper.redirect("/", "회원 탈퇴 완료");
+  }
+
   @GetMapping("/reservation") // 예약 페이지
-  public ModelAndView reservation(Model model){
+  public ModelAndView reservation(Model model,
+                                @RequestParam(value="booking_date", defaultValue="") String booking_date){
     Calendar c = Calendar.getInstance();
 
     int yy = c.get(Calendar.YEAR);
@@ -141,19 +165,29 @@ public class MyController {
     LocalDateTime dateTime = LocalDateTime.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     String today = dateTime.format(formatter);
+
+    if(booking_date.length() == 0) {
+      booking_date = today;
+    }
     
     Cal cal = new Cal(yy, mm, weekCnt, dayCnt, first, dayName, calen, today);
     
     List<Booking> count = null;
+    Booking input = new Booking();
+    input.setBooking_date(booking_date);
+    List<Booking> output = null;
 
     try {
       count = bookingService.bookingCount(yy, month);
+      output = bookingService.checkTime(input);
     } catch (Exception e) {
       return webHelper.serverError(e);
     }
     
     model.addAttribute("cal", cal);
     model.addAttribute("count", count);
+    model.addAttribute("output", output);
+    model.addAttribute("input", input);
 
     return new ModelAndView("/mypage/reservation");
   }

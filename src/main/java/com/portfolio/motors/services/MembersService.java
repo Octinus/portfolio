@@ -33,6 +33,14 @@ public interface MembersService {
     public Members update(Members input) throws NullPointerException, Exception;
 
     /**
+     * 맴버의 탈퇴 여부를 'Y'로 수정한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public Members drop(Members input) throws NullPointerException, Exception;
+    /**
      * 멤버 정보는 삭제한다.
      * 이 때, 멤버에 소속되어 있는 학생과 멤버도 일괄 삭제한다.
      * 삭제 후 Professor 테이블에서 영향을 받은 행 수가 없거나,

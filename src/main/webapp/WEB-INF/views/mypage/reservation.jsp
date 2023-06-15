@@ -93,15 +93,22 @@
   .time table td:first-child {
     padding-top: 10px;
   }
-  .time td button{
+  .time td .opentimebtn {
     font-size: 20px;
     margin-bottom: 10px;
     border: none;
     font-weight: 300;
     background-color: #ccf8ced3;
   }
-  .time td button:hover {
+  .time td .opentimebtn:hover {
     background-color: #b5d1fa;
+  }
+  .time td .closetimebtn {
+    font-size: 20px;
+    margin-bottom: 10px;
+    border: none;
+    font-weight: 300;
+    background-color: #e9e9e9;
   }
 
   .reserbottom {
@@ -151,12 +158,12 @@
                             <c:forEach var="count" items="${count}" varStatus="status">
                                 <c:if test="${count.dd == k && count.cnt == 16}">
                                     <c:set var="find" value="1"/>
-                                    <button class="donedatebtn" type="button" value="">${k}</button>
+                                    <button class="donedatebtn" type="button" value=""><a href="${contextPath}/reservation?booking_date=${cal.yy}-${cal.mm}-${k}">${k}</a></button>
                                 </c:if> 
                             </c:forEach>
 
                             <c:if test="${find == 0}">
-                                <button class="opendatebtn" type="button" value="${String.format('%02d',k)}">${k}</button>
+                                <button class="opendatebtn" type="button" value="${String.format('%02d',k)}"><a href="${contextPath}/reservation?booking_date=${cal.yy}-${cal.mm}-${k}">${k}</a></button>
                             </c:if>
                         </c:otherwise>
                     </c:choose>
@@ -177,28 +184,220 @@
           </th>
         </tr>
         <tr>
-          <td><button class="timebtn" type="button" value="09:00">09:00</button></td>
-          <td><button class="timebtn" type="button" value="09:30">09:30</button></td>
-          <td><button class="timebtn" type="button" value="10:00">10:00</button></td>
-          <td><button class="timebtn" type="button" value="10:30">10:30</button></td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('09:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">09:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="09:00">09:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('09:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">09:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="09:30">09:30</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('10:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">10:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="10:00">10:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('10:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">10:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="10:30">10:30</button>
+            </c:if>
+          </td>
         </tr>
         <tr>
-          <td><button class="timebtn" type="button" value="11:00">11:00</button></td>
-          <td><button class="timebtn" type="button" value="11:30">11:30</button></td>
-          <td><button class="timebtn" type="button" value="13:00">13:00</button></td>
-          <td><button class="timebtn" type="button" value="13:30">13:30</button></td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('11:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">11:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="11:00">11:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('11:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">11:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="11:30">11:30</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('13:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">13:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="13:00">13:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('13:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">13:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="13:30">13:30</button>
+            </c:if>
+          </td>
         </tr>
         <tr>
-          <td><button class="timebtn" type="button" value="14:00">14:00</button></td>
-          <td><button class="timebtn" type="button" value="14:30">14:30</button></td>
-          <td><button class="timebtn" type="button" value="15:00">15:00</button></td>
-          <td><button class="timebtn" type="button" value="15:30">15:30</button></td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('14:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">14:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="14:00">14:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('14:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">14:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="14:30">14:30</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('15:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">15:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="15:00">15:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('15:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">15:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="15:30">15:30</button>
+            </c:if>
+          </td>
         </tr>
         <tr>
-          <td><button class="timebtn" type="button" value="16:00">16:00</button></td>
-          <td><button class="timebtn" type="button" value="16:30">16:30</button></td>
-          <td><button class="timebtn" type="button" value="17:00">17:00</button></td>
-          <td><button class="timebtn" type="button" value="17:30">17:30</button></td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('16:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">16:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="16:00">16:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('16:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">16:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="16:30">16:30</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('17:00:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">17:00</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="17:00">17:00</button>
+            </c:if>
+          </td>
+          <td>
+            <c:set var="find" value="0"/>
+            <c:forEach var="output" items="${output}" varStatus="status">
+                <c:if test="${output.booking_time.equals('17:30:00')}">
+                  <c:set var="find" value="1"/>
+                  <button class="closetimebtn" type="button" value="">17:30</button>
+                </c:if> 
+            </c:forEach>
+
+            <c:if test="${find == 0}">
+              <button class="opentimebtn" type="button" value="17:30">17:30</button>
+            </c:if>
+          </td>
         </tr>
       </table>
     </div>
@@ -209,7 +408,7 @@
       <input type="hidden" name="customer_id" id="customer_id" value="${login_info.getId()}"/>
       <input type="hidden" name="is_done" id="is_done" value="N"/>
       <label for="booking_date">예약일자</label>
-      <input type="text" name="booking_date" id="booking_date" value="" readonly/>
+      <input type="text" name="booking_date" id="booking_date" value="${input.booking_date}" readonly/>
       <label for="booking_time">예약시간</label>
       <input type="text" name="booking_time" id="booking_time" value="" readonly/>
       <label for="problem">입고 사유</label>
@@ -225,13 +424,14 @@
     const idx = $(e.currentTarget).parent().index()
     if(idx == 0 || idx == 6) {
       $('#booking_date').attr('value', '')
+      $('.closetimebtn').attr('href', '')
       return
     }
     const date = $(e.currentTarget).attr('value')
     $('#booking_date').attr('value', '${cal.yy}-${cal.mm}-' + date)
     $('#booking_time').attr('value', '')
   });
-  $('.timebtn').on('click', (e) => {
+  $('.opentimebtn').on('click', (e) => {
     const time = $(e.currentTarget).attr('value')
     $('#booking_time').attr('value', time)
   });

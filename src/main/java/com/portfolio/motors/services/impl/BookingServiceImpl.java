@@ -157,4 +157,9 @@ public class BookingServiceImpl implements BookingService{
     return  bookingMapper.bookingCount(yy, mm);
   }
 
+  @Override
+  public List<Booking> checkTime(Booking input) throws NullPointerException, Exception {
+    return bookingMapper.checkTime(input);
+  }
+
 }

@@ -37,6 +37,16 @@ public class MembersServiceImpl implements MembersService{
   }
 
   @Override
+  public Members drop(Members input) throws NullPointerException, Exception {
+    int rows = membersMapper.drop(input);
+
+    if (rows == 0) {
+      throw new NullPointerException("수정된 데이터가 없습니다.");
+    }
+    return membersMapper.selectItem(input);
+  }
+
+  @Override
   public void delete(Members input) throws NullPointerException, Exception {
     Members members = new Members();
     members.setId(input.getId());
@@ -121,7 +131,4 @@ public class MembersServiceImpl implements MembersService{
   public List<Members> onlyCust() throws NullPointerException, Exception {
     return membersMapper.onlyCust();
   }
-
-  
-  
 }

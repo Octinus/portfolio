@@ -219,4 +219,12 @@ public int doneCount(Booking input);
 @Result(property = "booking_date", column = "booking_date"),
 @Result(property = "dd", column = "dd")})
 public List<Booking> bookingCount(int yy, int mm);
+
+@Select("<script>" +
+        "select id, booking_date, booking_time, problem, customer_id, tech_id, is_done from booking  " +
+        "where booking_date=#{booking_date}" +
+        "</script>")
+// 조회 결과와 MODEL의 맵핑이 이전 규칙과 동일한 경우 id값으로 이전 규칙을 재사용
+@ResultMap("myResultId")
+public List<Booking> checkTime(Booking input);
 }
