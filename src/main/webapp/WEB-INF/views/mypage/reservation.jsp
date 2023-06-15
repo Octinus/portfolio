@@ -150,7 +150,7 @@
                 <c:otherwise>
                   <td>
                     <c:choose>
-                        <c:when test="${cal.today.substring(8) >= k}">
+                        <c:when test="${cal.today.substring(8) >= k || cal.first == 0}">
                             <button class="closedatebtn" type="button" value="">${k}</button>
                         </c:when>
                         <c:otherwise>
@@ -158,7 +158,7 @@
                             <c:forEach var="count" items="${count}" varStatus="status">
                                 <c:if test="${count.dd == k && count.cnt == 16}">
                                     <c:set var="find" value="1"/>
-                                    <button class="donedatebtn" type="button" value=""><a href="${contextPath}/reservation?booking_date=${cal.yy}-${cal.mm}-${k}">${k}</a></button>
+                                    <button class="donedatebtn" type="button" value="">${k}</button>
                                 </c:if> 
                             </c:forEach>
 
