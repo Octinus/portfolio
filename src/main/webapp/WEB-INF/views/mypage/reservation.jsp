@@ -57,6 +57,11 @@
     background-color: #ccf8ced3;
     margin: 10px;
   }
+  .date td .opendatebtn a {
+    background-color: #ccf8ced3;
+    text-decoration: none;
+    color: black;
+  }
   .date td .donedatebtn {
     border: none;
     width: 40px;
@@ -66,7 +71,8 @@
     background-color: #f8ccced3;
     margin: 10px;
   }
-  .date td .opendatebtn:hover {
+  .date td .opendatebtn:hover,
+  .date td .opendatebtn:hover a {
     background-color: #b5d1fa;
   }
   .date td:nth-child(1) .opendatebtn,
@@ -142,7 +148,7 @@
         </tr>
           <c:forEach var="j" items="${cal.calen}">
             <tr class="date">
-            <c:forEach var="k" items="${j}">
+            <c:forEach var="k" items="${j}" varStatus="status">
               <c:choose>
                 <c:when test="${k == 0}">
                   <td></td>
@@ -150,12 +156,12 @@
                 <c:otherwise>
                   <td>
                     <c:choose>
-                        <c:when test="${cal.today.substring(8) >= k || cal.first == 0}">
+                        <c:when test="${cal.today.substring(8) >= k || status.index == 0 || status.index == 6}">
                             <button class="closedatebtn" type="button" value="">${k}</button>
                         </c:when>
                         <c:otherwise>
                             <c:set var="find" value="0"/>
-                            <c:forEach var="count" items="${count}" varStatus="status">
+                            <c:forEach var="count" items="${count}">
                                 <c:if test="${count.dd == k && count.cnt == 16}">
                                     <c:set var="find" value="1"/>
                                     <button class="donedatebtn" type="button" value="">${k}</button>
@@ -435,8 +441,5 @@
     const time = $(e.currentTarget).attr('value')
     $('#booking_time').attr('value', time)
   });
-
-  
-  
 </script>
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />
