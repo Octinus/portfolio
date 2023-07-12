@@ -229,6 +229,43 @@ public class AdminController {
     return new ModelAndView("admin/tech/list");
   }
 
+  @GetMapping("/tech/add.do") // 자유게시판 작성 페이지
+  public ModelAndView addTech(){
+
+    return new ModelAndView("/admin/tech/add");
+  }
+
+  @PostMapping("/tech/add_ok.do") // 자유게시판 작성 액션 페이지
+  public ModelAndView qnaAddOk(Model model,
+                              @RequestParam(value="category") String category,
+                              @RequestParam(value="q_type") String q_type,
+                              @RequestParam(value="subject") String subject,
+                              @RequestParam(value="content") String content,
+                              @RequestParam(value="reg_date") String reg_date,
+                              @RequestParam(value="members_id") int members_id
+                              ){
+
+    try{
+      regexHelper.isValue(subject, "제목을 입력하세요.");
+      regexHelper.isValue(content, "내용이 없이는 작성을 완료 할 수 없습니다.");
+      
+    }
+    catch(StringFormatException e){
+      return webHelper.badRequest(e);
+    }
+
+    Members input = new Members();
+
+    try {
+      // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
+      membersService.insert(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    return webHelper.redirect("/techmanagement", "정비사 추가가 완료 되었습니다.");
+  }
+
   @GetMapping("/tech/read.do") // 고객 상세 정보 페이지
   public ModelAndView readTech(Model model,
                           @RequestParam(value="id", defaultValue = "") int id){

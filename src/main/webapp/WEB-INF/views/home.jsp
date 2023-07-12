@@ -51,16 +51,16 @@
     <!-- 요령 slick 본체-->
     <div class="tip">
       <div class="tip-item">
-        <img src="${contextPath}/assets/img/2.jpg" />
+        <img src="${contextPath}/assets/img/spring.png" />
       </div>
       <div class="tip-item">
-        <img src="${contextPath}/assets/img/3.jpg" />
+        <img src="${contextPath}/assets/img/summer.png" />
       </div>
       <div class="tip-item">
-        <img src="${contextPath}/assets/img/4.jpg" />
+        <img src="${contextPath}/assets/img/fall.png" />
       </div>
       <div class="tip-item">
-        <img src="${contextPath}/assets/img/5.jpg" />
+        <img src="${contextPath}/assets/img/winter.png" />
       </div>
     </div>
   </div>

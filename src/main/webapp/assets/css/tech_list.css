@@ -32,13 +32,35 @@
 }
 .adtechmain table {
   width: 1200px;
-  border-top: 2px solid #c5c5c5;
   line-height: 2.5;
 }
 .adtechmain tr {
   border: 1px solid #c5c5c5;
 }
+.adtechmain tr:first-child {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.adtechmain tr:nth-child(2) {
+  border-top: 2px solid #c5c5c5;
+}
 .adtechmain tr:first-child th {
+  text-align: right;
+}
+.adtechmain tr:first-child th a {
+  text-align: right;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  padding: 5px;
+  transition: all 0.5s;
+}
+.adtechmain tr:first-child th a:hover {
+  color: black;
+  background-color: white;
+}
+.adtechmain tr:nth-child(2) th {
   background-color: #e2e1e1;
 }
 

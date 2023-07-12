@@ -14,7 +14,7 @@
 <div class="myinfo-container">
   <form class="myinfo" method="post" action="${contextPath}/myEdit.ok">
     <input type="hidden" name="id" id="id" value="${login_info.getId()}"/>
-    <input type="hidden" name="mem_type" id="mem_type" value="C" />
+    <input type="hidden" name="mem_type" id="mem_type" value="${login_info.getMem_type()}" />
     <input type="hidden" name="is_out" id="is_out" value="N" />
 
     <table>
@@ -38,6 +38,12 @@
         <th><label for="userpwre">비밀번호 확인<span>*</span></label></th>
         <td><input type="password" name="mem_pwre" id="mem_pwre" placeholder="비밀번호 확인"/></td>
       </tr>
+      <c:if test="${login_info.getMem_type().equals('T')}">
+        <tr>
+          <th><label for="level">등급<span>*</span></label></th>
+          <td><input type="text" name="level" id="level" value="${login_info.getLevel()}" readonly /></td>
+        </tr>
+      </c:if>
       <tr>
         <th><label for="tel">연락처<span>*</span></label></th>
         <td>

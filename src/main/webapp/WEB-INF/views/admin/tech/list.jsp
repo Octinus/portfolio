@@ -15,6 +15,11 @@
   <!-- 조회 결과 목록 -->
   <table>
     <tr>
+      <th colspan="7">
+        <a href="/tech/add.do">정비사 추가</a>
+      </th>
+    </tr>
+    <tr>
       <th>등록번호</th>
       <th>이름</th>
       <th>아이디</th>
