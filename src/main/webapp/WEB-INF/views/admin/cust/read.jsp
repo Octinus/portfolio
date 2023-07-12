@@ -4,65 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
-<style>
-  .custRtop {
-    font-weight: 900;
-    margin: 20px 0 50px 0;
-  }
-  .custRtop h1 {
-    display: contents;
-    font-size: 30px;
-  }
 
-  .custRmain {
-    width: 600px;
-    margin: auto;
-  }
-  
-  .custRtable {
-    width: 600px;
-    border: 1px solid #d5d5d5;
-  }
-  .custRtable tr {
-    text-align: left;
-    text-indent: 10px;
-    line-height: 3;
-    font-size: 13px;
-    border-bottom: 1px dotted #d5d5d5;
-  }
-  .custRtable tr:first-child {
-    border-top: 2px solid #d5d5d5;
-  }
-  .custRtable tr th {
-    width: 80px;
-    text-align: center;
-  }
-  .custRtable tr td {
-    width: 250px;
-    background-color: white;
-  }
-
-  .custRbottom {
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
-    padding-top: 30px;
-    margin: 30px auto 80px auto;
-  }
-  .custRbottom a {
-    text-decoration: none;
-    display: block;
-    font-size: 13px;
-    color: white;
-    width: 140px;
-    height: 35px;
-    padding-top: 10px;
-    background-color: black;
-  }
-  .custRbottom button {
-    width: 140px;
-  }
-</style>
+<link rel="stylesheet" href="${contextPath}/assets/css/cust_read.css" />
 
 <div class="custRtop">
   <h1>고객 상세 페이지</h1>

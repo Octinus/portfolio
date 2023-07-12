@@ -1,0 +1,35 @@
+.emailtop {
+      padding-bottom: 40px;
+    }
+    .emailtable {
+      border: 1px solid black;
+      width: 1200px;
+    }
+    .emailtable tr {
+      text-align: left;
+      line-height: 3;
+      font-size: 13px;
+    }
+    .emailtable tr:first-child,
+    .emailtable tr:last-child {
+      text-indent: 10px;
+    }
+
+    .emailbottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 30px;
+    }
+    .emailbottom a {
+      text-decoration: none;
+      display: block;
+      font-size: 13px;
+      color: black;
+      width: 140px;
+      height: 35px;
+      padding-top: 10px;
+      background-color: #d5d5d5;
+    }
+    .emailbottom button {
+      width: 140px;
+    }

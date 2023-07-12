@@ -4,61 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
-<style>
-  .centertop {
-    margin: 20px auto 80px auto;
-    font-size: 25px;
-    width: 200px;
-    border-bottom: 1px solid black;
-  }
-  .centertop h1 {
-    padding-bottom: 10px;
-  }
-  .main:after {
-    content: '';
-    display: block;
-    clear: both;
-    float: none;
-  }
 
-  .main .content-container #img {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 80px;
-  }
-
-  .main .content-container #map {
-    width: 500px;
-    height: 400px;
-    padding-bottom: 30px;
-    float: left;
-  }
-
-  #map, #way {
-    display: flex;
-  }
-  #way {
-    display: inline;
-  }
-  #way h3 {
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 80px;
-  }
-  #way p {
-    text-align: left;
-    font-size: 18px;
-    margin-bottom: 80px;
-    text-indent: 60px;
-  }
-  #way span {
-    font-size: 25px;
-    font-weight: 500;
-  }
-  .centerbottom {
-    margin-bottom: 120px;
-  }
-</style>
+<link rel="stylesheet" href="${contextPath}/assets/css/center.css" />
 
 <div class="centertop">
 <h1>ABOUT 최씨네</h1>

@@ -4,36 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <c:import url="/WEB-INF/views/inc/top.jsp" />
-  <style>
-    .techtop {
-    margin: 20px auto 80px auto;
-    font-size: 25px;
-    width: 100px;
-    border-bottom: 1px solid black;
-    }
-    .techtop h1 {
-      padding-bottom: 10px;
-    }
 
-    .techmain {
-      margin-bottom: 100px;
-    }
-    .techtable {
-      border: 1px solid black;
-      width: 600px;
-      line-height: 3;
-      margin: auto;
-    }
-
-    .techtable th {
-      border: 1px solid black;
-      
-    }
-
-    .techtable td {
-      border: 1px solid black;
-    }
-  </style>
+  <link rel="stylesheet" href="${contextPath}/assets/css/tech.css" />
 
   <div class="techtop">
     <h1>정비사</h1>

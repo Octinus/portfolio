@@ -4,58 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
-<style>
-  .adcusttop {
-    width: 460px;
-    border-bottom: 1px solid black;
-    font-size: 40px;
-    padding-bottom: 5px;
-    margin: 50px auto 0 auto;
-  }
-  .adcusttop h1 {
-    font-size: 40px;
-    font-weight: 600;
-  }
 
-  .adcustsearch {
-    margin: 10px auto 20px auto;
-  }
-  .adcustsearch form {
-    text-align: left;
-  }
-  .adcustsearch input,
-  .adcustsearch button {
-    border: 1px solid #c5c5c5;
-  }
-  .adcustsearch input {
-    width: 150px;
-  }
-  .adcustsearch button {
-    cursor: pointer;
-  }
-
-  .adcustmain {
-    margin: 100px auto 20px auto;
-  }
-  .adcustmain mark {
-  background-color: #c2d6ff;
-  }
-  .adcustmain table {
-    width: 1200px;
-    border-top: 2px solid #c5c5c5;
-    line-height: 2.5;
-  }
-  .adcustmain tr {
-    border: 1px solid #c5c5c5;
-  }
-  .adcustmain tr:first-child th {
-    background-color: #e2e1e1;
-  }
-
-  .adcustbottom {
-    margin-bottom: 100px;
-  }
-</style>
+<link rel="stylesheet" href="${contextPath}/assets/css/cust_list.css" />
 
   <div class="adcusttop">
     <h1>Customer Management</h1>

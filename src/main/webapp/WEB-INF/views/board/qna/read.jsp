@@ -5,78 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
 
-<style>
-  .qnaRtop {
-    display: inline;
-    width: 150px;
-    border-bottom: 1px solid black;
-  }
-  .qnaRtop h1 {
-    display: contents;
-    font-size: 30px;
-  }
-  .qnaRtop p {
-    font-size: 15px;
-    color: #8b8b8b;
-    margin: 20px 0 50px 0;
-  }
-
-  .qnaRtable {
-    border: 1px solid #d5d5d5;
-    width: 1200px;
-  }
-  .qnaRtable tr {
-    text-align: left;
-    text-indent: 10px;
-    line-height: 3;
-    font-size: 13px;
-    border-bottom: 1px dotted #d5d5d5;
-  }
-  .qnaRtable tr textarea {
-    border: none;
-    width: 1180px;
-    height: 600px;
-  }
-  .qnaRtable tr th {
-    width: 120px;
-    text-align: center;
-  }
-  .qnaRtable tr td,
-  .qnaRtable tr td p {
-    width: 250px;
-    background-color: white;
-  }
-  .qnaRtable tr:nth-child(3) td {
-    height: 600px;
-  }
-  .qnaRtable tr:nth-child(3) td p {
-    width: 1180px;
-    margin: 5px auto 5px auto;
-  }
-  
-  .qnaRbottom {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 30px;
-    margin-bottom: 80px;
-  }
-  .qnaRbottom a {
-    text-decoration: none;
-    display: block;
-    font-size: 13px;
-    color: white;
-    width: 140px;
-    height: 35px;
-    padding-top: 10px;
-    background-color: black;
-    transition: all 0.5s;
-  }
-  .qnaRbottom a:hover {
-  border: 1px solid black;
-  background-color: white;
-  color: black;
-  }
-</style>
+<link rel="stylesheet" href="${contextPath}/assets/css/q_read.css" />
 
 <div class="qnaRtop">
   <h1>Q & A</h1>

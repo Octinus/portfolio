@@ -5,86 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
 
-<style>
-.recordtop {
-  width: 460px;
-  border-bottom: 1px solid black;
-  font-size: 40px;
-  padding-bottom: 5px;
-  margin: 50px auto 50px auto;
-}
-.recordtop h1 {
-  font-size: 40px;
-  font-weight: 600;
-}
 
-.recordmain input {
-  border: none;
-}
-.recordmain .recordtable {
-  border: 1px solid #c5c5c5;
-  width: 1200px;
-}
-.recordmain .recordtable tr {
-  text-align: left;
-  text-indent: 10px;
-  line-height: 3;
-  font-size: 13px;
-}
-.recordmain .recordtable tr th {
-  width: 80px;
-}
-.recordmain .recordtable tr:nth-child(5) input {
-  width: 300px;
-  border: 1px solid #d5d5d5;
-  background-color: white;
-}
-.recordmain .recordtable select,
-.recordmain .recordtable option {
-  background-color: white;
-}
-.ck.ck-editor__editable_inline {
-    min-height: 600px;
-    background-color: white;
-  }
-  .ck.ck-editor__editable_inline p {
-    background-color: white;
-  }
-.recordbottom {
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 0 100px 0;
-}
-.recordbottom a {
-  text-decoration: none;
-  display: block;
-  font-size: 13px;
-  color: white;
-  width: 140px;
-  height: 35px;
-  padding-top: 10px;
-  background-color: #d5d5d5;
-  transition: all 0.5s;
-}
-.recordbottom a:hover {
-  background-color: #c5c5c5;
-  color: black;
-  border: 1px solid #c5c5c5;
-}
-.recordbottom button {
-  cursor: pointer;
-  width: 140px;
-  background-color: black;
-  color: white;
-  border: 1px solid black;
-  transition: all 0.5s;
-}
-.recordbottom button:hover {
-  background-color: #c5c5c5;
-  color: black;
-  border: 1px solid #c5c5c5;
-}
-</style>
+<link rel="stylesheet" href="${contextPath}/assets/css/r_add.css" />
+
 <div class="recordtop">
   <h1>모두를 위한 정비 이력</h1>
 </div>  

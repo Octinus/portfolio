@@ -4,51 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
-<style>
-  .recordEtop {
-    margin-bottom: 50px;
-  }
-  .recordEtable {
-    border: 1px solid #8b8b8b;
-    width: 1200px;
-  }
-  .recordEtable tr {
-    text-align: left;
-    text-indent: 10px;
-    line-height: 3;
-    font-size: 13px;
-  }
-  .recordEtable input {
-    border: 1px solid #8b8b8b;
-    background-color: white;
-  }
-  .ck.ck-editor__editable_inline>:last-child {
-    height: 600px;
-    background-color: white;
-  }
-  .ck.ck-editor__editable_inline>p {
-    background-color: white;
-  }
 
-  .recordEbottom {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 30px;
-  }
-  .recordEbottom a {
-    text-decoration: none;
-    display: block;
-    font-size: 13px;
-    color: black;
-    width: 140px;
-    height: 35px;
-    padding-top: 10px;
-    background-color: #d5d5d5;
-  }
-  .recordEbottom button {
-    width: 140px;
-  }
-</style>
+<link rel="stylesheet" href="${contextPath}/assets/css/r_edit.css" />
+
 <div class="recordEtop">
   <h class="recordEtop">RECORD</h>
 </div>

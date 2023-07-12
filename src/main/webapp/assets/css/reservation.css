@@ -1,0 +1,124 @@
+.resertop {
+  margin: 20px auto 80px auto;
+  font-size: 25px;
+  width: 180px;
+  border-bottom: 1px solid black;
+}
+.resertop h1 {
+  padding-bottom: 10px;
+}
+
+.calendar {
+  width: 500px;
+  margin-bottom: 100px;
+}
+.calendar, .time {
+  display: inline-flex;
+}
+.calendar table {
+  margin: auto;
+  line-height: 3;
+  border: 2px solid #8b8b8b;
+  text-align: center;
+}
+.calendar th {
+  width: 400px;
+  font-size: 25px;
+  
+}
+.month {
+  border-bottom: 1px dotted #8b8b8b;
+  background-color: #b5d1fa;
+  font-weight: 600;
+}
+.calendar .day td {
+  font-size: 25px;
+  line-height: 2;
+}
+.calendar .day td:first-child {
+  color: red;
+}
+.calendar .day td:last-child {
+  color: blue;
+}
+
+.date td .opendatebtn {
+  border: none;
+  width: 40px;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  background-color: #ccf8ced3;
+  margin: 10px;
+}
+.date td .opendatebtn a {
+  background-color: #ccf8ced3;
+  text-decoration: none;
+  color: black;
+}
+.date td .donedatebtn {
+  border: none;
+  width: 40px;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  background-color: #f8ccced3;
+  margin: 10px;
+}
+.date td .opendatebtn:hover,
+.date td .opendatebtn:hover a {
+  background-color: #b5d1fa;
+}
+.date td:nth-child(1) .opendatebtn,
+.date td:nth-child(7) .opendatebtn,
+.closedatebtn {
+  font-size: 20px;
+  font-weight: 300;
+  background-color: #e9e9e9;
+  border: none;
+  width: 40px;
+  text-align: center;
+  margin: 10px;
+}
+.time table {
+  line-height: 3;
+  border: 2px solid #8b8b8b;
+  text-align: center;
+}
+.time table th {
+  font-size: 25px;
+  width: 300px;
+  border-bottom: 1px dotted #8b8b8b;
+}
+.time table td:first-child {
+  padding-top: 10px;
+}
+.time td .opentimebtn {
+  font-size: 20px;
+  margin-bottom: 10px;
+  border: none;
+  font-weight: 300;
+  background-color: #ccf8ced3;
+}
+.time td .opentimebtn:hover {
+  background-color: #b5d1fa;
+}
+.time td .closetimebtn {
+  font-size: 20px;
+  margin-bottom: 10px;
+  border: none;
+  font-weight: 300;
+  background-color: #e9e9e9;
+}
+
+.reserbottom {
+  margin-bottom: 100px;
+  display: inline-flex;
+}
+.reserbottom input {
+  border: 1px solid #8b8b8b;
+  width: 120px;
+}
+.reserbottom button {
+  border: 1px solid #8b8b8b;
+}

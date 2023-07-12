@@ -3,87 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-  <c:import url="/WEB-INF/views/inc/top.jsp" />
-  <style>
-    .requiredrecordtop {
-      width: 520px;
-      border-bottom: 1px solid black;
-      font-size: 40px;
-      padding-bottom: 5px;
-      margin: 50px auto 0 auto;
-    }
-    .requiredrecordtop h1 {
-      font-size: 40px;
-      font-weight: 600;
-    }
+<c:import url="/WEB-INF/views/inc/top.jsp" />
 
-    .requiredrecordsearch {
-      margin: 10px auto 100px auto;
-    }
-    .requiredrecordsearch form {
-      text-align: left;
-    }
-    .requiredrecordsearch input,
-    .requiredrecordsearch button {
-      border: 1px solid #c5c5c5;
-    }
-    .requiredrecordsearch input {
-      width: 150px;
-      background-color: white;
-    }
-    .requiredrecordsearch button {
-      cursor: pointer;
-      border: 1px solid black;
-      background-color: black;
-      color: white;
-      transition: all 0.5s;
-    }
-    .requiredrecordsearch button:hover {
-      background-color: #f7f7f7;
-      color: black;
-      border: 1px solid black;
-    }
+<link rel="stylesheet" href="${contextPath}/assets/css/r_add_list.css" />
 
-    .requiredrecordmain {
-      margin: 100px auto 20px auto;
-    }
-    .requiredrecordmain table {
-      width: 1200px;
-      line-height: 2.5;
-    }
-    .requiredrecordmain tr td {
-      background-color: white;
-    }
-    .requiredrecordmain tr td a {
-      text-decoration: none;
-      background-color: white;
-    }
-    .requiredrecordmain tr:first-child {
-      text-align: right;
-      border: none;
-    }
-    .requiredrecordmain tr:first-child td {
-      font-size: 12px;
-      color: #acacac;
-      background-color: #f7f7f7;
-    }
-    .requiredrecordmain tr:nth-child(2) {
-      border-top: 2px solid #c5c5c5;
-    }
-    .requiredrecordmain tr {
-      border: 1px solid #c5c5c5;
-    }
-    .requiredrecordmain tr:nth-child(2) th {
-      background-color: #e2e1e1;
-    }
-
-    .requiredrecordbottom {
-      margin-bottom: 10px;
-    }
-  </style>
-  <div class="requiredrecordtop">
-    <h1>이력 작성이 필요한 예약건</h1>
-  </div>    
+<div class="requiredrecordtop">
+  <h1>이력 작성이 필요한 예약건</h1>
+</div>    
 
   <div class="requiredrecordmain">
     <!-- 조회 결과 목록 -->
@@ -217,4 +143,4 @@
   </form>
 </div>
 
-  <c:import url="/WEB-INF/views/inc/bottom.jsp" />
+<c:import url="/WEB-INF/views/inc/bottom.jsp" />

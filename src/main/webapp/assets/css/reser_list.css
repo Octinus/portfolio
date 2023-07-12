@@ -1,0 +1,50 @@
+.adreservtop {
+  width: 460px;
+  border-bottom: 1px solid black;
+  font-size: 40px;
+  padding-bottom: 5px;
+  margin: 50px auto 0 auto;
+}
+.adreservtop h1 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.adreservsearch {
+  margin: 10px auto 20px auto;
+}
+.adreservsearch form {
+  text-align: left;
+}
+.adreservsearch input,
+.adreservsearch button {
+  border: 1px solid #c5c5c5;
+}
+.adreservsearch input {
+  width: 150px;
+}
+.adreservsearch button {
+  cursor: pointer;
+}
+
+.adreservmain {
+  margin: 100px auto 20px auto;
+}
+.adreservmain table {
+  width: 1200px;
+  border-top: 2px solid #c5c5c5;
+  line-height: 2.5;
+}
+.adreservmain tr {
+  border: 1px solid #c5c5c5;
+}
+.adreservmain tr:first-child {
+  text-align: right;
+}
+.adreservmain tr:nth-child(2) th {
+  background-color: #e2e1e1;
+}
+
+.adreservbottom {
+  margin-bottom: 100px;
+}

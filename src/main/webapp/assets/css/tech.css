@@ -1,0 +1,28 @@
+.techtop {
+  margin: 20px auto 80px auto;
+  font-size: 25px;
+  width: 100px;
+  border-bottom: 1px solid black;
+  }
+  .techtop h1 {
+    padding-bottom: 10px;
+  }
+
+  .techmain {
+    margin-bottom: 100px;
+  }
+  .techtable {
+    border: 1px solid black;
+    width: 600px;
+    line-height: 3;
+    margin: auto;
+  }
+
+  .techtable th {
+    border: 1px solid black;
+    
+  }
+
+  .techtable td {
+    border: 1px solid black;
+  }

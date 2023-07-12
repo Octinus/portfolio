@@ -1,0 +1,57 @@
+.techRtop {
+  font-weight: 900;
+  margin: 20px 0 50px 0;
+}
+.techRtop h1 {
+  display: contents;
+  font-size: 30px;
+}
+
+.techRmain {
+  width: 600px;
+  margin: auto;
+}
+
+.techRtable {
+  width: 600px;
+  border: 1px solid #d5d5d5;
+}
+.techRtable tr {
+  text-align: left;
+  text-indent: 10px;
+  line-height: 3;
+  font-size: 13px;
+  border-bottom: 1px dotted #d5d5d5;
+}
+.techRtable tr:first-child {
+  border-top: 2px solid #d5d5d5;
+}
+.techRtable tr th {
+  width: 80px;
+  text-align: center;
+}
+.techRtable tr td {
+  width: 250px;
+  background-color: white;
+}
+
+.techRbottom {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+  margin: 30px auto 80px auto;
+}
+.techRbottom a {
+  text-decoration: none;
+  display: block;
+  font-size: 13px;
+  color: white;
+  width: 140px;
+  height: 35px;
+  padding-top: 10px;
+  background-color: black;
+}
+.techRbottom button {
+  width: 140px;
+}
