@@ -48,15 +48,17 @@
 .adtechmain tr:first-child th {
   text-align: right;
 }
-.adtechmain tr:first-child th a {
+.adtechmain tr:first-child th button {
   text-align: right;
   text-decoration: none;
   color: white;
   background-color: black;
+  border: 1px solid black;
   padding: 5px;
+  cursor: pointer;
   transition: all 0.5s;
 }
-.adtechmain tr:first-child th a:hover {
+.adtechmain tr:first-child th button:hover {
   color: black;
   background-color: white;
 }

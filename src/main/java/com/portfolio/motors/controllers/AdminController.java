@@ -594,4 +594,21 @@ public ModelAndView adDrop(Model model,
 
     return new ModelAndView("admin/drop");
   }
+
+  @PostMapping("/drop_ok.do")
+  public ModelAndView delete(Model model,
+                            @RequestParam(value="id") List<Integer> ids){
+
+    // 데이터 삭제에 필요한 조건값을 Beans에 저장하기
+    Members input = new Members();
+    input.setIds(ids);
+
+    try {
+      membersService.delete(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    return webHelper.redirect("/drop", "삭제 완료");
+  }
 }

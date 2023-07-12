@@ -49,7 +49,7 @@ public class MembersServiceImpl implements MembersService{
   @Override
   public void delete(Members input) throws NullPointerException, Exception {
     Members members = new Members();
-    members.setId(input.getId());
+    members.setIds(input.getIds());
     membersMapper.delete(members);
 
     int rows = membersMapper.delete(input);

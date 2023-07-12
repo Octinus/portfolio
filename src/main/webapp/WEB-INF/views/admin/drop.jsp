@@ -14,9 +14,10 @@
 <div class="adtechmain">
   <!-- 조회 결과 목록 -->
   <table>
+    <form action="${contextPath}/drop_ok.do" method="post">
     <tr>
-      <th colspan="7">
-        <a href="/drop_ok.do">DROP</a>
+      <th colspan="6">
+        <button type="submit">DELETE</button>
       </th>
     </tr>
     <tr>
@@ -31,7 +32,7 @@
     <%-- 조회 결과가 없는 경우 --%>
     <c:when test="${output == null || fn:length(output) == 0}">
     <tr>
-      <td colspan="5">조회 결과가 없습니다.</td>
+      <td colspan="6">조회 결과가 없습니다.</td>
     </tr>
       </c:when>
       <%-- 조회 결과가 있는 경우 --%>
@@ -60,6 +61,7 @@
               <c:param name="id" value="${item.id}" />
           </c:url>
 
+          
           <tr>
               <td><input type="checkbox" name="id" value="${id}" checked /></td>
               <td>${id}</td>
@@ -72,6 +74,7 @@
           </c:forEach>
         </c:otherwise>
       </c:choose>
+    </form>
     </table>
   </div>
 
