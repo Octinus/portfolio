@@ -25,6 +25,7 @@
           <a href="${contextPath}/customermanagement">고객관리</a>
           <a href="${contextPath}/techmanagement">정비사관리</a>
           <a href="${contextPath}/reservationmanagement">예약관리</a>
+          <a href="${contextPath}/drop">탈퇴관리</a>
         </li>
       </c:if>
 

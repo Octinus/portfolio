@@ -20,6 +20,8 @@ import com.portfolio.motors.models.Members;
 import com.portfolio.motors.services.BookingService;
 import com.portfolio.motors.services.MembersService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -236,25 +238,72 @@ public class AdminController {
   }
 
   @PostMapping("/tech/add_ok.do") // 자유게시판 작성 액션 페이지
-  public ModelAndView qnaAddOk(Model model,
-                              @RequestParam(value="category") String category,
-                              @RequestParam(value="q_type") String q_type,
-                              @RequestParam(value="subject") String subject,
-                              @RequestParam(value="content") String content,
-                              @RequestParam(value="reg_date") String reg_date,
-                              @RequestParam(value="members_id") int members_id
-                              ){
+  public ModelAndView addTechOk(@RequestParam(value="name") String name,
+                              @RequestParam(value="mem_type") String memType,
+                              @RequestParam(value="mem_id") String memid,
+                              @RequestParam(value="mem_pw") String mempw,
+                              @RequestParam(value="mem_pwre") String mempwre,
+                              @RequestParam(value="level") String level,
+                              @RequestParam(value="tel") String tel,
+                              @RequestParam(value="birthdate") String birthdate,
+                              @RequestParam(value="email") String email,
+                              @RequestParam(value="postcode") String postcode,
+                              @RequestParam(value="addr1") String addr1,
+                              @RequestParam(value="addr2") String addr2,
+                              @RequestParam(value="reg_date") String regDate,
+                              @RequestParam(value="is_out") String isOut){
 
+    String totTel = tel.replace(",", "-");
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    regDate = dateTime.format(formatter);
+    
     try{
-      regexHelper.isValue(subject, "제목을 입력하세요.");
-      regexHelper.isValue(content, "내용이 없이는 작성을 완료 할 수 없습니다.");
-      
+      regexHelper.isValue(name, "이름을 입력하세요.");
+      regexHelper.isKor(name, "이름은 한글만 입력 가능합니다.");
+      regexHelper.isValue(memid, "아이디를 입력하세요.");
+      regexHelper.onlyNum(memid, "아이디는 숫자로만 이루어질 수 없습니다.");
+      regexHelper.isMaxLength(memid, "아이디는 16자를 넘을 수 없습니다.");
+      regexHelper.isMinLength(memid, "아이디는 4자 이상이어야 합니다.");
+      regexHelper.isValue(mempw, "비밀번호를 입력하세요.");
+      regexHelper.isMaxLength(mempw, "비밀번호는 16자를 넘을 수 없습니다.");
+      regexHelper.isMinPwLength(mempw, "비밀번호는 10자 이상이어야 합니다..");
+      regexHelper.isValue(mempwre, "비밀번호를 입력하세요.");
+      regexHelper.isSame(mempw, mempwre, "비밀번호를 확인해주세요.");
+      regexHelper.isValue(level, "등급을 선택하세요.");
+      regexHelper.isValue(totTel, "연락처를 입력하세요.");
+      regexHelper.isValue(email, "E-mail을 입력하세요.");
+      regexHelper.isEmail(email, "E-mail형식이 잘못되었습니다.");
+      regexHelper.isValue(birthdate, "생년월일을 입력하세요.");
+      regexHelper.isValue(postcode, "우편번호를 입력하세요.");
+      regexHelper.isValue(addr1, "기본주소를 입력하세요.");
+      regexHelper.isValue(addr2, "상세주소를 입력하세요.");
     }
     catch(StringFormatException e){
       return webHelper.badRequest(e);
     }
 
     Members input = new Members();
+    input.setName(name);
+    input.setMem_type(memType);
+    input.setMem_id(memid);
+    input.setMem_pw(mempw);
+    input.setLevel(level);
+    input.setTel(totTel);
+    input.setBirthdate(birthdate);
+    input.setEmail(email);
+    input.setPostcode(postcode);
+    input.setAddr1(addr1);
+    input.setAddr2(addr2);
+    input.setReg_date(regDate);
+    input.setIs_out(isOut);
+
+    Members output = null;
+    try {
+      output = membersService.checkId(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
 
     try {
       // 데이터 저장 -> 데이터 저장에 성공하면 파라미터로 전달하는 input 객체에 PK값이 저장된다.
@@ -266,7 +315,7 @@ public class AdminController {
     return webHelper.redirect("/techmanagement", "정비사 추가가 완료 되었습니다.");
   }
 
-  @GetMapping("/tech/read.do") // 고객 상세 정보 페이지
+  @GetMapping("/tech/read.do") // 정비사 상세 정보 페이지
   public ModelAndView readTech(Model model,
                           @RequestParam(value="id", defaultValue = "") int id){
 
@@ -379,6 +428,24 @@ public class AdminController {
     return webHelper.redirect("/tech/read.do?id=" + input.getId(), "수정 완료");
   }
 
+  @GetMapping("/tech/drop.do")
+  public ModelAndView deleteTech(Model model,
+                            @RequestParam(value="id") int id){
+
+    // 데이터 삭제에 필요한 조건값을 Beans에 저장하기
+    Members input = new Members();
+    input.setId(id);
+    input.setIs_out("Y");
+
+    try {
+      membersService.drop(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    return webHelper.redirect("/techmanagement", "정비사 삭제 완료");
+  }
+
   @GetMapping("/reservationmanagement") // 예약 관리
   public ModelAndView adReservation(Model model,
                                   @RequestParam(value="keyword", required = false) String keyword,
@@ -486,5 +553,10 @@ public class AdminController {
 
     // 저장 결과를 확인하기 위해서 데이터 저장시 생성된 PK값을 상세 페이지로 전달해야 한다.
     return webHelper.redirect("/reservationmanagement", "정비사 배정 완료");
+  }
+
+  @GetMapping("/drop")
+  public ModelAndView adDrop(){
+
   }
 }

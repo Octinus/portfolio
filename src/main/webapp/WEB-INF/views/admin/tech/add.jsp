@@ -4,116 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
-<style>
-.jointop {
-  margin: 20px auto 80px auto;
-  font-size: 25px;
-  font-weight: 600;
-  width: 150px;
-  border-bottom: 1px solid black;
-}
-.jointop h1 {
-  padding-bottom: 10px;
-}
 
-.join table {
-  margin-bottom: 80px;
-  line-height: 2.5;
-}
-.join table span {
-  color: red;
-}
+<link rel="stylesheet" href="${contextPath}/assets/css/tech_add.css" />
 
-.join th,
-.join td{
-  border: 1px solid #c5c5c5;    
-}
-.join > table tr:nth-child(1) th {
-  border: none;
-  font-size: 12px;
-  font-weight: 300;
-  text-align: right;
-  padding-bottom: 10px;
-}
-.join > table tr:nth-child(2) {
-  border-top: 2px solid #c5c5c5;
-}
-.join th {
-  width: 130px;
-  text-align: left;
-}
-.join td {
-  width: 1070px;
-  height: 30px;
-  text-align: left;
-  font-size: 12px;
-}
-.join th label {
-  margin-left: 20px;
-  font-size: 13px;
-  font-weight: 100;
-}
-.join td select {
-  margin: 5px 0 5px 20px;
-}
-.join tr:nth-child(6) input {
-  margin: 5px 0 5px 0px;
-  width: 80px;
-}
-.join tr:nth-child(7) input:nth-child(2) {
-  margin: 5px 0 5px 0px;
-}
-.join td input {
-  margin: 5px 0 5px 20px;
-  border: 1px solid #a3a3a3;
-}
-.join td button {
-  border: 1px solid #a3a3a3;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-.joinbtn {
-  margin-bottom: 100px;
-}
-.join .joinbtn button {
-  width: 150px;
-  height: 30px;
-  margin-bottom: 30px;
-  background-color: black;
-  color: white;
-  border: 1px solid black;
-  transition: all 0.5s;
-}
-.join .joinbtn button:hover {
-  background-color: #f7f7f7;
-  color: black;
-  border: 1px solid black;
-}
-
-/* 에러 메세지에 대한 글자 색상 */
-.error {
-  color: red;
-}
-/* 에러가 발생한 <input>태그 */
-input.error {
-  background-color: #f8b2b2;
-}
-/* 에러메세지가 표시중인 <label>태그 */
-label.error {
-  font-size: 10px;
-  display: inline-block;
-  padding: 5px 10px;
-  margin: 0;
-}
-</style>
-<div class="jointop">
+<div class="addtechtop">
   <h1>정비사 추가</h1>
 </div>
     
 <div class="join-container">
-  <form action="${contextPath}/tech/add_ok.do" method="post" class="join">
-    <input type="hidden" name="mem_type" id="mem_type" value="${login_info.getMem_type()}" />
+  <form action="${contextPath}/tech/add_ok.do" method="post" class="addtech">
+    <input type="hidden" name="mem_type" id="mem_type" value="T" />
     <input type="hidden" name="reg_date" id="reg_date" value="" />
     <input type="hidden" name="is_out" id="is_out" value="N" />
     <table border="1">
@@ -180,7 +80,7 @@ label.error {
       -
         <input type="tel" name="tel" id="tel" />
         -
-        <input type="tel" name="tel" id="tel" /> (직접 연락 받으실 번호를 적어주세요.)</td>
+        <input type="tel" name="tel" id="tel" /></td>
     </tr>
     <tr>
       <th><label for="email">E-mail<span>*</span></label></th>
@@ -202,7 +102,7 @@ label.error {
     </tr>
     </label>
     </table>
-    <div class="joinbtn">
+    <div class="addtechbtn">
       <button type="submit">ADD</button>
       <button type="reset">RESET</button>
     </div>

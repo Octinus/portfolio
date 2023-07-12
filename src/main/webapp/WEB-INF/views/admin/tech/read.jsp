@@ -61,6 +61,9 @@
       <th>탈퇴여부</th>
       <td>${output.is_out}</td>
     </tr>
+    <tr>
+      <td colspan="2"><a href="${contextPath}/tech/drop.do?id=${output.id}">정비사 삭제</a></td>
+    </tr>
   </table>
 </div>
 

@@ -126,7 +126,7 @@ public interface MembersMapper {
         @Select("<script>" +
                 "select id, name, mem_type, mem_id, mem_pw, tel, email, birthdate, postcode, addr1, addr2, level, is_out from members " +
                 "<where>" +
-                "mem_type = 'T' " +
+                "mem_type = 'T'" +
                 "and is_out = 'N'" +
                 "<if test='name != null'> and (name like concat('%', #{name}, '%')</if>" +
                 "<if test='level != null'> or level like concat('%', #{level}, '%'))</if>" +

@@ -14,17 +14,33 @@
 
 .techRtable {
   width: 600px;
-  border: 1px solid #d5d5d5;
 }
 .techRtable tr {
   text-align: left;
   text-indent: 10px;
   line-height: 3;
   font-size: 13px;
+  border-left: 1px solid #d5d5d5;
+  border-right: 1px solid #d5d5d5;
   border-bottom: 1px dotted #d5d5d5;
 }
 .techRtable tr:first-child {
   border-top: 2px solid #d5d5d5;
+}
+.techRtable tr:last-child {
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+.techRtable tr:last-child td {
+  text-align: right;
+  background-color: #f7f7f7;
+}
+.techRtable tr:last-child a {
+  padding: 2px;
+  text-decoration: none;
+  color: white;
+  background-color: black;
 }
 .techRtable tr th {
   width: 80px;

@@ -61,7 +61,7 @@ public class JoinController {
       regexHelper.isValue(memid, "아이디를 입력하세요.");
       regexHelper.onlyNum(memid, "아이디는 숫자로만 이루어질 수 없습니다.");
       regexHelper.isMaxLength(memid, "아이디는 16자를 넘을 수 없습니다.");
-      regexHelper.isMinLength(memid, "아이디는 4자 이상이어야 합니다..");
+      regexHelper.isMinLength(memid, "아이디는 4자 이상이어야 합니다.");
       regexHelper.isValue(mempw, "비밀번호를 입력하세요.");
       regexHelper.isMaxLength(mempw, "비밀번호는 16자를 넘을 수 없습니다.");
       regexHelper.isMinPwLength(mempw, "비밀번호는 10자 이상이어야 합니다..");

@@ -1,0 +1,101 @@
+.addtechtop {
+  margin: 20px auto 80px auto;
+  font-size: 25px;
+  font-weight: 600;
+  width: 150px;
+  border-bottom: 1px solid black;
+}
+.addtechtop h1 {
+  padding-bottom: 10px;
+}
+
+.addtech table {
+  margin-bottom: 80px;
+  line-height: 2.5;
+}
+.addtech table span {
+  color: red;
+}
+
+.addtech th,
+.addtech td{
+  border: 1px solid #c5c5c5;    
+}
+.addtech > table tr:nth-child(1) th {
+  border: none;
+  font-size: 12px;
+  font-weight: 300;
+  text-align: right;
+  padding-bottom: 10px;
+}
+.addtech > table tr:nth-child(2) {
+  border-top: 2px solid #c5c5c5;
+}
+.addtech th {
+  width: 130px;
+  text-align: left;
+}
+.addtech td {
+  width: 1070px;
+  height: 30px;
+  text-align: left;
+  font-size: 12px;
+}
+.addtech th label {
+  margin-left: 20px;
+  font-size: 13px;
+  font-weight: 100;
+}
+.addtech td select {
+  margin: 5px 0 5px 20px;
+}
+.addtech tr:nth-child(6) input {
+  margin: 5px 0 5px 0px;
+  width: 80px;
+}
+.addtech tr:nth-child(7) input:nth-child(2) {
+  margin: 5px 0 5px 0px;
+}
+.addtech td input {
+  margin: 5px 0 5px 20px;
+  border: 1px solid #a3a3a3;
+}
+.addtech td button {
+  border: 1px solid #a3a3a3;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.addtechbtn {
+  margin-bottom: 100px;
+}
+.addtech .addtechbtn button {
+  width: 150px;
+  height: 30px;
+  margin-bottom: 30px;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  transition: all 0.5s;
+}
+.addtech .addtechbtn button:hover {
+  background-color: #f7f7f7;
+  color: black;
+  border: 1px solid black;
+}
+
+/* 에러 메세지에 대한 글자 색상 */
+.error {
+  color: red;
+}
+/* 에러가 발생한 <input>태그 */
+input.error {
+  background-color: #f8b2b2;
+}
+/* 에러메세지가 표시중인 <label>태그 */
+label.error {
+  font-size: 10px;
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0;
+}
