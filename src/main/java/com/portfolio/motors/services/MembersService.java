@@ -154,4 +154,21 @@ public interface MembersService {
      * @throws Exception - SQL처리에 실패한 경우
      */
     public int onlyTechCount(Members input) throws NullPointerException, Exception;
+
+    /**
+     * 탈퇴를 원하는 멤버의 목록을 조회하여 리턴한다.
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public List<Members> dropList(Members input) throws NullPointerException, Exception;
+
+    /**
+     * 탈퇴를 원하는 멤버 목록의 개수를 조회하여 개수를 리턴한다.
+     * @param input
+     * @return
+     * @throws NullPointerException
+     * @throws Exception
+     */
+    public int dropCount(Members input) throws NullPointerException, Exception;
 }

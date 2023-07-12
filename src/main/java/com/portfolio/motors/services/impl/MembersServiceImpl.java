@@ -131,4 +131,14 @@ public class MembersServiceImpl implements MembersService{
   public List<Members> onlyCust() throws NullPointerException, Exception {
     return membersMapper.onlyCust();
   }
+
+  @Override
+  public List<Members> dropList(Members input) throws NullPointerException, Exception {
+    return membersMapper.dropList(input);
+  }
+
+  @Override
+  public int dropCount(Members input) throws NullPointerException, Exception {
+    return  membersMapper.dropCount(input);
+  }
 }

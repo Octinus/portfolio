@@ -555,8 +555,43 @@ public class AdminController {
     return webHelper.redirect("/reservationmanagement", "정비사 배정 완료");
   }
 
-  @GetMapping("/drop")
-  public ModelAndView adDrop(){
+@GetMapping("/drop")
+public ModelAndView adDrop(Model model,
+                          @RequestParam(value="keyword", required = false) String keyword,
+                          @RequestParam(value="page", defaultValue = "1") int nowPage){
 
+    int totalCount = 0; // 전체 게시글 수
+    int listCount = 10; // 한 페이지당 표시할 목록 수
+    int pageCount = 5; // 한 그룹당 표시할 페이지 번호 수
+    
+    List<Members> output = null; //조회결과가 저장될 객체
+    Pagenation pagenation = null; // 페이지 번호를 계산한 결과가 저장될 객체
+
+    // 조회에 필요한 조건값(검색어)를 Beans에 담는다.
+    Members input = new Members();
+    input.setName(keyword);
+
+    try {
+      // 전체 게시글 수 조회
+      totalCount = membersService.dropCount(input);
+      //페이지 번호 계산 -> 계산결과를 로그로 출력될 것이다.
+      pagenation = new Pagenation(nowPage, totalCount, listCount, pageCount);
+
+      //SQL의 LIMIT절에서 사용될 값을 Beans의 static 변수에 저장
+      Members.setOffset(pagenation.getOffset());
+      Members.setListCount(pagenation.getListCount());
+
+      //데이터 조회하기
+      output = membersService.dropList(input);
+    } catch (Exception e) {
+      return webHelper.serverError(e);
+    }
+
+    // view 처리
+    model.addAttribute("output", output);
+    model.addAttribute("keyword", keyword);
+    model.addAttribute("pagenation", pagenation);
+
+    return new ModelAndView("admin/drop");
   }
 }
