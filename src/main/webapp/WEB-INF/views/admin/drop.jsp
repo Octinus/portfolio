@@ -16,10 +16,11 @@
   <table>
     <tr>
       <th colspan="7">
-        <a href="/dropOk.do">DROP</a>
+        <a href="/drop_ok.do">DROP</a>
       </th>
     </tr>
     <tr>
+      <th></th>
       <th>등록번호</th>
       <th>이름</th>
       <th>아이디</th>
@@ -44,8 +45,6 @@
           <c:set var="mem_id" value="${item.mem_id}" />
           <c:set var="tel" value="${item.tel}" />
           <c:set var="email" value="${item.email}" />
-          <c:set var="birthdate" value="${item.birthdate}" />
-          <c:set var="level" value="${item.level}" />
 
           <%-- 검색어가 있다면? --%>
           <c:if test="${keyword != ''}">
@@ -62,12 +61,14 @@
           </c:url>
 
           <tr>
+              <td><input type="checkbox" name="id" value="${id}" checked /></td>
               <td>${id}</td>
               <td><a href="${viewUrl}">${name}</a></td>
               <td>${mem_id}</td>
               <td>${tel}</td>
               <td>${email}</td>
           </tr>
+
           </c:forEach>
         </c:otherwise>
       </c:choose>
@@ -100,41 +101,41 @@
 </c:choose>
 
 
-<%-- 페이지 번호 (시작 페이지부터 끝 페이지까지 반복) --%>
-<c:forEach var="i" begin="${pagenation.startPage}" end="${pagenation.endPage}" varStatus="status">
+  <%-- 페이지 번호 (시작 페이지부터 끝 페이지까지 반복) --%>
+  <c:forEach var="i" begin="${pagenation.startPage}" end="${pagenation.endPage}" varStatus="status">
     <%-- 이동할 URL 생성 --%>
     <c:url value="/techmanagement" var="pageUrl">
-        <c:param name="page" value="${i}" />
-        <c:param name="keyword" value="${keyword}" />
+      <c:param name="page" value="${i}" />
+      <c:param name="keyword" value="${keyword}" />
     </c:url>
 
     <%-- 페이지 번호 출력--%>
     <c:choose>
-        <%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
-        <c:when test="${pagenation.nowPage == i}">
-            <b>[${i}]</b>
-        </c:when>
-        <%-- 나머지 페이지의 경우 링크 적용함 --%>
-        <c:otherwise>
-            <a href="${pageUrl}">[${i}]</a>
-        </c:otherwise>
+      <%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+      <c:when test="${pagenation.nowPage == i}">
+        <b>[${i}]</b>
+      </c:when>
+      <%-- 나머지 페이지의 경우 링크 적용함 --%>
+    <c:otherwise>
+      <a href="${pageUrl}">[${i}]</a>
+    </c:otherwise>
     </c:choose>
-</c:forEach>
+  </c:forEach>
 
-<%-- 다음 그룹에 대한 링크 --%>
-<c:choose>
+  <%-- 다음 그룹에 대한 링크 --%>
+  <c:choose>
     <%-- 다음 그룹으로 이동 가능하다면? --%>
     <c:when test="${pagenation.nextPage > 0}">
         <%-- 이동할 URL 생성--%>
         <c:url value="/techmanagement" var="nextPageUrl">
-            <c:param name="page" value="${pagenation.nextPage}" />
-            <c:param name="keyword" value="${keyword}"/>
+          <c:param name="page" value="${pagenation.nextPage}" />
+          <c:param name="keyword" value="${keyword}"/>
         </c:url>
         <a href="${nextPageUrl}">[다음]</a>
     </c:when>
     <c:otherwise>
     </c:otherwise>
-</c:choose>
+  </c:choose>
 </div>
 
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />
