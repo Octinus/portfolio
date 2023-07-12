@@ -5,20 +5,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/inc/top.jsp" />
 
-<link rel="stylesheet" href="${contextPath}/assets/css/tech_list.css" />
+<link rel="stylesheet" href="${contextPath}/assets/css/drop.css" />
 
 <div class="adtechtop">
-  <h1>Technician Management</h1>
+  <h1>탈퇴 관리</h1>
 </div> 
 
 <div class="adtechmain">
   <!-- 조회 결과 목록 -->
   <table>
-    <tr>
-      <th colspan="7">
-        <a href="/tech/add.do">정비사 추가</a>
-      </th>
-    </tr>
     <tr>
       <th>등록번호</th>
       <th>이름</th>
@@ -30,7 +25,7 @@
     <%-- 조회 결과가 없는 경우 --%>
     <c:when test="${output == null || fn:length(output) == 0}">
     <tr>
-      <td colspan="12">조회 결과가 없습니다.</td>
+      <td colspan="5">조회 결과가 없습니다.</td>
     </tr>
       </c:when>
       <%-- 조회 결과가 있는 경우 --%>
@@ -55,7 +50,7 @@
               <%-- 출력을 위해 준비한 검색어와 일치하는 단어를 형광팬 효과로 변경 --%>
               <c:set var="name" value="${fn:replace(name, keyword, mark)}" />
           </c:if> 
-                  
+
           <%-- 상세페이지로 이동하기 위한 URL --%>
           <c:url value="/tech/read.do" var="viewUrl">
               <c:param name="id" value="${item.id}" />
@@ -83,58 +78,58 @@
   </div>
 
 <div class="adtechbottom">
-<!-- 페이지 번호 구현 -->
-<%-- 이전 그룹에 대한 링크 --%>
-<c:choose>
-    <%-- 이전 그룹으로 이동 가능하다면? --%>
-    <c:when test="${pagenation.prevPage > 0}">
-        <%-- 이동할 URL 생성--%>
-        <c:url value="/techmanagement" var="prevPageUrl">
-            <c:param name="page" value="${pagenation.prevPage}" />
-            <c:param name="keyword" value="${keyword}"/>
-        </c:url>
-        <a href="${prevPageUrl}">[이전]</a>
-    </c:when>
-    <c:otherwise>
-    </c:otherwise>
-</c:choose>
+  <!-- 페이지 번호 구현 -->
+  <%-- 이전 그룹에 대한 링크 --%>
+  <c:choose>
+      <%-- 이전 그룹으로 이동 가능하다면? --%>
+      <c:when test="${pagenation.prevPage > 0}">
+          <%-- 이동할 URL 생성--%>
+          <c:url value="/techmanagement" var="prevPageUrl">
+              <c:param name="page" value="${pagenation.prevPage}" />
+              <c:param name="keyword" value="${keyword}"/>
+          </c:url>
+          <a href="${prevPageUrl}">[이전]</a>
+      </c:when>
+      <c:otherwise>
+      </c:otherwise>
+  </c:choose>
 
 
-<%-- 페이지 번호 (시작 페이지부터 끝 페이지까지 반복) --%>
-<c:forEach var="i" begin="${pagenation.startPage}" end="${pagenation.endPage}" varStatus="status">
-    <%-- 이동할 URL 생성 --%>
-    <c:url value="/techmanagement" var="pageUrl">
-        <c:param name="page" value="${i}" />
-        <c:param name="keyword" value="${keyword}" />
-    </c:url>
+  <%-- 페이지 번호 (시작 페이지부터 끝 페이지까지 반복) --%>
+  <c:forEach var="i" begin="${pagenation.startPage}" end="${pagenation.endPage}" varStatus="status">
+      <%-- 이동할 URL 생성 --%>
+      <c:url value="/techmanagement" var="pageUrl">
+          <c:param name="page" value="${i}" />
+          <c:param name="keyword" value="${keyword}" />
+      </c:url>
 
-    <%-- 페이지 번호 출력--%>
-    <c:choose>
-        <%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
-        <c:when test="${pagenation.nowPage == i}">
-            <b>[${i}]</b>
-        </c:when>
-        <%-- 나머지 페이지의 경우 링크 적용함 --%>
-        <c:otherwise>
-            <a href="${pageUrl}">[${i}]</a>
-        </c:otherwise>
-    </c:choose>
-</c:forEach>
+      <%-- 페이지 번호 출력--%>
+      <c:choose>
+          <%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+          <c:when test="${pagenation.nowPage == i}">
+              <b>[${i}]</b>
+          </c:when>
+          <%-- 나머지 페이지의 경우 링크 적용함 --%>
+          <c:otherwise>
+              <a href="${pageUrl}">[${i}]</a>
+          </c:otherwise>
+      </c:choose>
+  </c:forEach>
 
-<%-- 다음 그룹에 대한 링크 --%>
-<c:choose>
-    <%-- 다음 그룹으로 이동 가능하다면? --%>
-    <c:when test="${pagenation.nextPage > 0}">
-        <%-- 이동할 URL 생성--%>
-        <c:url value="/techmanagement" var="nextPageUrl">
-            <c:param name="page" value="${pagenation.nextPage}" />
-            <c:param name="keyword" value="${keyword}"/>
-        </c:url>
-        <a href="${nextPageUrl}">[다음]</a>
-    </c:when>
-    <c:otherwise>
-    </c:otherwise>
-</c:choose>
+  <%-- 다음 그룹에 대한 링크 --%>
+  <c:choose>
+      <%-- 다음 그룹으로 이동 가능하다면? --%>
+      <c:when test="${pagenation.nextPage > 0}">
+          <%-- 이동할 URL 생성--%>
+          <c:url value="/techmanagement" var="nextPageUrl">
+              <c:param name="page" value="${pagenation.nextPage}" />
+              <c:param name="keyword" value="${keyword}"/>
+          </c:url>
+          <a href="${nextPageUrl}">[다음]</a>
+      </c:when>
+      <c:otherwise>
+      </c:otherwise>
+  </c:choose>
 </div>
 
 <c:import url="/WEB-INF/views/inc/bottom.jsp" />

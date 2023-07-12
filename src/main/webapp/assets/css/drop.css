@@ -1,0 +1,49 @@
+.adtechtop {
+  width: 200px;
+  border-bottom: 1px solid black;
+  font-size: 40px;
+  padding-bottom: 10px;
+  margin: 50px auto 0 auto;
+}
+.adtechtop h1 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.adtechsearch {
+  margin: 10px auto 20px auto;
+}
+.adtechsearch form {
+  text-align: left;
+}
+.adtechsearch input,
+.adtechsearch button {
+  border: 1px solid #c5c5c5;
+}
+.adtechsearch input {
+  width: 150px;
+}
+.adtechsearch button {
+  cursor: pointer;
+}
+
+.adtechmain {
+  margin: 100px auto 20px auto;
+}
+.adtechmain table {
+  width: 1200px;
+  line-height: 2.5;
+}
+.adtechmain tr {
+  border: 1px solid #c5c5c5;
+}
+.adtechmain tr:first-child {
+  border-top: 2px solid #c5c5c5;
+}
+.adtechmain tr:first-child th {
+  background-color: #e2e1e1;
+}
+
+.adtechbottom {
+  margin-bottom: 100px;
+}
