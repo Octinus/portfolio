@@ -595,13 +595,13 @@ public ModelAndView adDrop(Model model,
     return new ModelAndView("admin/drop");
   }
 
-  @PostMapping("/drop_ok.do")
+  @GetMapping("/drop_ok.do")
   public ModelAndView delete(Model model,
-                            @RequestParam(value="id") List<Integer> ids){
+                            @RequestParam(value="id") int id){
 
     // 데이터 삭제에 필요한 조건값을 Beans에 저장하기
     Members input = new Members();
-    input.setIds(ids);
+    input.setId(id);
 
     try {
       membersService.delete(input);

@@ -14,7 +14,7 @@
 <div class="adtechmain">
   <!-- 조회 결과 목록 -->
   <table>
-    <form action="${contextPath}/drop_ok.do" method="post">
+    <form action="${contextPath}/drop_ok.do" method="get">
     <tr>
       <th colspan="6">
         <button type="submit">DELETE</button>

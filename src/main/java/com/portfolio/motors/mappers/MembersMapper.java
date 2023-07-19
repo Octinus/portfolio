@@ -31,7 +31,7 @@ public interface MembersMapper {
                 "where id=#{id}")
         public int drop(Members input);
 
-        @Delete("delete from members where id=#{id}")
+        @Delete("delete from members where id in (#{id})")
         public int delete(Members input);
 
         // SELECT문(단일행 조회)을 수행하는 메서드 정의
